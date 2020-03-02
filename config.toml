@@ -348,9 +348,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   #telegram              = "example"
   #vine                  = ""
   googlescholar         = "https://scholar.google.com/citations?user=kW67_MkAAAAJ&hl=en"
-  orcid                 = "https://orcid.org/0000-0002-3924-2694"
+  orcid                 = "0000-0002-3924-2694"
   #researchgate          = "example"
   #keybase               = "example"
-  mastodon              = "@samuelworkman@mastodon.social"
+  mastodon              = "mastodon.social/@samuelworkman"
   # Email
-  email                 = "samuel.workman@gmail.com"
+  email                 = "samuel.workman@ou.edu"
