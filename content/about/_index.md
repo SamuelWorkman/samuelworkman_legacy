@@ -9,6 +9,8 @@ I also provide statistical consulting in the private sector, specializing in the
 
 I am originally from Fayette County West Virginia. I enjoy rural life: mountains, rivers, fishing, gardens, and forests.
 
+![](bridge.jfif)
+
 # Skills & Experience
 
 * Policy research, data management, statistical analysis & modeling, presentation, reporting & data visualization, machine learning

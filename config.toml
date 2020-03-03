@@ -75,7 +75,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
       alt                 = "Hugo Future Imperfect Slim"
 
   [params.sidebar]
-    about               = "Academics, Data & Statistical Consulting, Wild Wonderful West Virginia"
+    about               = "Academics, Data Science, Life on the Mountain"
     # Sets the number of recent posts to show in the sidebar. The default value is 5.
     postAmount          = 5
     # set to show or to hide categories in the sidebar
