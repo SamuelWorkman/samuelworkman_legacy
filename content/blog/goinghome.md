@@ -1,15 +1,15 @@
 ---
-author: Hugo Authors
+author: Samuel Workman
 categories:
 - ""
-date: "2019-03-09"
-description: Lorem Ipsum Dolor Si Amet
+date: "2020-03-02"
+description: The Lodge.
 images:
-- img/2014/09/pic03.jpg
+- img/thelodge/wvlodge.jpg
 tags:
 - markdown
 - text
-title: Placeholder Text
+title: Going home.
 type: post
 ---
 
