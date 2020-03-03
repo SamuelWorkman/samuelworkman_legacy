@@ -127,20 +127,6 @@
   </url>
   
   <url>
-    <loc>/fr/contact/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="/pl/contact/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="/fr/contact/"
-                />
-  </url>
-  
-  <url>
     <loc>/fr/tags/</loc>
     <xhtml:link
                 rel="alternate"
