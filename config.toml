@@ -12,14 +12,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 math = true
 
 [params]
-  mainSections          = ["blog", "post"]
-  enableCDN             = true
+  mainSections          = ["blog", "post","about"]
+  enableCDN             = false
 
   # Loads CSS and JavaScript files. The variable is an array so that you can load
   # multiple/additional files if necessary. The standard theme files can be loaded
   # by adding the value, "default". Default includes the add-on.css and and-on.js.
   # Example: ["default", "/path/to/file"]
-  cssFiles              = ["/assets/css/fonts.css","default"]
+  cssFiles              = ["default"]
   jsFiles               = ["default"]
   # Sets options for highlight.js
   highlightjs           = true
