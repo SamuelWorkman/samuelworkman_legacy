@@ -1,0 +1,38 @@
+/*
+  This css file is for individual users to restyle items for their personal site,
+  or for the implementation of features specifically for their site. Anything that
+  is an official part of the theme (ex. Pull Requests) should be included in main.css
+  and follow the formatting and style given.
+*/
+
+/* philosopher-regular - latin */
+@font-face {
+  font-family: 'Philosopher';
+  font-style: normal;
+  font-weight: 400;
+  src: url('philosopher-v12-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Philosopher Regular'), local('Philosopher-Regular'),
+       'philosopher-v12-latin-regular.eot?#iefix' format('embedded-opentype'), /* IE6-IE8 */
+       'philosopher-v12-latin-regular.woff2' format('woff2'), /* Super Modern Browsers */
+       'philosopher-v12-latin-regular.woff' format('woff'), /* Modern Browsers */
+       'philosopher-v12-latin-regular.ttf' format('truetype'), /* Safari, Android, iOS */
+       'philosopher-v12-latin-regular.svg#Philosopher' format('svg'); /* Legacy iOS */
+}
+
+/* fira-sans-regular - latin */
+@font-face {
+font-family: 'Fira Sans';
+font-style: normal;
+font-weight: 400;
+src: url('/fonts/fira-sans-v10-latin-regular.eot'); / IE9 Compat Modes /
+src: local('Fira Sans Regular'), local('FiraSans-Regular'),
+url('/fonts/fira-sans-v10-latin-regular.eot?#iefix') format('embedded-opentype'), / IE6-IE8 /
+url('/fonts/fira-sans-v10-latin-regular.woff2') format('woff2'), / Super Modern Browsers /
+url('/fonts/fira-sans-v10-latin-regular.woff') format('woff'), / Modern Browsers /
+url('/fonts/fira-sans-v10-latin-regular.ttf') format('truetype'), / Safari, Android, iOS /
+url('/fonts/fira-sans-v10-latin-regular.svg#FiraSans') format('svg'); / Legacy iOS */
+}
+
+body {
+font-family: 'Fira Sans', sans-serif;
+}
