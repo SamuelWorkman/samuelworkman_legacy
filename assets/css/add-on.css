@@ -10,13 +10,13 @@
   font-family: 'Philosopher';
   font-style: normal;
   font-weight: 400;
-  src: url('../../philosopher-v12-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('../../static/fonts/philosopher-v12-latin-regular.eot'); /* IE9 Compat Modes */
   src: local('Philosopher Regular'), local('Philosopher-Regular'),
-       url('../../philosopher-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../../philosopher-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../../philosopher-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('../../philosopher-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../../philosopher-v12-latin-regular.svg#Philosopher') format('svg'); /* Legacy iOS */
+       url('../../static/fonts/philosopher-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../../static/fonts/philosopher-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../../static/fonts/philosopher-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../../static/fonts/philosopher-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../../static/fonts/philosopher-v12-latin-regular.svg#Philosopher') format('svg'); /* Legacy iOS */
 }
 
 body {

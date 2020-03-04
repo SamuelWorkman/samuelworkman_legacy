@@ -135,7 +135,7 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
   color: #3c3b3b;
-  font-family: "Raleway", Helvetica, sans-serif;
+  font-family: 'Philosopher', sans-serif;
   letter-spacing: 0.25em;
   line-height: 1.65;
   text-transform: uppercase; }

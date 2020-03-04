@@ -12,7 +12,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 math = true
 
 [params]
-  mainSections          = ["blog", "post","about"]
+  mainSections          = ["blog", "post", "about"]
   enableCDN             = false
 
   # Loads CSS and JavaScript files. The variable is an array so that you can load
