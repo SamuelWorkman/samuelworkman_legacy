@@ -3,38 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/about/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="/pl/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="/fr/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/about/"
-                />
-  </url>
-  
-  <url>
     <loc>/blog/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -83,23 +58,18 @@
   </url>
   
   <url>
-    <loc>/blog/goinghome/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+    <loc>/categories/politics/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/life/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/lodge/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+    <loc>/tags/politics/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -149,7 +119,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -195,6 +165,31 @@
                 hreflang="en"
                 href="/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>/blog/2020-03-5_splintered_establishment/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/2020-03-04_going_home/</loc>
+    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/life/</loc>
+    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lodge/</loc>
+    <lastmod>2020-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
