@@ -3,202 +3,202 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/</loc>
+    <loc>https://www.samuelworkman.org/blog/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="/fr/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="/pl/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="/pt/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="/de/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="/zh-cn/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="/zh-tw/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="/ja/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/politics/</loc>
-    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/politics/</loc>
-    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+    <loc>https://www.samuelworkman.org/categories/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="/fr/"
+                href="https://www.samuelworkman.org/fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="/pl/"
+                href="https://www.samuelworkman.org/pl/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/pt/"
+                href="https://www.samuelworkman.org/pt/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="/de/"
+                href="https://www.samuelworkman.org/de/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="/es/"
+                href="https://www.samuelworkman.org/es/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="/zh-cn/"
+                href="https://www.samuelworkman.org/zh-cn/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="/zh-tw/"
+                href="https://www.samuelworkman.org/zh-tw/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/ja/"
+                href="https://www.samuelworkman.org/ja/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/"
+                href="https://www.samuelworkman.org/categories/"
                 />
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://www.samuelworkman.org/categories/politics/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/tags/politics/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="/fr/tags/"
+                href="https://www.samuelworkman.org/fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="/pl/tags/"
+                href="https://www.samuelworkman.org/pl/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="/pt/tags/"
+                href="https://www.samuelworkman.org/pt/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="/de/tags/"
+                href="https://www.samuelworkman.org/de/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="/es/tags/"
+                href="https://www.samuelworkman.org/es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="/zh-cn/tags/"
+                href="https://www.samuelworkman.org/zh-cn/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="/zh-tw/tags/"
+                href="https://www.samuelworkman.org/zh-tw/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="/ja/tags/"
+                href="https://www.samuelworkman.org/ja/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/tags/"
+                href="https://www.samuelworkman.org/"
                 />
   </url>
   
   <url>
-    <loc>/blog/2020-03-5_splintered_establishment/</loc>
+    <loc>https://www.samuelworkman.org/tags/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://www.samuelworkman.org/fr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://www.samuelworkman.org/pl/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://www.samuelworkman.org/pt/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://www.samuelworkman.org/de/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://www.samuelworkman.org/es/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.samuelworkman.org/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://www.samuelworkman.org/zh-tw/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.samuelworkman.org/ja/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.samuelworkman.org/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/blog/2020-03-5_splintered_establishment/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://www.samuelworkman.org/about/</loc>
     <lastmod>2020-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2020-03-04_going_home/</loc>
+    <loc>https://www.samuelworkman.org/blog/2020-03-04_going_home/</loc>
     <lastmod>2020-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/life/</loc>
+    <loc>https://www.samuelworkman.org/categories/life/</loc>
     <lastmod>2020-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/lodge/</loc>
+    <loc>https://www.samuelworkman.org/tags/lodge/</loc>
     <lastmod>2020-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/wv/</loc>
+    <loc>https://www.samuelworkman.org/tags/wv/</loc>
     <lastmod>2020-03-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/contact/</loc>
+    <loc>https://www.samuelworkman.org/contact/</loc>
   </url>
   
 </urlset>

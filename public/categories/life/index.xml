@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Life on Samuel Workman</title>
-    <link>/categories/life/</link>
+    <link>https://www.samuelworkman.org/categories/life/</link>
     <description>Recent content in Life on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 03 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/life/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.samuelworkman.org/categories/life/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Going home.</title>
-      <link>/blog/2020-03-04_going_home/</link>
+      <link>https://www.samuelworkman.org/blog/2020-03-04_going_home/</link>
       <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020-03-04_going_home/</guid>
+      <guid>https://www.samuelworkman.org/blog/2020-03-04_going_home/</guid>
       <description>Its almost time!! Spring break is coming, if COVID-19 doesn&amp;rsquo;t get here first.
 Sheri and I are headed back to the mountains for spring break. Plans to plant additional apples and pears in the orchard, saw some lumber on the sawmill, and hike down to Gauley River from the family farm.</description>
     </item>
