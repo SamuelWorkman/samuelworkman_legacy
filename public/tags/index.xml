@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Samuel Workman</title>
-    <link>/tags/</link>
+    <link>https://www.samuelworkman.org/tags/</link>
     <description>Recent content in Tags on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 05 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.samuelworkman.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>politics</title>
-      <link>/tags/politics/</link>
+      <link>https://www.samuelworkman.org/tags/politics/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/politics/</guid>
+      <guid>https://www.samuelworkman.org/tags/politics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lodge</title>
-      <link>/tags/lodge/</link>
+      <link>https://www.samuelworkman.org/tags/lodge/</link>
       <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/lodge/</guid>
+      <guid>https://www.samuelworkman.org/tags/lodge/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wv</title>
-      <link>/tags/wv/</link>
+      <link>https://www.samuelworkman.org/tags/wv/</link>
       <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/wv/</guid>
+      <guid>https://www.samuelworkman.org/tags/wv/</guid>
       <description></description>
     </item>
     
