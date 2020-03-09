@@ -61,10 +61,6 @@
        url('./fira-mono-v8-latin-regular.svg#FiraMono') format('svg'); /* Legacy iOS */
 }
 
-.author {
-  font-family: 'Philosopher', sans-serif;
-}
-
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Philosopher', sans-serif;
 }
