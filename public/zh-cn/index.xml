@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Samuel Workman</title>
-    <link>https://www.samuelworkman.org/zh-cn/</link>
+    <link>/zh-cn/</link>
     <description>Recent content on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     
-	<atom:link href="https://www.samuelworkman.org/zh-cn/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/zh-cn/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
