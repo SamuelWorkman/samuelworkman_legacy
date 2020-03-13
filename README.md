@@ -5,3 +5,11 @@ This is my personal website for acedemics & data and statistical consulting.
 The site is based on the `hugo-future-imperfect-slim` theme as curated by `pacollins`. I have altered the fonts to use Google fonts "Philosopher" and "Fira". See `static/fonts` for example scss and the font files, which can be adjusted. Be sure to set `config.toml` variable `cssFiles` to `["default","/static/fonts/your.scss"].
 
 Feel free to fork this site and adjust to suit your needs.
+
+# To Do:
+
+- [ ] Create CV page.
+- [ ] Create current projects page.
+- [ ] Create data page.
+- [ ] More tinkering with fonts.
+- [ ] Try out math.
