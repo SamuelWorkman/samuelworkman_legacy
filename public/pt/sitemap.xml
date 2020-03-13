@@ -3,149 +3,149 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.samuelworkman.org/pt/categories/</loc>
+    <loc>/pt/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://www.samuelworkman.org/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://www.samuelworkman.org/fr/categories/"
+                href="/fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="https://www.samuelworkman.org/pl/categories/"
+                href="/pl/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://www.samuelworkman.org/de/categories/"
+                href="/de/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://www.samuelworkman.org/es/categories/"
+                href="/es/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://www.samuelworkman.org/zh-cn/categories/"
+                href="/zh-cn/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://www.samuelworkman.org/zh-tw/categories/"
+                href="/zh-tw/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://www.samuelworkman.org/ja/categories/"
+                href="/ja/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="https://www.samuelworkman.org/pt/categories/"
+                href="/pt/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/pt/</loc>
+    <loc>/pt/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://www.samuelworkman.org/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://www.samuelworkman.org/fr/"
+                href="/fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="https://www.samuelworkman.org/pl/"
+                href="/pl/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://www.samuelworkman.org/de/"
+                href="/de/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://www.samuelworkman.org/es/"
+                href="/es/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://www.samuelworkman.org/zh-cn/"
+                href="/zh-cn/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://www.samuelworkman.org/zh-tw/"
+                href="/zh-tw/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://www.samuelworkman.org/ja/"
+                href="/ja/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="https://www.samuelworkman.org/pt/"
+                href="/pt/"
                 />
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/pt/tags/</loc>
+    <loc>/pt/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://www.samuelworkman.org/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://www.samuelworkman.org/fr/tags/"
+                href="/fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="https://www.samuelworkman.org/pl/tags/"
+                href="/pl/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://www.samuelworkman.org/de/tags/"
+                href="/de/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://www.samuelworkman.org/es/tags/"
+                href="/es/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://www.samuelworkman.org/zh-cn/tags/"
+                href="/zh-cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://www.samuelworkman.org/zh-tw/tags/"
+                href="/zh-tw/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://www.samuelworkman.org/ja/tags/"
+                href="/ja/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt"
-                href="https://www.samuelworkman.org/pt/tags/"
+                href="/pt/tags/"
                 />
   </url>
   
