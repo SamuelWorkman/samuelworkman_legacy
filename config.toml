@@ -31,7 +31,7 @@ math = true
   readingTime           = true
   # Sets which Social Share links appear in posts.
   # Options are twitter, facebook, reddit, linkedin, pinterest, email
-  socialShare           = ["twitter", "facebook", "reddit", "linkedin",
+  socialShare           = ["twitter", "reddit", "linkedin",
                           "pinterest", "email"]
 
   [params.meta]
@@ -138,6 +138,13 @@ math = true
     url               = "/categories/"
     pre               = "<i class='fas fa-sitemap'></i>"
     weight            = 5
+
+  [[menu.main]]
+    name              = "CV"
+    identifier        = "cv"
+    url               = "/cv/"
+    pre               = ""
+    link              = "https://github.com/SamuelWorkman/sworkman_cv/blob/master/sworkman_cv.html"
 
   [[menu.main]]
     name              = "Contact"
