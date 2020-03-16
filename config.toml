@@ -140,18 +140,11 @@ math = true
     weight            = 5
 
   [[menu.main]]
-    name              = "CV"
-    identifier        = "cv"
-    url               = "/cv/"
-    pre               = ""
-    link              = "https://github.com/SamuelWorkman/sworkman_cv/blob/master/sworkman_cv.html"
-
-  [[menu.main]]
     name              = "Contact"
     identifier        = "contact"
     url               = "/contact/"
     pre               = "<i class='far fa-envelope'></i>"
-    weight            = 6
+    weight            = 7
 
 [Languages]
   # Each language has its own menu.
