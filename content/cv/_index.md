@@ -7,7 +7,7 @@ Please see links below to view my full CV or a brief 2-page CV. Both versions ar
 
 |               |               |  |
 | ---:         |     :---:      | :---: |
-| Open in Browser (HTML)  | [Full CV]()    | [2-Page CV](sw_two-page)    |
+| Open in Browser (HTML)  | [Full CV](sw_full_cv)    | [2-Page CV](sw_two-page)    |
 | View in PDF (for Printing) | [Full CV](sw_full_cv.pdf) | [2-Page CV](sw_two-page_cv.pdf) |
 
 {{< css.inline >}}
