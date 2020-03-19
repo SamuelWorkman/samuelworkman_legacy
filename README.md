@@ -8,8 +8,8 @@ Feel free to fork this site and adjust to suit your needs.
 
 # To Do:
 
-- [ ] Create CV page.
+- [x] Create CV page.
 - [ ] Create current projects page.
 - [ ] Create data page.
-- [ ] More tinkering with fonts.
+- [x] More tinkering with fonts.
 - [ ] Try out math.
