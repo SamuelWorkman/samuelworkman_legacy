@@ -140,6 +140,13 @@ math = true
     weight            = 5
 
   [[menu.main]]
+    name              = "CV"
+    identifier        = "cv"
+    url               = "/cv/"
+    pre               = "<i class='fas fa-scroll'></i>"
+    weight            = 6
+
+  [[menu.main]]
     name              = "Contact"
     identifier        = "contact"
     url               = "/contact/"
