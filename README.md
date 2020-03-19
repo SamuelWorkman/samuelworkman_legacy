@@ -13,3 +13,4 @@ Feel free to fork this site and adjust to suit your needs.
 - [ ] Create data page.
 - [x] More tinkering with fonts.
 - [ ] Try out math.
+- [ ] Implement a light/dark theme.
