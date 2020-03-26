@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>food on Samuel Workman</title>
+    <link>/categories/food/</link>
+    <description>Recent content in food on Samuel Workman</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/food/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From the Bunker</title>
+      <link>/blog/2020-03-26_bunker_essentials/</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2020-03-26_bunker_essentials/</guid>
+      <description>So&amp;hellip;we never made it to West Virginia. I came home after work on March 8th and decided going back to the office was a bad idea. So, we have been self-isolating here in rural Oklahoma. I don&amp;rsquo;t teach in the Spring Semester so it hasn&amp;rsquo;t been too difficult.
+Political signaling - the power of elites to dictate public response was on full display in my small rural community. Though me and mine locked ourselves down early, not much changed here for a while.</description>
+    </item>
+    
+  </channel>
+</rss>
