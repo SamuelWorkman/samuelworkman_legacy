@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post on Samuel Workman</title>
+    <link>/post/</link>
+    <description>Recent content in Post on Samuel Workman</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Web Scraping RStudio Cheatsheets</title>
+      <link>/post/working-to-help-yourself/</link>
+      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/working-to-help-yourself/</guid>
+      <description>My work sits at the confluence of statistics, data science, and public policy. Though its fashionable to call oneself a &amp;lsquo;data scientist&amp;rsquo; these days, a data scientist I am not. I DO, however, use many of the tools, techniques, and processes of a data scientist.</description>
+    </item>
+    
+  </channel>
+</rss>

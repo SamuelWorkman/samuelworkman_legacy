@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rvest on Samuel Workman</title>
+    <link>/tags/rvest/</link>
+    <description>Recent content in rvest on Samuel Workman</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rvest/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Web Scraping RStudio Cheatsheets</title>
+      <link>/blog/scraping-up-bits-of-helpfulness/</link>
+      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/scraping-up-bits-of-helpfulness/</guid>
+      <description>The word “confluence” means the juncture or merging of things, usually rivers. I grew up in West Virginia near the confluence of Gauley River (world-class whitewater for you rafters) and Meadow River (a smallmouth bass fishing haven). The word confluence is also an apt description of how the intellectual currents of my work converge. My work sits at the confluence of statistics, data science, and public policy. Were these rivers, data science would undoubtedly be the smallest.</description>
+    </item>
+    
+  </channel>
+</rss>
