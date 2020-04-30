@@ -129,7 +129,7 @@ math = true
     name              = "Blog"
     identifier        = "blog"
     url               = "/blog/"
-    pre               = "<i class='far fa-newspaper'></i>"
+    pre               = "<i class='fas fa-blog'></i>"
     weight            = 3
 
   [[menu.main]]
@@ -137,6 +137,13 @@ math = true
     identifier        = "categories"
     url               = "/categories/"
     pre               = "<i class='fas fa-sitemap'></i>"
+    weight            = 4
+
+  [[menu.main]]
+    name              = "Current Projects"
+    identifier        = "current_projects"
+    url               = "/current_projects/"
+    pre               = "<i class='fas fa-drafting-compass'></i>"
     weight            = 5
 
   [[menu.main]]
