@@ -9,7 +9,7 @@ Feel free to fork this site and adjust to suit your needs.
 # To Do:
 
 - [x] Create CV page.
-- [ ] Create current projects page.
+- [x] Create current projects page.
 - [ ] Create data page.
 - [x] More tinkering with fonts.
 - [ ] Try out math.
