@@ -12,15 +12,15 @@ tags:
   - rvest
 description: ''
 images:
-  - ''
+  - 'img/dt-1.jpg'
 type: post
 ---
 
-The word "confluence" means the juncture or merging of things, usually rivers. I grew up in West Virginia near the confluence of Gauley River (world-class whitewater for you rafters) and Meadow River (a smallmouth bass fishing haven). The word confluence is also an apt description of how the intellectual currents of my work converge. My work sits at the confluence of statistics, data science, and public policy. Were these rivers, data science would undoubtedly be the smallest. Though its fashionable to call oneself a 'data scientist' these days, a data scientist I am not. I DO, however, use many of the tools, techniques, and processes of a data scientist.
+The word "confluence" means the juncture or merging of things, usually rivers. I grew up in West Virginia near the confluence of [Gauley River](https://www.nps.gov/gari/index.htm]) (world-class whitewater for you rafters) and [Meadow River](https://en.wikipedia.org/wiki/Meadow_River) (a smallmouth bass fishing haven). The word confluence is also an apt description of how the intellectual currents of my work converge. My work sits at the confluence of statistics, data science, and public policy. Were these rivers, data science would undoubtedly be the smallest. Though its fashionable to call oneself a "data scientist" these days, a data scientist I am not. I DO, however, use many of the tools, techniques, and processes of a data scientist.
 
-I study public policy, and as such, don't have the luxury of data that is of consistent form and measurement (e.g., dollars and cents for you economists). So, one day I am working with machine learning techniques for classifying text, the next I am working on measurement models for these classifications, and thereafter I may be building an extreme events model for some facet related to the data. All this means that I do a LOT of what data scientists, particularly those of the tidyverse persuasion, call 'data wrangling' - cleaning, organizing, and transforming data for analysis.
+I study public policy, and as such, don't have the luxury of data that is of consistent form and measurement (e.g., dollars and cents for you economists). So, one day I am working with machine learning techniques for classifying text, the next I am working on measurement models for these classifications, and thereafter I may be building an extreme events model for some facet related to the data. All this means that I do a LOT of what data scientists, particularly those of the Tidyverse persuasion, call "data wrangling" - cleaning, organizing, and transforming data for analysis.
 
-I often forget commands for various things that I need to with data. **RStudio** provides a great set of Cheatsheets for various packages and processes of data science and statistics. They are in the form of pdf posters like you'd see at a conference. The problem I have is that I am often working from the Lodge in West Virginia, where internet connection can be a challenge. This means I am often searching and downloading the cheatsheets I think I may need while I am there. Since the cheatsheets are updated from time to time, I run the risk of having a dated one stored locally. This all lead me to think about writing a short script that would access all RStudio Cheatsheets and download them locally. On to the code...
+I often forget commands for various things that I need to with data. **RStudio** provides a great set of Cheatsheets for various packages and processes of data science and statistics. They are in the form of pdf posters like you'd see at a conference. The problem I have is that I am often working from [The Lodge in West Virginia](https://www.samuelworkman.org/blog/2020-03-04_going_home/), where internet connection can be a challenge with [Gauley River's](https://www.nps.gov/gari/index.htm) canyon roaring in the background. This means I am often searching and downloading the cheatsheets I think I may need while I am there. Since the cheatsheets are updated from time to time, I run the risk of having a dated one stored locally. This all led me to think about writing a short script that would access all RStudio Cheatsheets and download them locally. On to the code...
 
 ### Load the Useful Libraries
 
@@ -34,13 +34,13 @@ library(stringr)
 
 ### Scraping Links & Downloading Files
 
-The line of code below gets the scrape started by identifying and reading the html of the `r fontawesome::fa("github", fill = "darkgreen", height = 20)` Github repository that contains the pdf RStudio Cheatsheets.
+The line of code below gets the scrape started by identifying and reading the html of the `r fontawesome::fa("github", fill = "darkgreen", height = 20)` Github repository that contains the pdf of the RStudio Cheatsheets.
 
 ```{r id, eval = FALSE, echo = TRUE}
 page <- read_html("https://www.github.com/rstudio/cheatsheets")
 ```
 
-If you go to this repo, you'll see that clicking on one of the pdfs in the table doesn't produce the assciated cheatsheet alone. It takes us to a second-level page of the repository and opens the file in a code editor. Obtaining the file for reference in your work means clicking the download button on the menu bar at the top of the code editor. And, par for the course, no scraping exercise is ever really simple. To get the file, we need to find a way around 'clicking' the download button. To be clear, there are scripts that would allow us to 'click' the button, but those I found deal in `jsonlite` and are more complicated (though more efficient) than what I do here.
+If you go to this repository, you'll see that clicking on one of the pdfs in the table doesn't produce the assciated cheatsheet alone. It takes us to a second-level page of the repository and opens the file in a code editor. Obtaining the file for reference in your work means clicking the download button on the menu bar at the top of the code editor. And, par for the course, no scraping exercise is ever really simple. To get the file, we need to find a way around "clicking" the download button. To be clear, there are scripts that would allow us to "click" the button, but those I found deal in `jsonlite` and are more complicated (though more efficient) than what I do here.
 
 ```{r scrape, eval=FALSE, echo=TRUE}
 raw_list <- page %>% # takes the page above for which we've read the html
@@ -55,20 +55,20 @@ raw_list <- page %>% # takes the page above for which we've read the html
   walk2(., basename(.), download.file, mode = "wb") # use purrr to download the pdf associated with each url to the current working directory
 ```
 
-I leverage the initial scrape of links on the homepage of the repository to access, record, and get a list of the links associated with the download button for each cheatsheet. Its a work around for not writing a script that 'clicks' the button for each. The script is not the most efficient, but you'll end up with all of great RStudio Cheatsheets in your working directory locally.
+I leverage the initial scrape of links on the homepage of the repository to access, record, and get a list of the links associated with the download button for each cheatsheet. Its a work around for not writing a script that "clicks" the button for each. The script is not the most efficient, but you'll end up with all of great RStudio Cheatsheets in your working directory locally.
 
 The prepending is important, as each call to `read_html` needs full urls. In turn, the parsing in `html_nodes` and `html_attr` depend on having read the html. The string collapse function `str_c` from `stringr` makes this easy. For the parsing, we make use of the `map` function in Tidyverse package `purrr`. 
 
 ### Important Tidbits
 
 * In the initial scrape, `str_subset("\\.pdf")` tells `r fontawesome::fa("r-project", fill = "steelblue", height = 20)` to return all the links with pdfs. Otherwise, you get the links for the entire repository, including development files.
-* `map(html_node, "#raw-url")` tells `r fontawesome::fa("r-project", fill = "steelblue", height = 20)` to look for the url associated with the download button for each cheatsheet. You identify this tag by using the Google's Selector Gadget---search it for examples and how to identify tags.
+* `map(html_node, "#raw-url")` tells `r fontawesome::fa("r-project", fill = "steelblue", height = 20)` to look for the url associated with the download button for each cheatsheet. You identify this tag by using Google's Selector Gadget---search it for examples and how to identify tags.
 * `purrr::walk2` applies the `download.file` function to each of the generated raw links. The "." tells it to use the data from the previous commend (the raw urls). `basename(.)` tells it to give the downloaded file the basename of the url (e.g., "purrr.pdf"). 
 * Depending on your pdf reader, you may need to add `mode = "wb"`. Otherwise the files may appear blank, corrupt, or not render properly. See the documentation for `download.file()` for more information.
 
 ### Old School
 
-Note that `walk2` and many of these other great functions from the `tidyverse` are not necessary per se. The for-loop below is an old-school implementation of what `walk2` is doing above. Here, `download.file` is applied to each url in `raw_list` (url is just a tag here for each line in the object `raw_list`). 
+Note that `walk2` and many of these other great functions from the `tidyverse` are not necessary per se. The for-loop below is an old-school implementation of what `walk2` is doing above in base `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`. Here, `download.file` is applied to each url in `raw_list` (url is just a tag here for each line in the object `raw_list`). 
 
 ```{r oldschool, eval=FALSE, echo=TRUE}
 for (url in raw_list){
@@ -78,4 +78,4 @@ for (url in raw_list){
 
 ### Wrapping Up
 
-So, this is not the most efficient code for scraping where there is a need for "button-clicking", but it gets the job done with minimal packages and knowledge of `json` or other languages. Now that we're done, I can also say that the Cheatsheets are available at [RStudio's](https://rstudio.com/resources/cheatsheets/) resource page. There, they would be an easier scrape, and of course you can click and download. I reference them often to students as they are a great resource in teachng data analysis and statistics.
+So, this is not the most efficient code for scraping where there is a need for "button-clicking," but it gets the job done with minimal packages and knowledge of `json` or other languages. Now that we're done, I can also say that the Cheatsheets are available at [RStudio's](https://rstudio.com/resources/cheatsheets/) resource page. There, they would be an easier scrape, and of course you can just click and download them. I reference them often to students as they are a great resource in teachng data analysis and statistics.
