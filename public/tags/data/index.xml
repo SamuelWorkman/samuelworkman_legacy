@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data on Samuel Workman</title>
+    <link>/tags/data/</link>
+    <description>Recent content in data on Samuel Workman</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tips for Data Collection &amp; Organization</title>
+      <link>/blog/hunter-gatherer-culture-in-research/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/hunter-gatherer-culture-in-research/</guid>
+      <description>-experience and qualifications -connect to teaching statistics -importance of data collection -who is this for
+The Origin &amp;amp; Life of Data Record, Don&amp;rsquo;t Calculate -names _ . &amp;quot; &amp;quot; caps
+Better To Be Consistent Than Right Storage -text -whitespace
+Apocolypse Is Just Around the Corner -backup</description>
+    </item>
+    
+  </channel>
+</rss>
