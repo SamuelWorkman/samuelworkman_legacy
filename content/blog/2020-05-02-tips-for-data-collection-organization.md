@@ -13,6 +13,8 @@ images:
 type: post
 ---
 
+As I've stated many times, my research sits at the juncture of public policy, statistics, and data science. More specifically, I study elite texts and policy documents quantitatively. From early on in my academic career,
+
 -experience and qualifications
 -connect to teaching statistics
 -importance of data collection
@@ -33,3 +35,9 @@ type: post
 ## Apocolypse Is Just Around the Corner
 
 -backup
+
+{{< css.inline >}}
+<style>
+.canon { background: #FBF0D9; width: 100%; height: auto;}
+</style>
+{{< /css.inline >}}

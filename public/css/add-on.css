@@ -81,3 +81,44 @@ body {
  .button {
    font-family: 'Fira Sans', sans-serif;
  }
+
+ /*Top Navigation Styles*/
+
+ #site-header {background-color: #f1e7d0;}
+  #site-header a {color: #5F4B32;}
+  #site-header a:hover {color: #B22222;}
+
+/*#site-nav .nav-title a {color: #ff0053;}
+  #site-nav .nav-title a:hover {color: #a9a9b3;}*/
+
+/* Main Content Area Styling */
+
+#wrapper {background-color: #f1e7d0;}
+
+.pagination .button {
+  color: #5F4B32;
+  border-color: #f1e7d0;
+  }
+  .pagination .button:hover,
+  article.post .button:hover {
+    color: #B22222 !important;
+    border-color: #f1e7d0;
+  }
+
+article.post{
+  background-color: #f1e7d0;
+  border-radius: 5px 15px 5px 5px;
+  }
+  article.post .button {
+    margin: 10px 5px 15px;
+    text-align: right;
+  }
+
+.hljs,
+code {
+  background: #f1e7d0;
+  border-radius: 5px;
+  border: 1px solid #929292;
+  color: #404148;
+  }
+  .hljs:hover, code:hover {border: 1px solid #ff0053;}

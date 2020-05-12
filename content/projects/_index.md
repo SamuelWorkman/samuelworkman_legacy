@@ -1,6 +1,6 @@
 ---
 date: "2020-04-30"
-title: Current Projects
+title: Projects
 ---
 
 *A Few Words on Topics and Approaches*
