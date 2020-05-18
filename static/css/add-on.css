@@ -82,31 +82,31 @@ body {
    font-family: 'Fira Sans', sans-serif;
  }
 
- /*Top Navigation Styles*/
+/*Top Navigation Styles*/
 
- #site-header {background-color: #f1e7d0;}
+ #site-header {background-color: #fdf6e3;}
   #site-header a {color: #5F4B32;}
-  #site-header a:hover {color: #B22222;}
+  #site-header a:hover {color: #dc322f;}
 
 /*#site-nav .nav-title a {color: #ff0053;}
   #site-nav .nav-title a:hover {color: #a9a9b3;}*/
 
 /* Main Content Area Styling */
 
-#wrapper {background-color: #f1e7d0;}
+#wrapper {background-color: #fdf6e3;}
 
 .pagination .button {
   color: #5F4B32;
-  border-color: #f1e7d0;
+  border-color: #fdf6e3;
   }
   .pagination .button:hover,
   article.post .button:hover {
-    color: #B22222 !important;
-    border-color: #f1e7d0;
+    color: #dc322f !important;
+    border-color: #fdf6e3;
   }
 
 article.post{
-  background-color: #f1e7d0;
+  background-color: #fdf6e3;
   border-radius: 5px 15px 5px 5px;
   }
   article.post .button {
@@ -118,7 +118,27 @@ article.post{
 code {
   background: #f1e7d0;
   border-radius: 5px;
-  border: 1px solid #929292;
-  color: #404148;
+  border: 1px solid #073642;
+  color: #657b83;
   }
-  .hljs:hover, code:hover {border: 1px solid #ff0053;}
+  .hljs:hover, code:hover {border: 1px solid #268bd2;}
+
+/* MCA Links and Hover Styles */
+
+.content p a {color: #268bd2;} /* color change for links in post paragraphs */
+  .content p a:hover {color: #dc322f;}
+
+/* Sidebar Area Styles */
+
+#site-intro header h1 {color: #5F4B32;}
+
+/*Make Picture/Avatar Greyscale
+#site-intro img.circle {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  }
+  #site-intro img.circle:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+  }
+*/
