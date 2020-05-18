@@ -99,13 +99,3 @@ If finding yourself in the first situation, adjustment is easy, because all inco
 Ambiguous and double categorization is the enemy of reliability. Within a column, each observation should receive one and only one code. Taken together, 4A and 4B are the enemies of comparison. It is essential to remember that all research and analysis (whether public, private, or academic sectors), is an effort to compare things across time or space and make choices about what to do. If you feel the need to double categorize cases or observations, do so in a separate column. Though remember, if codes are reliable, the safety net of double coding isn't as necessary.
 
 Whether in business, the public sector, or the academy, answering questions and making decisions depends first on information garnered in observation - recording and preserving data. There is nothing complicated about employing these principles, and they make life much easier for the analyst. On a final note, it is always tempting to use existing data sets. It's great when data are adaptable to many questions. Use caution. All data exists for a purpose likely unrelated to your own. These principles cannot answer the conceptual problem of fit between your objective and existing data. 
-
-For other thoughts on data collection and organization, the papers listed below are incredibly useful.
-
-<div id="refs"></div>
-
-{{< css.inline >}}
-<style>
-.canon { background: #FBF0D9; width: 100%; height: auto;}
-</style>
-{{< /css.inline >}}
