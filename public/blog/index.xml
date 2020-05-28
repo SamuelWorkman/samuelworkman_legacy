@@ -6,10 +6,19 @@
     <description>Recent content in Blog on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cooler Geometry and COVID-19</title>
+      <link>/blog/how-food-bends-the-arc-of-time/</link>
+      <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/how-food-bends-the-arc-of-time/</guid>
+      <description>Like many in the academy, I am lucky. Since self-isolating beginning March 10, my family has lived out of our freezer—chocked full of beef and pork (oddly no chicken, but more on that below). How our freezer is full, and its contents, are what lead me to this short dispatch. The convergence of the pandemic, my upbringing, and oddly, the geometry of coolers, have bent the arc of time and transported me to a simpler life I left long ago.</description>
+    </item>
     
     <item>
       <title>Four Principles of Data Collection</title>
