@@ -5,18 +5,31 @@
   and follow the formatting and style given.
 */
 
-/* philosopher-regular - latin */
+/* alegreya-regular - latin */
 @font-face {
-  font-family: 'Philosopher';
+  font-family: 'Alegreya';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/philosopher-v12-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local('Philosopher Regular'), local('Philosopher-Regular'),
-       url('../fonts/philosopher-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/philosopher-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/philosopher-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/philosopher-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/philosopher-v12-latin-regular.svg#Philosopher') format('svg'); /* Legacy iOS */
+  src: url('../fonts/alegreya-v13-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Alegreya Regular'), local('Alegreya-Regular'),
+       url('../fonts/alegreya-v13-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/alegreya-v13-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/alegreya-v13-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/alegreya-v13-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/alegreya-v13-latin-regular.svg#Alegreya') format('svg'); /* Legacy iOS */
+}
+/* alegreya-800 - latin */
+@font-face {
+  font-family: 'Alegreya';
+  font-style: normal;
+  font-weight: 800;
+  src: url('../fonts/alegreya-v13-latin-800.eot'); /* IE9 Compat Modes */
+  src: local('Alegreya ExtraBold'), local('Alegreya-ExtraBold'),
+       url('../fonts/alegreya-v13-latin-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/alegreya-v13-latin-800.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/alegreya-v13-latin-800.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/alegreya-v13-latin-800.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/alegreya-v13-latin-800.svg#Alegreya') format('svg'); /* Legacy iOS */
 }
 
 /* fira-sans-regular - latin */
@@ -62,7 +75,7 @@
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Philosopher', sans-serif;
+  font-family: 'Alegreya', serif;
 }
 
 body {
@@ -88,6 +101,7 @@ body {
  #site-header {background-color: #ECEFF4;}
   #site-header a {color: #2E3440;}
   #site-header a:hover {color: #304890;}
+  #site-header a {font-family: 'Alegreya', serif;}
 
 /*#site-nav .nav-title a {color: #ff0053;}
   #site-nav .nav-title a:hover {color: #a9a9b3;}*/
@@ -132,14 +146,3 @@ code {
 /* Sidebar Area Styles */
 
 #site-intro header h1 {color: #2E3440;}
-
-/*Make Picture/Avatar Greyscale
-#site-intro img.circle {
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
-  }
-  #site-intro img.circle:hover {
-    -webkit-filter: grayscale(0);
-    filter: grayscale(0);
-  }
-*/
