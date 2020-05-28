@@ -8,7 +8,7 @@ categories:
   - food
 tags:
   - life
-description: ''
+description: 'How Food Bends the Arc of Time'
 images:
   - 'img/braising_liquid.jpg'
 type: post
