@@ -108,7 +108,7 @@ body {
 
 /* Main Content Area Styling */
 
-#wrapper {background-color: #ECEFF4;}
+#wrapper {background-color: #F2F1ED;}
 
 .pagination .button {
   color: #5F4B32;
@@ -121,7 +121,7 @@ body {
   }
 
 article.post{
-  background-color: #D8DEE9;
+  background-color: #FAF9F5;
   border-radius: 5px 15px 5px 5px;
   }
   article.post .button {
