@@ -9,7 +9,7 @@ My courses on data analysis and statistical methods emphasize data-driven decisi
 
 ## Course Portals
 
-
+[Maximum Likelihood Estimation](mle/)
 
 {{< css.inline >}}
 <style>
