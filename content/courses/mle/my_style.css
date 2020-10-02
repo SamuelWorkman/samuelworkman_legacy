@@ -1,0 +1,105 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&family=Fira+Mono&family=Josefin+Slab:wght@700&display=swap');
+
+h1 {
+  font-family: 'Josefin Slab', serif;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Alegreya Sans', sans-serif;
+}
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+}
+
+monospace {
+  font-family: 'Fira Mono', monospace;
+}
+
+math {
+  font-family: 'Fira Mono', monospace;
+}
+
+/*BACKGROUND COLOR*/
+body {
+  background-color: #fdf6e3;
+  color: #657b83;
+}
+
+.title {
+  text-align: center;
+}
+
+.author{
+  text-align: center;
+}
+
+.author-afil {
+  text-align: center;
+}
+
+.date{
+  text-align: center;
+  page-break-after: always;
+}
+
+.abstract {
+  text-align: left;
+  page-break-after: always;
+}
+
+h1 {
+  color: #268bd2;
+}
+
+/*HEADING FONT COLOR*/
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #586e75;
+}
+
+/*LINKS*/
+/* unvisited link */
+a:link {
+  color: #268bd2;
+}
+
+/* visited link */
+a:visited {
+  color: #859900;
+}
+
+/* mouse over link */
+a:hover {
+  color: #dc322f;
+}
+
+/* selected link */
+a:active {
+  color: #cb4b16;
+}
+
+.btn {
+    border-width: 0 0px 0px 0px;
+    font-weight: normal;
+    text-transform: ;
+}
+.btn-default {
+    color: #2ecc71;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+</style>
