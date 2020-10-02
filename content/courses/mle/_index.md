@@ -11,6 +11,8 @@ The vast majority of data of interest to social scientists do not fit into the G
 
 [Introduction](../../../slides/intro_slides.html)
 
+{{< youtube 5Y1t3fb-Rm0 >}}
+
 [Basic Probability & Mathematics](../../../slides/likelihood_math.html)
 
 [Classical Approach to Analysis](../../../slides/classical_approach.html)

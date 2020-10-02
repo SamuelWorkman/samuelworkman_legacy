@@ -120,6 +120,8 @@ Workman, [Four Principles of Data Collection](https://towardsdatascience.com/fou
 
 [Introduction](../../../slides/intro_slides.html#1)
 
+[Introduction on YouTube](https://youtu.be/5Y1t3fb-Rm0)
+
 [Basic Probability & Mathematics](../../../slides/likelihood_math.html#1)
 
 [Classic Approach to Analysis](../../../slides/classical_approach.html)
