@@ -17,11 +17,6 @@ Most of these projects involve the classification of text for which I use the to
 
 - **Methods of the Policy Process:** The goal of this edited volume is one of communication of the diverse ways that theoretically-based research in public policy is conducted and move toward better methods of the policy process. The chapters address the methodological approaches common within theoretical traditions in public policy, but also push onward to new frontiers in conceptualization, measurement, and statistical modeling.
 
-```{r embed-xaringan, echo=FALSE, include=FALSE}
-xaringanExtra::embed_xaringan(url = "intro_slides.html, ratio"" = "4:3")
-```
-
-
 {{< css.inline >}}
 <style>
 .canon { background: white; width: 100%; height: auto;}

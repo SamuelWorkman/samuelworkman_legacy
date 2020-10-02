@@ -9,7 +9,8 @@ My courses on data analysis and statistical methods emphasize data-driven decisi
 
 ## Course Portals
 
-[Maximum Likelihood Estimation](mle/)
+{{< button "Maximum Likelihood Estimation (MLE)" "https://www.samuelworkman.org/courses/mle" >}}
+
 
 {{< css.inline >}}
 <style>
