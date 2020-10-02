@@ -29,11 +29,94 @@ style_solarized_light(
 
 class: center, middle
 
-# The Classical Approach to Social Research
+# The Classic Approach to Analysis
 
 ---
 
+## Classic Procedure
 
+1. Assume that some set of true parameters (often $\beta$) exist that describe social systems; these true parameters are fixed.
+
+--
+
+2. Gather some data, the observations of which are random, or in some way representative of the population.
+
+--
+
+3. Assume system outcomes are a function of a Gaussian distribution; note this often means contriving the data in such a way as to be continuous and to meet Gaussian assumptions.
+
+--
+
+4. More often than not, we parameterize and model *only* the center mass of the distribution, ignoring important variance in the dispersiion and shape. Treat the error term as statistical nuisance in the estimation of the true population parameters
+
+--
+
+5. Employ transformations or statistical or mathematical gimmickry to “fix” standard errors.
+
+--
+
+6. Discussion is restricted to the estimates of the $\beta$s which is makes explanation easy, if often tenuous.
+
+--
+
+7. In practice, restricts causal inference to one parameter defining one distribution within the entire realm of probability distributions.
+
+---
+
+## Problems with the Classical Approach
+
+1. The data are not random...they are the result of a social or natural system and a data generating process (DGP).
+
+--
+
+2. The approach to the stochastic component belies the fact that the data is in part a product this stochastic component.
+
+--
+
+3. The normal regression model is itself based on 2 parameters; often times, the second parameter is the most interesting (e.g., variation across MCs, states, school systems, or countries).
+
+--
+
+4. Most interesting social phenomena are not normally distributed or continuous (e.g., votes, protests, even budgets).
+
+--
+
+5. Massaging data until it meets the assumptions of the classic approach means layering measurement error onto slack in model specification; also means that explanations are not intuitive and tortured (e.g., people simply do not think in terms of logged dollars).
+
+--
+
+6. At worst, the model estimates precisely a *true* $\beta$ that generates nonsensical substantive implications.
+
+--
+
+7. Fails to incorporate stochastic uncertainty into substantive implications of the model and counterfactual analysis.
+
+---
+
+## Key Departures in Likelihood
+
+* Bayesian about data—the data are the data, not some random draw
+from a population with *true* parameters.
+
+--
+
+* There are no recoverable *true* population parameters---parameters are a product of a distribution, itself a result of a social or natural data-generating process.
+
+--
+
+* In other words, the data, not the parameters, are fixed.
+
+--
+
+* Makes the stochastic component of the data-generating process integral to understanding the dependent variable. The real world is not a nuisance.
+
+--
+
+* Likelihood treats uncertainty as relative, rather than as an objective quantity (Bayesian about uncertainty and learning).
+
+--
+
+* Use social science theory and the data generating process to derive the stochastic component of our models directly.
 
 ---
 
