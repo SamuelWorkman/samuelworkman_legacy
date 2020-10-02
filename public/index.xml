@@ -12,6 +12,59 @@
     
     
     <item>
+      <title>Maximum Likelihood Estimation</title>
+      <link>/courses/mle/classical_approach/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/courses/mle/classical_approach/</guid>
+      <description>class: center, middle
+The Classical Approach to Social Researchclass: left, middle
+Next - Deriving the Likelihood for Gaussian Outcomes.blue[Up-ahead - Maximum Likelihoood Methods for Least Squares]class: center, middle
+Samuel Workman, Ph.D..red[] samuel.workman@ou.edu.blue[] samuelworkman.org.green[] [@samuel.workman](https://medium.com/@samuel.workman).blue[] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)</description>
+    </item>
+    
+    <item>
+      <title>Maximum Likelihood Estimation</title>
+      <link>/courses/mle/intro_slides/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/courses/mle/intro_slides/</guid>
+      <description>class: center, middle
+Introduction &amp;amp; Course ContentCourse TopicsLogic of Bayesian Inference (with no informative prior, Bayesian estimates collapse to the MLE estimate)–
+Probability model of uncertainty; propagating this uncertainty intosubstantive, model-based inference–
+Focus on understanding the construction of distributions and how wemight parameterize these–
+Be Bayesian about data…–
+Understand how data generating processes and the construction of measurement dictates, or bounds, modeling strategies–</description>
+    </item>
+    
+    <item>
+      <title>Maximum Likelihood Estimation</title>
+      <link>/courses/mle/likelihood_math/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/courses/mle/likelihood_math/</guid>
+      <description>class: center, middle
+Mathematics &amp;amp; Probability for LikelihoodUnderstanding SetsA set, \(\mathcal{S}\), is simply a collection of elements \(\{s_1, s_2,...,s_i\}\), formally:\[\begin{align}\mathcal{S} = \{s_1, s_2,...,s_i\}\end{align}\]
+–
+Element \(s_i\) is an element of, or “in”, set \(\mathcal{S}\):\[\begin{align}s_i \in \mathcal{S}\end{align}\]
+–
+\(\mathcal{S}\) is an empty set if it contains no elements:\[\begin{align}\mathcal{S} = \emptyset\end{align}\]—
+Subsets &amp;amp; Relations Among Sets\(\mathcal{S}\) is a subset of the larger set \(\mathcal{T}\):\[\begin{align}\mathcal{S} \subset \mathcal{T}\end{align}\]</description>
+    </item>
+    
+    <item>
+      <title>Maximum Likelihood Estimation</title>
+      <link>/courses/mle/syllabus/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/courses/mle/syllabus/</guid>
+      <description>samuel.workman@ou.edu samuelworkman.org @samuel.workman @SamuelGWorkman
+
+Office Hours: Remote &amp;amp; By AppointmentClass Sessions: AsynchronousOffice: RemoteClassroom: Remote
+Course DescriptionThe vast majority of data of interest to social scientists do not fit into the Gaussian assumptions of the classic normal regression model taught in introductory statistics courses. Data often diverge drastically from the continuous, normally distributed outcomes associated with the classic model.</description>
+    </item>
+    
+    <item>
       <title>Cooler Geometry and COVID-19</title>
       <link>/blog/how-food-bends-the-arc-of-time/</link>
       <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>

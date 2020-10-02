@@ -9,7 +9,11 @@ The vast majority of data of interest to social scientists do not fit into the G
 
 ## Lecture Slides
 
-[Introduction & Logic of MLE](intro_slides.html)
+[1. Introduction & Logic of MLE](intro_slides.html)
+
+[2. Math Notes for Likelihood](likelihood_math.html)
+
+[3. The Classical Approach to Social Research](classical_approach.html)
 
 {{< css.inline >}}
 <style>
