@@ -1,0 +1,258 @@
+---
+title: "Maximum Likelihood Estimation"
+subtitle: "Social & Natural Science Applications"  
+author: 
+  - "Samuel Workman, Ph.D."
+date: '2020-10-01'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [xaringan-themer.css, title_theme.css]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+
+
+<p>class: center, middle</p>
+<div id="mathematics-probability-for-likelihood" class="section level1">
+<h1>Mathematics &amp; Probability for Likelihood</h1>
+<hr />
+<div id="understanding-sets" class="section level2">
+<h2>Understanding Sets</h2>
+<ul>
+<li>A <em>set</em>, <span class="math inline">\(\mathcal{S}\)</span>, is simply a collection of elements <span class="math inline">\(\{s_1, s_2,...,s_i\}\)</span>, formally:</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\mathcal{S} = \{s_1, s_2,...,s_i\}
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>Element <span class="math inline">\(s_i\)</span> is an element of, or “in”, <em>set</em> <span class="math inline">\(\mathcal{S}\)</span>:</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+s_i \in \mathcal{S}
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li><span class="math inline">\(\mathcal{S}\)</span> is an empty set if it contains no elements:</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\mathcal{S} = \emptyset
+\end{align}\]</span>
+—</p>
+</div>
+<div id="subsets-relations-among-sets" class="section level2">
+<h2>Subsets &amp; Relations Among Sets</h2>
+<ul>
+<li><span class="math inline">\(\mathcal{S}\)</span> is a <strong>subset</strong> of the larger set <span class="math inline">\(\mathcal{T}\)</span>:</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\mathcal{S} \subset \mathcal{T}
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>The <strong>union</strong> of sets <span class="math inline">\(\mathcal{S}\)</span> and <span class="math inline">\(\mathcal{T}\)</span> is the new set containing all elements in at least one of the sets; in other words, all elements not outside the sets</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\mathcal{S} \cup \mathcal{T}
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>The <strong>intersection</strong> of sets <span class="math inline">\(\mathcal{S}\)</span> and <span class="math inline">\(\mathcal{T}\)</span> is the new set containing all elements in both of the sets</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\mathcal{S} \cap \mathcal{T}
+\end{align}\]</span></p>
+<hr />
+</div>
+<div id="defining-probability-models" class="section level2">
+<h2>Defining Probability Models</h2>
+<p>Probability models are defined by 3 simple assumptions for a given sample
+space <span class="math inline">\(\Omega\)</span>, containing all possible sets:</p>
+<p>–</p>
+<ul>
+<li>The probability of any possible event from the social process lies between zero and one.</li>
+</ul>
+<p>–</p>
+<p><span class="math display">\[\begin{align}
+Pr(a_i) \in [0:1] \text{ } \forall \text{ } i
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>Something will happen with probability one.</li>
+</ul>
+<p>–</p>
+<p><span class="math display">\[\begin{align}
+Pr(\mathcal{\Omega}) = 1
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>The probability of unions of <span class="math inline">\(n\)</span> pairwise disjoint events is the sum of their individual probabilities. So, if <span class="math inline">\(\{a_1, a_2, \ldots, a_i\}\)</span> are mutually exclusive, then the additive property applies, such that:</li>
+</ul>
+<p>–</p>
+<p><span class="math display">\[\begin{align}
+Pr(a_1 \cup a_2 \cup a_i) = Pr(a_1) + Pr(a_2) + \ldots + Pr(a_i)
+\end{align}\]</span></p>
+<hr />
+</div>
+<div id="calculating-probabilities" class="section level2">
+<h2>Calculating Probabilities</h2>
+<ul>
+<li>Probability of Unions</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>Probability of Intersections</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(A \cap B) = Pr(A) + Pr(B) - Pr(A \cup B)
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>Probability of Complements</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(A^C) = 1 - Pr(A) \\
+Pr(A) = 1 - Pr(A^C)
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>Probability of Null Set</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(\emptyset) = 0
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li>Probability of Sample Space</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(A) = 1
+\end{align}\]</span></p>
+<hr />
+</div>
+<div id="probability-as-a-basis-for-modeling-uncertainty" class="section level2">
+<h2>Probability as a Basis for Modeling Uncertainty</h2>
+<ul>
+<li><strong>marginal probability</strong> - the probability of an event irrespective of the values of another variable.</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(X = A)
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li><strong>joint probability</strong> - the probability of any number of events occurring, <span class="math inline">\(Pr(X = A)\)</span> <em>and</em> <span class="math inline">\(Pr(X = B)\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+Pr(A \cap B) = Pr(AB)
+\end{align}\]</span></p>
+<p>–</p>
+<ul>
+<li><strong>conditional probablity</strong> - the probability of an event given another event, <span class="math inline">\(Pr(A|B)\)</span></li>
+</ul>
+<p><span class="math display">\[\text{conditional probablity} = \frac{\text{joint probability}}{\text{marginal probability}}\]</span>
+<span class="math display">\[\frac{Pr(A \cap B)}{Pr(B)}\]</span>
+—</p>
+</div>
+<div id="using-conditional-probability-to-derive-bayes-rule" class="section level2">
+<h2>Using Conditional Probability to Derive Bayes Rule</h2>
+<p>The probability of <span class="math inline">\(a\)</span> given <span class="math inline">\(b\)</span> depends on the probability of <span class="math inline">\(b\)</span> given <span class="math inline">\(a\)</span> and on the marginal probabilities of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<p><span class="math display">\[\text{conditional probablity} = \frac{\text{joint probability}}{\text{marginal probability}}\]</span></p>
+<p>–</p>
+<p><span class="math display">\[\begin{align}
+Pr(a|b) &amp;= \frac{Pr(a \cap b)}{Pr(b)} \\
+Pr(b|a) &amp;= \frac{Pr(b \cap a)}{Pr(a)} \\
+Pr(b|a)Pr(a) &amp;= Pr(b \cap a) \\
+Pr(a|b)Pr(b) &amp;= Pr(a \cap b) \\
+Pr(a|b)Pr(b) &amp;= Pr(b|a)Pr(a) \\
+Pr(a|b) &amp;= \frac{Pr(b|a)Pr(a)}{Pr(b)}
+\end{align}\]</span></p>
+<hr />
+</div>
+<div id="notes-on-exponents" class="section level2">
+<h2>Notes on Exponents</h2>
+<ul>
+<li>Zero Property: <span class="math inline">\(x^0 = 1\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>One Property: <span class="math inline">\(x^1 = x\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Fraction Property: <span class="math inline">\((\frac{x}{y})^a = (\frac{x^a}{y^a}) = x^ay^{-a}\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Nested Exponents: <span class="math inline">\((x^a)^b = x^{ab}\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Distributive Property: <span class="math inline">\(xy^a = x^ay^a\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Product Property: <span class="math inline">\(x^ax^b = x^{a+b}\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Ratio Property: <span class="math inline">\(x^{\frac{a}{b}} = (x^a)^{\frac{1}{b}} = (x^{\frac{1}{b}})^a = \sqrt[b]{x^a}\)</span></li>
+</ul>
+<hr />
+</div>
+<div id="notes-on-logarithms" class="section level2">
+<h2>Notes on Logarithms</h2>
+<ul>
+<li>Zero–One Property: <span class="math inline">\(log_b(1) = 0\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Base &amp; Identity: <span class="math inline">\(log_b(b^x) = x\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Multiplication: <span class="math inline">\(log(xy) = log(x) + log(y)\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Division: <span class="math inline">\(log(\frac{x}{y}) = log(x) - log(y)\)</span></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Exponentiation: <span class="math inline">\(log(x^y) = y log(x)\)</span></li>
+</ul>
+<hr />
+<p>class: left, middle</p>
+</div>
+</div>
+<div id="next---the-classical-approach-to-social-research" class="section level1">
+<h1>Next - The Classical Approach to Social Research</h1>
+</div>
+<div id="blueup-ahead---maximum-likelihood-methods" class="section level1">
+<h1>.blue[Up-ahead - Maximum Likelihood Methods]</h1>
+<hr />
+<p>class: center, middle</p>
+</div>
+<div id="samuel-workman-ph.d." class="section level1">
+<h1>Samuel Workman, Ph.D.</h1>
+<div class="section level3">
+<h3>.red[<i class="fas  fa-envelope "></i>] <a href="mailto:samuel.workman@ou.edu">samuel.workman@ou.edu</a></h3>
+</div>
+<div class="section level3">
+<h3>.blue[<i class="fas  fa-globe-americas "></i>] <a href="https://www.samuelworkman.org">samuelworkman.org</a></h3>
+</div>
+<div class="section level3">
+<h3>.green[<i class="fab  fa-medium "></i>] <span class="citation">[@samuel.workman]</span>(<a href="https://medium.com/@samuel.workman" class="uri">https://medium.com/@samuel.workman</a>)</h3>
+</div>
+<div class="section level3">
+<h3>.blue[<i class="fab  fa-twitter "></i>] <span class="citation">[@SamuelGWorkman]</span>(<a href="https://twitter.com/SamuelGWorkman" class="uri">https://twitter.com/SamuelGWorkman</a>)</h3>
+</div>
+</div>

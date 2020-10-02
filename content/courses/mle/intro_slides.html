@@ -1,0 +1,208 @@
+---
+title: "Maximum Likelihood Estimation"
+subtitle: "Social & Natural Science Applications"  
+author: 
+  - "Samuel Workman, Ph.D."
+date: '2020-10-01'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    includes:
+      in_header: "in_header.html"
+      after_body: "after_body.html"
+    css: [xaringan-themer.css, title_theme.css]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+
+
+<p>class: center, middle</p>
+<div id="introduction-course-content" class="section level1">
+<h1>Introduction &amp; Course Content</h1>
+<hr />
+<div id="course-topics" class="section level2">
+<h2>Course Topics</h2>
+<ol style="list-style-type: decimal">
+<li>Logic of Bayesian Inference (with no informative prior, Bayesian estimates collapse to the MLE estimate)</li>
+</ol>
+<p>–</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Probability model of uncertainty; propagating this uncertainty into
+substantive, model-based inference</li>
+</ol>
+<p>–</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Focus on understanding the construction of distributions and how we
+might parameterize these</li>
+</ol>
+<p>–</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Be Bayesian about data…</li>
+</ol>
+<p>–</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Understand how data generating processes and the construction of measurement dictates, or bounds, modeling strategies</li>
+</ol>
+<p>–</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Using <i class="fab  fa-r-project "></i> as the core tool of analysis</li>
+</ol>
+<hr />
+</div>
+<div id="persistent-themes" class="section level2">
+<h2>Persistent Themes</h2>
+<ol style="list-style-type: decimal">
+<li>Attention to fit of the research design, and statistical procedures, to our research questions</li>
+</ol>
+<p>–</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Attention to data generating process as the central guide to modeling
+strategies</li>
+</ol>
+<p>–</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Conceptual understanding of the underlying math for MLE</li>
+</ol>
+<p>–</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Model-based simulation in order to more fully understand statistical
+procedures, inference, and substantive implications of model findings</li>
+</ol>
+<p>–</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Visualizing data—for descriptive purposes, to understand causal inference, the robustness of our models and measures, and the
+substantive impact of model findings; communicating research results to
+a general audience</li>
+</ol>
+<p>–</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Applied data analysis — lots of <i class="fab  fa-r-project "></i> Code</li>
+</ol>
+<hr />
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="vignettes-research-paper" class="section level1">
+<h1>Vignettes &amp; Research Paper</h1>
+<hr />
+<div id="content-of-the-vignettes" class="section level2">
+<h2>Content of the Vignettes</h2>
+<ul>
+<li>Vignettes should explain a method or statistical procedure in a way that a generalist in data science, analytics, or statistics can understand</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Vignettes should contain <i class="fab  fa-r-project "></i> code, but also use <em>text</em> to explain the chunks and lines of code - key difference between the vignettes and the research paper</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Vignettes should use real data and cover all coding and statistical procedures necessary to procure or collect the data, clean the data, analyze the data, and communicate the results</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Vignettes do not contain literature reviews, social science theory, or broad discussions of implications; they may illustrate inference however, or how to learn from data or an analytical procedure</li>
+</ul>
+<p>–</p>
+<ul>
+<li>See <a href="https://towardsdatascience.com/scraping-downloading-and-storing-pdfs-in-r-367a0a6d9199">“Scraping, Downloading, and Storing PDFs in R” in <em>Towards Data Science</em></a> for an example of a vignette.</li>
+</ul>
+<hr />
+</div>
+<div id="content-of-the-research-paper" class="section level2">
+<h2>Content of the Research Paper</h2>
+<ul>
+<li>In general, the paper should look like a <em>journal submission</em></li>
+</ul>
+<p>–</p>
+<ul>
+<li>The research design should map onto the research question, theory, and
+hypotheses; <strong>this is the most common reason for rejection at journals</strong></li>
+</ul>
+<p>–</p>
+<ul>
+<li>The paper will contain the <em>mathematical representation</em> of the model
+and other statistical procedures</li>
+</ul>
+<p>–</p>
+<ul>
+<li>The paper will contain visual displays of quantitative information
+(VDQIs)—for both descriptive and causal inference</li>
+</ul>
+<p>–</p>
+<ul>
+<li>Serious effort to engage <em>counterfactual</em> scenarios and explanations</li>
+</ul>
+<hr />
+</div>
+<div id="structure-of-the-research-paper" class="section level2">
+<h2>Structure of the Research Paper</h2>
+<ol style="list-style-type: decimal">
+<li>Research question and why it is important—no talk of “gap” filling.</li>
+</ol>
+<p>–</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Theoretical (causal models) &amp; conceptual development (measurement
+models).</li>
+</ol>
+<p>–</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Data &amp; Measures—justification of indicators and measures, noting
+potential measurement errors or conceptual and theoretical strengths.</li>
+</ol>
+<p>–</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Hypotheses—map theoretical expectations and concepts directly onto
+measures.</li>
+</ol>
+<p>–</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Methodological Approach—including mathematical and theoretical
+justification for statistical models and procedures.</li>
+</ol>
+<p>–</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Findings—must contain discussion of robustness of approach and
+estimates.</li>
+</ol>
+<p>–</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Discussion—must contain VDQIs and exploration of counterfactuals;
+emphasize substantive findings.</li>
+</ol>
+<p>–</p>
+<ol start="8" style="list-style-type: decimal">
+<li>Conclusion—what did we learn…theoretically, conceptually,
+methodologically…about the world.</li>
+</ol>
+<hr />
+<p>class: left, middle</p>
+</div>
+</div>
+<div id="next---review-of-mathematics-for-likelihood" class="section level1">
+<h1>Next - Review of Mathematics for Likelihood</h1>
+</div>
+<div id="blueup-ahead---the-classical-approach-to-social-science-modeling" class="section level1">
+<h1>.blue[Up-ahead - The Classical Approach to Social Science Modeling]</h1>
+<hr />
+<p>class: center, middle</p>
+</div>
+<div id="samuel-workman-ph.d." class="section level1">
+<h1>Samuel Workman, Ph.D.</h1>
+<div class="section level3">
+<h3>.red[<i class="fas  fa-envelope "></i>] <a href="mailto:samuel.workman@ou.edu">samuel.workman@ou.edu</a></h3>
+</div>
+<div class="section level3">
+<h3>.blue[<i class="fas  fa-globe-americas "></i>] <a href="https://www.samuelworkman.org">samuelworkman.org</a></h3>
+</div>
+<div class="section level3">
+<h3>.green[<i class="fab  fa-medium "></i>] <span class="citation">[@samuel.workman]</span>(<a href="https://medium.com/@samuel.workman" class="uri">https://medium.com/@samuel.workman</a>)</h3>
+</div>
+<div class="section level3">
+<h3>.blue[<i class="fab  fa-twitter "></i>] <span class="citation">[@SamuelGWorkman]</span>(<a href="https://twitter.com/SamuelGWorkman" class="uri">https://twitter.com/SamuelGWorkman</a>)</h3>
+</div>
+</div>

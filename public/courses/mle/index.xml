@@ -64,5 +64,14 @@ Office Hours: Remote &amp;amp; By AppointmentClass Sessions: AsynchronousOffic
 Course DescriptionThe vast majority of data of interest to social scientists do not fit into the Gaussian assumptions of the classic normal regression model taught in introductory statistics courses. Data often diverge drastically from the continuous, normally distributed outcomes associated with the classic model.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>/courses/mle/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/courses/mle/readme/</guid>
+      <description>Description This is the repository for my graduate level statistics course on maximum likelihood methods using R, Rstudio, ggplot2, and the tidyverse for data wrangling and tidying. The course focuses on understanding distributions, how to parameterize and model them, and communicate results visually.</description>
+    </item>
+    
   </channel>
 </rss>
