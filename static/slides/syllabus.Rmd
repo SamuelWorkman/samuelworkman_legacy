@@ -118,9 +118,11 @@ Workman, [Four Principles of Data Collection](https://towardsdatascience.com/fou
 
 ##### Lecture Slides
 
-[Introduction & Logic of Likelihood](https://www.samuelworkman.org/courses/mle/intro_slides.html)
+[Introduction & Logic of Likelihood](intro_slides.html#1)
 
-[Math Notes for Likelihood](https://www.samuelworkman.org/courses/mle/likelihood_math.html)
+[Math Notes for Likelihood](https://www.samuelworkman.org/likelihood_math.html#1)
+
+[Classical Approach to Analysis](https://www.samuelworkman.org/classical_approach.html#1)
 
 ##### Gary King's Take
 

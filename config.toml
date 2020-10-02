@@ -154,18 +154,11 @@ math = true
     weight            = 6
 
   [[menu.main]]
-    name              = "Courses"
-    identifier        = "courses"
-    url               = "/courses/"
-    pre               = "<i class='fas fa-university'></i>"
-    weight            = 7
-
-  [[menu.main]]
     name              = "Contact"
     identifier        = "contact"
     url               = "/contact/"
     pre               = "<i class='far fa-envelope'></i>"
-    weight            = 8
+    weight            = 7
 
 [Languages]
   # Each language has its own menu.
