@@ -122,7 +122,9 @@ Workman, [Four Principles of Data Collection](https://towardsdatascience.com/fou
 
 [Introduction on YouTube](https://youtu.be/5Y1t3fb-Rm0)
 
-[Basic Probability & Mathematics](../../../slides/likelihood_math.html#1)
+[Basic Probability & Mathematics for Likelihood](../../../slides/likelihood_math.html#1)
+
+[Basic Probability & Mathematics for Likelihood on YouTube](https://youtu.be/wwe_U7z3sKY)
 
 [Classic Approach to Analysis](../../../slides/classical_approach.html)
 
