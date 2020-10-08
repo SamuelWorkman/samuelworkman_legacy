@@ -7,15 +7,27 @@ date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
+    includes:
+      in_header: "in_header.html"
+      after_body: "after_body.html"
     css: [xaringan-themer.css, title_theme.css]
     nature:
       highlightStyle: solarized-light
       highlightLines: true
       countIncrementalSlides: false
+      ratio: 16:9
 ---
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+library(xaringanExtra)
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -51,7 +63,7 @@ class: center, middle
 
 --
 
-5. Employ transformations or statistical or mathematical gimmickry to “fix” standard errors.
+5. Employ transformations, statistical, and/or mathematical gimmickry to “fix” standard errors.
 
 --
 
@@ -62,6 +74,30 @@ class: center, middle
 7. In practice, restricts causal inference to one parameter defining one distribution within the entire realm of probability distributions.
 
 ---
+.left-code[
+```{r y_dist, warning=FALSE, eval=FALSE, fig.showtext=TRUE}
+#library(tidyverse)
+set.seed(2579)
+dv <- rnorm(10000, 0, 1)
+dv <- data.frame(dv)
+
+ggplot(dv, aes(x=dv)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  xlab("Dependent Variable") +
+  ylab("Density") +
+  theme_xaringan()
+```
+]
+
+.right-out[
+```{r y_dist_out, ref.label="y_dist", echo=FALSE, out.width="90%"}
+```
+]
+
+---
 
 ## Problems with the Classical Approach
 
@@ -69,11 +105,19 @@ class: center, middle
 
 --
 
-2. The approach to the stochastic component belies the fact that the data is in part a product this stochastic component.
+2. The approach to the stochastic component belies the fact that the data is in part a product of this stochastic component.
 
 --
 
-3. The normal regression model is itself based on 2 parameters; often times, the second parameter is the most interesting (e.g., variation across MCs, states, school systems, or countries).
+  * E.g., Counts have long tails because counts are produced by processes that make them so, not because we've failed to get a representative sample.
+
+--
+
+3. The normal regression model is itself based on 2 parameters (what are they?); often times, the second parameter is the most interesting (e.g., variation across MCs, states, school systems, or countries).
+
+--
+
+  * $x \sim N(\mu, \sigma^2)$ --- the mean and variance
 
 --
 
@@ -95,12 +139,15 @@ class: center, middle
 
 ## Key Departures in Likelihood
 
-* Bayesian about data—the data are the data, not some random draw
-from a population with *true* parameters.
+* The data are the data. They arise out of a social or natural process not some random draw from a population with *true* parameters.
 
 --
 
 * There are no recoverable *true* population parameters---parameters are a product of a distribution, itself a result of a social or natural data-generating process.
+
+--
+
+  - Given the data, some parameters ($\beta$'s) are more ***likely*** than others.
 
 --
 

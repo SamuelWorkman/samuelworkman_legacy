@@ -4,9 +4,16 @@
     <title>Maximum Likelihood Estimation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Samuel Workman, Ph.D." />
-    <meta name="date" content="2020-10-02" />
+    <meta name="date" content="2020-10-08" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+      crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/fnaufel/smartify/smartify.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="title_theme.css" type="text/css" />
   </head>
@@ -17,7 +24,7 @@ class: center, middle, inverse, title-slide
 # Maximum Likelihood Estimation
 ## Social &amp; Natural Science Applications
 ### Samuel Workman, Ph.D.
-### 2020-10-02
+### 2020-10-08
 
 ---
 
@@ -50,7 +57,7 @@ class: center, middle
 
 --
 
-5. Employ transformations or statistical or mathematical gimmickry to “fix” standard errors.
+5. Employ transformations, statistical, and/or mathematical gimmickry to “fix” standard errors.
 
 --
 
@@ -61,6 +68,30 @@ class: center, middle
 7. In practice, restricts causal inference to one parameter defining one distribution within the entire realm of probability distributions.
 
 ---
+.left-code[
+
+```r
+#library(tidyverse)
+set.seed(2579)
+dv &lt;- rnorm(10000, 0, 1)
+dv &lt;- data.frame(dv)
+
+ggplot(dv, aes(x=dv)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  xlab("Dependent Variable") +
+  ylab("Density") +
+  theme_xaringan()
+```
+]
+
+.right-out[
+&lt;img src="classical_approach_files/figure-html/y_dist_out-1.png" width="90%" /&gt;
+]
+
+---
 
 ## Problems with the Classical Approach
 
@@ -68,11 +99,19 @@ class: center, middle
 
 --
 
-2. The approach to the stochastic component belies the fact that the data is in part a product this stochastic component.
+2. The approach to the stochastic component belies the fact that the data is in part a product of this stochastic component.
 
 --
 
-3. The normal regression model is itself based on 2 parameters; often times, the second parameter is the most interesting (e.g., variation across MCs, states, school systems, or countries).
+  * E.g., Counts have long tails because counts are produced by processes that make them so, not because we've failed to get a representative sample.
+
+--
+
+3. The normal regression model is itself based on 2 parameters (what are they?); often times, the second parameter is the most interesting (e.g., variation across MCs, states, school systems, or countries).
+
+--
+
+  * `\(x \sim N(\mu, \sigma^2)\)` --- the mean and variance
 
 --
 
@@ -94,12 +133,15 @@ class: center, middle
 
 ## Key Departures in Likelihood
 
-* Bayesian about data—the data are the data, not some random draw
-from a population with *true* parameters.
+* The data are the data. They arise out of a social or natural process not some random draw from a population with *true* parameters.
 
 --
 
 * There are no recoverable *true* population parameters---parameters are a product of a distribution, itself a result of a social or natural data-generating process.
+
+--
+
+  - Given the data, some parameters ($\beta$'s) are more ***likely*** than others.
 
 --
 
@@ -144,7 +186,8 @@ class: center, middle
 <script>var slideshow = remark.create({
 "highlightStyle": "solarized-light",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
@@ -228,6 +271,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
+<script type="text/javascript">smartify();</script>
 
 <script>
 slideshow._releaseMath = function(el) {
