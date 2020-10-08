@@ -23,7 +23,6 @@ options(htmltools.dir.version = FALSE)
 library(tidyverse)
 library(ggExtra) # axes and labeling
 library(showtext) # use Google Fonts
-library(xaringanExtra)
 xaringanExtra::use_extra_styles(
   hover_code_line = TRUE,         #<<
   mute_unhighlighted_code = TRUE  #<<
@@ -147,7 +146,7 @@ ggplot(dv, aes(x=dv)) +
 
 --
 
-  - Given the data, some parameters ($\beta$'s) are more ***likely*** than others.
+  - Given the data, some parameters, or $\beta$s, are more ***likely*** than others.
 
 --
 
