@@ -18,3 +18,5 @@ The vast majority of data of interest to social scientists do not fit into the G
 {{< youtube wwe_U7z3sKY >}}
 
 [***Classical Approach to Analysis***](../../../slides/classical_approach.html)
+
+{{< youtube NXafc2vNU6I >}}
