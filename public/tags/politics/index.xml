@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>politics on Samuel Workman</title>
-    <link>/tags/politics/</link>
+    <link>https://www.samuelworkman.org/tags/politics/</link>
     <description>Recent content in politics on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 05 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/politics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.samuelworkman.org/tags/politics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The Splintered Establishment Comes Together</title>
-      <link>/blog/2020-03-05_splintered_establishment/</link>
+      <link>https://www.samuelworkman.org/blog/2020-03-05_splintered_establishment/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020-03-05_splintered_establishment/</guid>
+      <guid>https://www.samuelworkman.org/blog/2020-03-05_splintered_establishment/</guid>
       <description>On Tuesday evening, I was invited to go on the OU Nightly&amp;rsquo;s broadcast to talk about issue politics, the Democratic presidential primary, and what this means moving forward. It was the second television interview I&amp;rsquo;ve done in my career. (The first was when a former student, Paul Benefiel at UT Austin, ended up on the Colbert Report after some actions inspired by my GOV310 course - the local news came calling.</description>
     </item>
     

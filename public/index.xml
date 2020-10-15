@@ -2,76 +2,76 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Samuel Workman</title>
-    <link>/</link>
+    <link>https://www.samuelworkman.org/</link>
     <description>Recent content on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.samuelworkman.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cooler Geometry and COVID-19</title>
-      <link>/blog/how-food-bends-the-arc-of-time/</link>
+      <link>https://www.samuelworkman.org/blog/how-food-bends-the-arc-of-time/</link>
       <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/how-food-bends-the-arc-of-time/</guid>
+      <guid>https://www.samuelworkman.org/blog/how-food-bends-the-arc-of-time/</guid>
       <description>Like many in the academy, I am lucky. Since self-isolating beginning March 10, my family has lived out of our freezer—chocked full of beef and pork (oddly no chicken, but more on that below). How our freezer is full, and its contents, are what lead me to this short dispatch. The convergence of the pandemic, my upbringing, and oddly, the geometry of coolers, have bent the arc of time and transported me to a simpler life I left long ago.</description>
     </item>
     
     <item>
       <title>Four Principles of Data Collection</title>
-      <link>/blog/hunter-gatherer-culture-in-research/</link>
+      <link>https://www.samuelworkman.org/blog/hunter-gatherer-culture-in-research/</link>
       <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/hunter-gatherer-culture-in-research/</guid>
+      <guid>https://www.samuelworkman.org/blog/hunter-gatherer-culture-in-research/</guid>
       <description>I have spent an academic lifetime compiling original data sets, both in my work and as part of broader research teams. In doing so, I have become quite opinionated about the role of data in science, its collection, and its organization. In this post, I detail four principles of data collection and organization useful to any analyst needing to collect data, whether by hand or machine. Often, students, junior scholars, business analysts, and public managers engage in data collection.</description>
     </item>
     
     <item>
       <title>Web Scraping RStudio Cheatsheets</title>
-      <link>/blog/scraping-up-bits-of-helpfulness/</link>
+      <link>https://www.samuelworkman.org/blog/scraping-up-bits-of-helpfulness/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/scraping-up-bits-of-helpfulness/</guid>
+      <guid>https://www.samuelworkman.org/blog/scraping-up-bits-of-helpfulness/</guid>
       <description>The word “confluence” means the juncture or merging of things, usually rivers. I grew up in West Virginia near the confluence of Gauley River (world-class whitewater for you rafters) and Meadow River (a smallmouth bass fishing haven). The word confluence is also an apt description of how the intellectual currents of my work converge. My work sits at the confluence of statistics, data science, and public policy. Were these rivers, data science would undoubtedly be the smallest.</description>
     </item>
     
     <item>
       <title>The County</title>
-      <link>/blog/the-county/</link>
+      <link>https://www.samuelworkman.org/blog/the-county/</link>
       <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/the-county/</guid>
+      <guid>https://www.samuelworkman.org/blog/the-county/</guid>
       <description>I’ve titled this post ‘The County’. Back home in West Virginia, people often refer to entities of government by their jurisidiction or where they draw authority. We refer to the police as ‘The Law’ and the various functions, whether for public health or taxes, as ‘The County’. Today, I’m drawing a map of the ‘The County’, Fayetteville, WV. Even when going into town to pay your taxes, you’d say “going over to see ‘The County’”.</description>
     </item>
     
     <item>
       <title>From the Bunker</title>
-      <link>/blog/2020-03-26_bunker_essentials/</link>
+      <link>https://www.samuelworkman.org/blog/2020-03-26_bunker_essentials/</link>
       <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020-03-26_bunker_essentials/</guid>
+      <guid>https://www.samuelworkman.org/blog/2020-03-26_bunker_essentials/</guid>
       <description>So&amp;hellip;we never made it to West Virginia. I came home after work on March 8th and decided going back to the office was a bad idea. So, we have been self-isolating here in rural Oklahoma. I don&amp;rsquo;t teach in the Spring Semester so it hasn&amp;rsquo;t been too difficult.
 Political signaling - the power of elites to dictate public response was on full display in my small rural community. Though me and mine locked ourselves down early, not much changed here for a while.</description>
     </item>
     
     <item>
       <title>The Splintered Establishment Comes Together</title>
-      <link>/blog/2020-03-05_splintered_establishment/</link>
+      <link>https://www.samuelworkman.org/blog/2020-03-05_splintered_establishment/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020-03-05_splintered_establishment/</guid>
+      <guid>https://www.samuelworkman.org/blog/2020-03-05_splintered_establishment/</guid>
       <description>On Tuesday evening, I was invited to go on the OU Nightly&amp;rsquo;s broadcast to talk about issue politics, the Democratic presidential primary, and what this means moving forward. It was the second television interview I&amp;rsquo;ve done in my career. (The first was when a former student, Paul Benefiel at UT Austin, ended up on the Colbert Report after some actions inspired by my GOV310 course - the local news came calling.</description>
     </item>
     
     <item>
       <title>Going home.</title>
-      <link>/blog/2020-03-04_going_home/</link>
+      <link>https://www.samuelworkman.org/blog/2020-03-04_going_home/</link>
       <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2020-03-04_going_home/</guid>
+      <guid>https://www.samuelworkman.org/blog/2020-03-04_going_home/</guid>
       <description>Its almost time!! Spring break is coming, if COVID-19 doesn&amp;rsquo;t get here first.
 Sheri and I are headed back to the mountains for spring break. Plans to plant additional apples and pears in the orchard, saw some lumber on the sawmill, and hike down to Gauley River from the family farm.</description>
     </item>

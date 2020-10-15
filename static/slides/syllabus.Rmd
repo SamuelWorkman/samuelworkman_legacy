@@ -130,6 +130,10 @@ Workman, [Four Principles of Data Collection](https://towardsdatascience.com/fou
 
 [Classic Approach to Analysis `r icon::fa("youtube")`](https://youtu.be/NXafc2vNU6I)
 
+[Describing Statistical Models](../../../slides/statistical_models.html)
+
+[Describing Statistical Models `r icon::fa("youtube")`]()
+
 <!---
 ```{r embed-xaringan, echo=FALSE}
 xaringanExtra::embed_xaringan(url = "../../../slides/likelihood_math.html", ratio = "1:.75")

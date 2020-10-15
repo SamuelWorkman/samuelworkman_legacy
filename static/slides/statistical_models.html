@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Maximum Likelihood Estimation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Samuel Workman, Ph.D." />
+    <meta name="date" content="2020-10-15" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+      crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/fnaufel/smartify/smartify.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="title_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Maximum Likelihood Estimation
+## Social &amp; Natural Science Applications
+### Samuel Workman, Ph.D.
+### 2020-10-15
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Describing Statistical Models
+
+---
+
+## Writing a Statistical Model
+
+Traditional Linear Regression
+
+`\begin{align}
+y_i &amp;= \alpha + x_1\beta_1 + x_2\beta_2 +...x_{ik}\beta_k  + \epsilon_i
+\end{align}`
+
+--
+
+Where...
+
+`\begin{align}
+\alpha &amp;= \text{the intercept} \\
+x_{ik} &amp;= \text{indepedent variables} \\
+\epsilon_i &amp;= \text{the error term}
+\end{align}`
+
+--
+
+Here come the assumptions...
+
+`\begin{align}
+\mathcal{E}(\epsilon_i) &amp;= 0 \\
+Var(\epsilon_i) &amp;= \mathcal{E}(\epsilon_i^2) = \sigma^2 \\
+Cov(\epsilon_i, \epsilon_j) &amp;= 0, \forall\text{ } i \neq j
+\end{align}`
+
+--
+
+- Very tedious...Also, have to evaluate all these...
+
+--
+
+- If the dependent variable, `\(y_i\)`, is not Gaussian or a function of the normal distribution, we already know one or more of these are violated.
+
+--
+
+* From the outset, we've failed to model the real-world social or natural process that generates the data, `\(y_i\)`.
+
+---
+
+## How do we develop a model?
+
+1. Theory - Social or Natural Sciences
+  - Can come in the form of empirical findings or laws as well.
+
+--
+
+2. The data-generating process (DGP)
+  - Look at the distribution of the dependent variable.
+  
+--
+
+3. The limitations of measurement and observation.
+  - E.g., our "continuous" attitude may not be observable in any fashion expect an ordinal variable.
+  
+--
+
+4. Taking the stochastic component of the model seriously upfront, in constrast to examining it after the fact.
+
+--
+
+5. Moving research questions, and thus our models, beyond typical center mass analysis
+  - Distributions can be described in terms of location, scale,
+and shape, among other parameters.
+
+---
+
+## Probability and Models of Social &amp; Natural Phenomena
+
+**Data-generating processes lead to empirical distributions, which map onto random variables distributed by functions with known properties and assumptions.**
+
+--
+
+* Given this data, the goal is inference - using data (we know) to uncover causal relationships (we do not know).
+
+--
+
+* In order to do this, we have to be able to quantify the uncertainty of our inferences - probability is the catalyst for this.
+
+--
+
+* Taking the stochastic component seriously, upfront, is central to accomplishing this.
+
+---
+
+## A More Flexible Way to Describe Statistical Models
+
+Suppose we have a dependent variable or outcome `\(y_i\)` (e.g., turnout, regulatory enforcements, deaths, vote choice, etc.).
+
+--
+
+Given the DGP and our theory, we assume `\(y_i\)` is distributed by, or best described by, some function, `\(\mathcal{f}(\cdot)\)`.
+
+--
+
+We can then formulate a stastical model of the DGP as follows:
+
+--
+
+  * **Stochastic Component**
+  `$$y \sim \mathcal{f}(\mu, \theta)$$`
+  
+--
+
+  * **Systematic Component** 
+  `$$\mu = \mathcal{g}(X, \beta)$$`
+--
+
+Note
+
+  1. The distribution of `\(y\)` is dependent on two parameters, `\(\mu\)` and `\(\theta\)`, but could be described in terms of one (e.g., (poisson), two (logistic), or three (gamma).
+
+--
+
+  2. The systematic component above parameterizes `\(\mu\)`, but we could just as easily parameterize `\(\theta\)` or both `\(\mu\)` and `\(\theta\)`.
+
+--
+
+  3. Choosing a different distribution generates a completely new model. This isn't possible with the error-term formulation.
+  
+--
+
+  4. The `\(X\beta\)` should begin to look familiar...
+
+---
+
+## Choosing Distributions and Distribution Functions
+
+![](statistical_models_files/figure-html/dists_funs-1.png)&lt;!-- --&gt;
+
+--
+
+* We can use any distribution that approximates are dependent variable.
+
+--
+
+* We can also use the PDF or CDF as appropriate.
+
+---
+
+## Let's Return to Normal
+
+Remember the error-term description of regression
+`$$y_i = \alpha + x_{i1}\beta_1 + x_{i2}\beta_2 + ... + x_{ik}\beta_k + \epsilon_i$$`
+--
+
+We can rewrite this in matrix form for simplicity
+`$$y = X\beta + \epsilon$$`
+--
+
+Where
+
+`\begin{align}
+y &amp;= \text{dependent variable} \\
+X &amp;= \text{a matrix of independent variables, along with an intercept} \\
+\beta &amp;= \text{the parameters to be estimated for each independent variable, along with an intercept} \\
+\epsilon &amp;= \text{the error term, which we assume is distributed such that...}
+\end{align}`
+
+--
+
+`$$\epsilon \sim \mathcal{f}_N(0, \sigma^2)$$`
+--
+
+* Note that we never, in any of these equations, describe the dependent variable...the very thing we hope to understand and model.
+
+--
+
+* The only reference we have to what the dependent variable looks like is in our assumptions about the error term, and then, only after accounting for the systematic component, `\(X\beta\)`.
+
+---
+
+## Let's Try Our Approach
+
+Using our new notion, if we assume that the function mapping the Data Generating Process to our dependent variable is the normal probability density function or `\(\mathcal{f}(\cdot)\)`
+
+--
+
+**Stochastic Component**
+`$$y \sim \mathcal{f}_N(\mu, \sigma^2)$$`
+--
+
+**Systematic Component**
+`$$\mu = X\beta$$`
+--
+
+Notes
+
+* Note that we tackle the stochastic component of the dependent variable upfront - before we attempt to model it (impose our theory).
+
+--
+
+* We could just as easily parameterize the variance, `\(\sigma^2\)`, as well
+
+--
+
+`$$\sigma^2 = exp(Z\delta)$$`
+--
+
+* Choosing a new distribution, `\(\mathcal{f}(\cdot)\)`, would give us a new model, even though our systematic component would be the same. This is not possible in the error-term approach.
+
+---
+
+## Writing and Talking about Models
+
+So, in a paper, we may write are model, assuming a Gaussian dependent variable, such that
+`\begin{align}
+y &amp;\sim \mathcal{f}_N(\mu, \sigma^2) \\
+\mu &amp;= X\beta
+\end{align}`
+
+--
+
+We describe the model as follows:
+
+"The dependent variable, `\(y\)`, is distributed according to the normal distribution with mean, `\(\mu\)`, and variance, `\(\sigma^2\)`. We model `\(\mu\)` as a function of our matrix of covariates, `\(X\)`, and a vector of coefficients, `\(\beta\)`, to be estimated from the data."
+
+* You can insert the conceptual names for the variables in these placeholders such that "We model *vote choice* according to the normal distribution...so on and so forth." 
+
+* The dependent and key independent variables should always be described in detail elsewhere in the text.
+
+--
+
+**Note**
+
+Never, ever write
+`$$y_i = \alpha + x_{i1}\beta_1 + x_{i2}\beta_2 + ... + x_{ik}\beta_k + \epsilon_i$$`
+Then say you've "estimated OLS" or "estimated logit" or "estimated ordered logit." Nothing about that equation implies any of the sort.
+---
+
+class: left, middle
+
+# Next - A Method for Developing Likelihoods
+
+# .blue[Up-ahead - Likelihood for Continuous Outcomes]
+
+---
+
+class: center, middle
+
+# Samuel Workman, Ph.D.
+
+### .red[<i class="fas  fa-envelope "></i>] [samuel.workman@ou.edu](mailto:samuel.workman@ou.edu)
+
+### .blue[<i class="fas  fa-globe-americas "></i>] [samuelworkman.org](https://www.samuelworkman.org)
+
+### .green[<i class="fab  fa-medium "></i>] [@samuel.workman](https://medium.com/@samuel.workman)
+
+### .blue[<i class="fab  fa-twitter "></i>] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<script type="text/javascript">smartify();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

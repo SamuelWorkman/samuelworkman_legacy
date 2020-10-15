@@ -2,93 +2,93 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Samuel Workman</title>
-    <link>/tags/</link>
+    <link>https://www.samuelworkman.org/tags/</link>
     <description>Recent content in Tags on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 28 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.samuelworkman.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>life</title>
-      <link>/tags/life/</link>
+      <link>https://www.samuelworkman.org/tags/life/</link>
       <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/life/</guid>
+      <guid>https://www.samuelworkman.org/tags/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>data</title>
-      <link>/tags/data/</link>
+      <link>https://www.samuelworkman.org/tags/data/</link>
       <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/data/</guid>
+      <guid>https://www.samuelworkman.org/tags/data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rstats</title>
-      <link>/tags/rstats/</link>
+      <link>https://www.samuelworkman.org/tags/rstats/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rstats/</guid>
+      <guid>https://www.samuelworkman.org/tags/rstats/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rvest</title>
-      <link>/tags/rvest/</link>
+      <link>https://www.samuelworkman.org/tags/rvest/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rvest/</guid>
+      <guid>https://www.samuelworkman.org/tags/rvest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tidyverse</title>
-      <link>/tags/tidyverse/</link>
+      <link>https://www.samuelworkman.org/tags/tidyverse/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/tidyverse/</guid>
+      <guid>https://www.samuelworkman.org/tags/tidyverse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ggplot2</title>
-      <link>/tags/ggplot2/</link>
+      <link>https://www.samuelworkman.org/tags/ggplot2/</link>
       <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggplot2/</guid>
+      <guid>https://www.samuelworkman.org/tags/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>politics</title>
-      <link>/tags/politics/</link>
+      <link>https://www.samuelworkman.org/tags/politics/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/politics/</guid>
+      <guid>https://www.samuelworkman.org/tags/politics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lodge</title>
-      <link>/tags/lodge/</link>
+      <link>https://www.samuelworkman.org/tags/lodge/</link>
       <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/lodge/</guid>
+      <guid>https://www.samuelworkman.org/tags/lodge/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wv</title>
-      <link>/tags/wv/</link>
+      <link>https://www.samuelworkman.org/tags/wv/</link>
       <pubDate>Tue, 03 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/wv/</guid>
+      <guid>https://www.samuelworkman.org/tags/wv/</guid>
       <description></description>
     </item>
     

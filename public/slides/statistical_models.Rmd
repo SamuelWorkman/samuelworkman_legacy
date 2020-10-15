@@ -1,0 +1,346 @@
+---
+title: "Maximum Likelihood Estimation"
+subtitle: "Social & Natural Science Applications"  
+author: 
+  - "Samuel Workman, Ph.D."
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    includes:
+      in_header: "in_header.html"
+      after_body: "after_body.html"
+    css: [xaringan-themer.css, title_theme.css]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+library(xaringanthemer)
+style_solarized_light(
+  header_font_google = google_font("Josefin Slab", "600"),
+  text_font_google   = google_font("Alegreya Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code")
+)
+```
+
+
+
+class: center, middle
+
+# Describing Statistical Models
+
+---
+
+## Writing a Statistical Model
+
+Traditional Linear Regression
+
+\begin{align}
+y_i &= \alpha + x_1\beta_1 + x_2\beta_2 +...x_{ik}\beta_k  + \epsilon_i
+\end{align}
+
+--
+
+Where...
+
+\begin{align}
+\alpha &= \text{the intercept} \\
+x_{ik} &= \text{indepedent variables} \\
+\epsilon_i &= \text{the error term}
+\end{align}
+
+--
+
+Here come the assumptions...
+
+\begin{align}
+\mathcal{E}(\epsilon_i) &= 0 \\
+Var(\epsilon_i) &= \mathcal{E}(\epsilon_i^2) = \sigma^2 \\
+Cov(\epsilon_i, \epsilon_j) &= 0, \forall\text{ } i \neq j
+\end{align}
+
+--
+
+- Very tedious...Also, have to evaluate all these...
+
+--
+
+- If the dependent variable, $y_i$, is not Gaussian or a function of the normal distribution, we already know one or more of these are violated.
+
+--
+
+* From the outset, we've failed to model the real-world social or natural process that generates the data, $y_i$.
+
+---
+
+## How do we develop a model?
+
+1. Theory - Social or Natural Sciences
+  - Can come in the form of empirical findings or laws as well.
+
+--
+
+2. The data-generating process (DGP)
+  - Look at the distribution of the dependent variable.
+  
+--
+
+3. The limitations of measurement and observation.
+  - E.g., our "continuous" attitude may not be observable in any fashion expect an ordinal variable.
+  
+--
+
+4. Taking the stochastic component of the model seriously upfront, in constrast to examining it after the fact.
+
+--
+
+5. Moving research questions, and thus our models, beyond typical center mass analysis
+  - Distributions can be described in terms of location, scale,
+and shape, among other parameters.
+
+---
+
+## Probability and Models of Social & Natural Phenomena
+
+**Data-generating processes lead to empirical distributions, which map onto random variables distributed by functions with known properties and assumptions.**
+
+--
+
+* Given this data, the goal is inference - using data (we know) to uncover causal relationships (we do not know).
+
+--
+
+* In order to do this, we have to be able to quantify the uncertainty of our inferences - probability is the catalyst for this.
+
+--
+
+* Taking the stochastic component seriously, upfront, is central to accomplishing this.
+
+---
+
+## A More Flexible Way to Describe Statistical Models
+
+Suppose we have a dependent variable or outcome $y_i$ (e.g., turnout, regulatory enforcements, deaths, vote choice, etc.).
+
+--
+
+Given the DGP and our theory, we assume $y_i$ is distributed by, or best described by, some function, $\mathcal{f}(\cdot)$.
+
+--
+
+We can then formulate a stastical model of the DGP as follows:
+
+--
+
+  * **Stochastic Component**
+  $$y \sim \mathcal{f}(\mu, \theta)$$
+  
+--
+
+  * **Systematic Component** 
+  $$\mu = \mathcal{g}(X, \beta)$$
+--
+
+Note
+
+  1. The distribution of $y$ is dependent on two parameters, $\mu$ and $\theta$, but could be described in terms of one (e.g., (poisson), two (logistic), or three (gamma).
+
+--
+
+  2. The systematic component above parameterizes $\mu$, but we could just as easily parameterize $\theta$ or both $\mu$ and $\theta$.
+
+--
+
+  3. Choosing a different distribution generates a completely new model. This isn't possible with the error-term formulation.
+  
+--
+
+  4. The $X\beta$ should begin to look familiar...
+
+---
+
+## Choosing Distributions and Distribution Functions
+
+```{r dists_funs, warning=FALSE, eval=TRUE, echo=FALSE, fig.showtext=TRUE, fig.height=6, fig.width=16}
+library(patchwork)
+set.seed(2579)
+dv <- rnorm(10000, 0, 1)
+dv <- data.frame(dv)
+logdv <- ExtDist::rLogistic(n=10000, location=0.5, scale=0.5)
+logdv <- data.frame(logdv)
+
+p_1 <- ggplot(dv, aes(x=dv)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  labs(title = "PDF of Normal Distribution") +
+  xlab("Dependent Variable") +
+  ylab("Empirical PDF") +
+  theme_xaringan() +
+  theme(plot.title = element_text(size = 14, hjust=0.75)) 
+
+p_2 <- ggplot(dv, aes(x=dv)) +
+  stat_ecdf(geom = "step") +
+  labs(title = "CDF for Normal Distribution") +
+  xlab("Dependent Variable") +
+  ylab("Empirical CDF") +
+  theme_xaringan() +
+  theme(plot.title = element_text(size = 14, hjust=0.75))
+
+p_3 <- ggplot(logdv, aes(x=logdv)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  labs(title = "PDF for Logistic Distribution") +
+  xlab("Dependent Variable") +
+  ylab("Empirical PDF") +
+  theme_xaringan() +
+  theme(plot.title = element_text(size = 14, hjust=0.75)) 
+
+p_4 <- ggplot(logdv, aes(x=logdv)) +
+  stat_ecdf(geom = "step") +
+  labs(title = "CDF for Logistic Distribution") +
+  xlab("Dependent Variable") +
+  ylab("Empirical CDF") +
+  theme_xaringan() +
+  theme(plot.title = element_text(size = 14, hjust=0.75)) 
+
+panel <- p_1 + p_2 + p_3 + p_4 +
+  plot_layout(ncol = 4) +
+  plot_annotation(theme = theme(plot.margin = margin()))
+panel
+```
+
+--
+
+* We can use any distribution that approximates are dependent variable.
+
+--
+
+* We can also use the PDF or CDF as appropriate.
+
+---
+
+## Let's Return to Normal
+
+Remember the error-term description of regression
+$$y_i = \alpha + x_{i1}\beta_1 + x_{i2}\beta_2 + ... + x_{ik}\beta_k + \epsilon_i$$
+--
+
+We can rewrite this in matrix form for simplicity
+$$y = X\beta + \epsilon$$
+--
+
+Where
+
+\begin{align}
+y &= \text{dependent variable} \\
+X &= \text{a matrix of independent variables, along with an intercept} \\
+\beta &= \text{the parameters to be estimated for each independent variable, along with an intercept} \\
+\epsilon &= \text{the error term, which we assume is distributed such that...}
+\end{align}
+
+--
+
+$$\epsilon \sim \mathcal{f}_N(0, \sigma^2)$$
+--
+
+* Note that we never, in any of these equations, describe the dependent variable...the very thing we hope to understand and model.
+
+--
+
+* The only reference we have to what the dependent variable looks like is in our assumptions about the error term, and then, only after accounting for the systematic component, $X\beta$.
+
+---
+
+## Let's Try Our Approach
+
+Using our new notion, if we assume that the function mapping the Data Generating Process to our dependent variable is the normal probability density function or $\mathcal{f}(\cdot)$
+
+--
+
+**Stochastic Component**
+$$y \sim \mathcal{f}_N(\mu, \sigma^2)$$
+--
+
+**Systematic Component**
+$$\mu = X\beta$$
+--
+
+Notes
+
+* Note that we tackle the stochastic component of the dependent variable upfront - before we attempt to model it (impose our theory).
+
+--
+
+* We could just as easily parameterize the variance, $\sigma^2$, as well
+
+--
+
+$$\sigma^2 = exp(Z\delta)$$
+--
+
+* Choosing a new distribution, $\mathcal{f}(\cdot)$, would give us a new model, even though our systematic component would be the same. This is not possible in the error-term approach.
+
+---
+
+## Writing and Talking about Models
+
+So, in a paper, we may write are model, assuming a Gaussian dependent variable, such that
+\begin{align}
+y &\sim \mathcal{f}_N(\mu, \sigma^2) \\
+\mu &= X\beta
+\end{align}
+
+--
+
+We describe the model as follows:
+
+"The dependent variable, $y$, is distributed according to the normal distribution with mean, $\mu$, and variance, $\sigma^2$. We model $\mu$ as a function of our matrix of covariates, $X$, and a vector of coefficients, $\beta$, to be estimated from the data."
+
+* You can insert the conceptual names for the variables in these placeholders such that "We model *vote choice* according to the normal distribution...so on and so forth." 
+
+* The dependent and key independent variables should always be described in detail elsewhere in the text.
+
+--
+
+**Note**
+
+Never, ever write
+$$y_i = \alpha + x_{i1}\beta_1 + x_{i2}\beta_2 + ... + x_{ik}\beta_k + \epsilon_i$$
+Then say you've "estimated OLS" or "estimated logit" or "estimated ordered logit." Nothing about that equation implies any of the sort.
+---
+
+class: left, middle
+
+# Next - A Method for Developing Likelihoods
+
+# .blue[Up-ahead - Likelihood for Continuous Outcomes]
+
+---
+
+class: center, middle
+
+# Samuel Workman, Ph.D.
+
+### .red[`r icon::fa("envelope")`] [samuel.workman@ou.edu](mailto:samuel.workman@ou.edu)
+
+### .blue[`r icon::fa("globe-americas")`] [samuelworkman.org](https://www.samuelworkman.org)
+
+### .green[`r icon::fa("medium")`] [@samuel.workman](https://medium.com/@samuel.workman)
+
+### .blue[`r icon::fa("twitter")`] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)
