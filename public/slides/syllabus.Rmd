@@ -145,3 +145,7 @@ xaringanExtra::embed_xaringan(url = "../../../slides/likelihood_math.html", rati
 <iframe width="162" height="100" src="https://www.youtube.com/embed/6C7yRBfh2ok" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 #### Module 2. Maximum Likelihood for Continuous Outcomes 
+
+[Describing Statistical Models](../../../slides/statistical_models.html)
+
+[Describing Statistical Models `r icon::fa("youtube")`]()
