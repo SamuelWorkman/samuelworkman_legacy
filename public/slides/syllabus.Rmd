@@ -112,6 +112,8 @@ Students will work through each of the modules below. Once constructed, slides, 
 
 #### Module 1. Introduction & Logic of Maximum Likelihood
 
+---
+
 Reading: King, Chapter 1 & 2; Ward & Ahlquist Chapter 1 & 2.
 
 Workman, [Four Principles of Data Collection](https://towardsdatascience.com/four-principles-of-data-collection-82ad07938ac1)
@@ -144,7 +146,11 @@ xaringanExtra::embed_xaringan(url = "../../../slides/likelihood_math.html", rati
 <iframe width="162" height="100" src="https://www.youtube.com/embed/kaL1KzDTotc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <iframe width="162" height="100" src="https://www.youtube.com/embed/6C7yRBfh2ok" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-#### Module 2. Maximum Likelihood for Continuous Outcomes 
+#### Module 2. Describing and Developing Statistical Models
+
+---
+
+Reading: None.
 
 [Describing Statistical Models](../../../slides/statistical_models.html)
 
