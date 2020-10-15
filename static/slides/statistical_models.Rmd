@@ -56,6 +56,7 @@ y_i &= \alpha + x_1\beta_1 + x_2\beta_2 +...x_{ik}\beta_k  + \epsilon_i
 Where...
 
 \begin{align}
+y_i &= \text{the dependent variable} \\
 \alpha &= \text{the intercept} \\
 x_{ik} &= \text{indepedent variables} \\
 \epsilon_i &= \text{the error term}
@@ -98,7 +99,7 @@ Cov(\epsilon_i, \epsilon_j) &= 0, \forall\text{ } i \neq j
 --
 
 3. The limitations of measurement and observation.
-  - E.g., our "continuous" attitude may not be observable in any fashion expect an ordinal variable.
+  - E.g., our "continuous" attitude may not be observable in any fashion except an ordinal variable.
   
 --
 
@@ -114,7 +115,7 @@ and shape, among other parameters.
 
 ## Probability and Models of Social & Natural Phenomena
 
-**Data-generating processes lead to empirical distributions, which map onto random variables distributed by functions with known properties and assumptions.**
+**Data-generating processes lead to empirical distributions, which map onto parametric distributions with known functions, properties, and assumptions.**
 
 --
 
@@ -140,7 +141,7 @@ Given the DGP and our theory, we assume $y_i$ is distributed by, or best describ
 
 --
 
-We can then formulate a stastical model of the DGP as follows:
+We can then formulate a statistical model of the DGP as follows:
 
 --
 
@@ -227,7 +228,7 @@ panel
 
 --
 
-* We can use any distribution that approximates are dependent variable.
+* We can use any distribution that approximates our dependent variable.
 
 --
 
@@ -283,18 +284,18 @@ $$\mu = X\beta$$
 
 Notes
 
-* Note that we tackle the stochastic component of the dependent variable upfront - before we attempt to model it (impose our theory).
+* We tackle the stochastic component of the dependent variable upfront - before we attempt to model it (impose our theory).
 
 --
 
-* We could just as easily parameterize the variance, $\sigma^2$, as well
+* We could just as easily parameterize the variance, $\sigma^2$, as well.
 
 --
 
 $$\sigma^2 = exp(Z\delta)$$
 --
 
-* Choosing a new distribution, $\mathcal{f}(\cdot)$, would give us a new model, even though our systematic component would be the same. This is not possible in the error-term approach.
+* Choosing a new distribution, $\mathcal{f}(\cdot)$, would give us a new model, even though our systematic component (causal theory) would be the same.
 
 ---
 
