@@ -4,7 +4,7 @@
     <title>Maximum Likelihood Estimation</title>
     <meta charset="utf-8" />
     <meta name="author" content="Samuel Workman, Ph.D." />
-    <meta name="date" content="2020-10-15" />
+    <meta name="date" content="2020-10-16" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 # Maximum Likelihood Estimation
 ## Social &amp; Natural Science Applications
 ### Samuel Workman, Ph.D.
-### 2020-10-15
+### 2020-10-16
 
 ---
 
@@ -41,7 +41,7 @@ class: center, middle
 
 ## Writing a Statistical Model
 
-Traditional Linear Regression
+Traditional Linear Regression Script
 
 `\begin{align}
 y_i &amp;= \alpha + x_1\beta_1 + x_2\beta_2 +...x_{ik}\beta_k  + \epsilon_i
@@ -96,6 +96,8 @@ Cov(\epsilon_i, \epsilon_j) &amp;= 0, \forall\text{ } i \neq j
 
 3. The limitations of measurement and observation.
   - E.g., our "continuous" attitude may not be observable in any fashion except an ordinal variable.
+  - Observation windows matter (E.g., "bug death" may be continuous process but we usually only observe "alive" or "dead").
+  - E.g., we know attitudes change gradually, but can only observe change at the point of the survey.
   
 --
 
@@ -106,6 +108,7 @@ Cov(\epsilon_i, \epsilon_j) &amp;= 0, \forall\text{ } i \neq j
 5. Moving research questions, and thus our models, beyond typical center mass analysis
   - Distributions can be described in terms of location, scale,
 and shape, among other parameters.
+  - Sometimes these phenomena are more interesting.
 
 ---
 
@@ -120,10 +123,12 @@ and shape, among other parameters.
 --
 
 * In order to do this, we have to be able to quantify the uncertainty of our inferences - probability is the catalyst for this.
+  * We can use the probability distributions most closely associated with our data to do this.
 
 --
 
-* Taking the stochastic component seriously, upfront, is central to accomplishing this.
+* Taking the stochastic component seriously, upfront, is central to quantifying uncertainty.
+  * And thus, to making worthwhile substantive statements about the *dependent variable*---the thing that interests us.
 
 ---
 
@@ -247,7 +252,7 @@ Notes
 
 ## Writing and Talking about Models
 
-So, in a paper, we may write are model, assuming a Gaussian dependent variable, such that
+So, in a paper, we may write our model, assuming a Gaussian dependent variable, such that
 `\begin{align}
 y &amp;\sim \mathcal{f}_N(\mu, \sigma^2) \\
 \mu &amp;= X\beta
