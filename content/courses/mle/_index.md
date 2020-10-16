@@ -22,3 +22,5 @@ The vast majority of data of interest to social scientists do not fit into the G
 {{< youtube NXafc2vNU6I >}}
 
 [***Describing Statistical Models***](../../../slides/statistical_models.html)
+
+{{< youtube PeaquNSMnhY >}}
