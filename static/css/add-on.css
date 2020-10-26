@@ -108,7 +108,7 @@ body {
 
 /* Main Content Area Styling */
 
-#wrapper {background-color: #F2F1ED;}
+#wrapper {background-color: #DEEBF7;}
 
 .pagination .button {
   color: #5F4B32;
@@ -121,7 +121,7 @@ body {
   }
 
 article.post{
-  background-color: #FAF9F5;
+  background-color: #F7FCF5;
   border-radius: 5px 15px 5px 5px;
   }
   article.post .button {
@@ -145,7 +145,7 @@ code {
 
 /* Sidebar Area Styles */
 
-#site-intro header h1 {color: #2E3440;}
+#site-intro header h1 {color: #006D2C;}
 #Sidebar a {font-family: 'Alegreya', serif;}
 
 .cta {
