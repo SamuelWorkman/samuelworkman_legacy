@@ -1,0 +1,241 @@
+---
+title: "Maximum Likelihood Estimation"
+subtitle: "Social & Natural Science Applications"  
+author: 
+  - "Samuel Workman, Ph.D."
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    includes:
+      in_header: "in_header.html"
+      after_body: "after_body.html"
+    lib_dir: libs
+    css: [xaringan-themer.css, title_theme.css]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+library(plotly)
+library(RColorBrewer)
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+library(xaringanthemer)
+style_solarized_light(
+  header_font_google = google_font("Josefin Slab", "600"),
+  text_font_google   = google_font("Alegreya Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code")
+)
+```
+
+
+
+class: center, middle
+
+# Four-step Approach to Developing a Likelihood
+
+---
+
+## The Notion of likelihood
+
+Let's assume that we have our model specified such that
+$$\mathbf{y} \sim \mathcal{f}(\theta)$$
+--
+
+* It is not possible to state the probabilities of particular $\theta$s given $\mathbf{y}$, $\mathcal{P}(\theta|\mathbf{y})$.
+
+--
+
+* However, we can get a sense of the ***relative likelihood*** of $\hat\theta$ over some other $\theta^\prime$
+
+--
+
+* The likelihood of $\theta$ given the data, $\mathbf{y}$, is proportional to the the probability of the data, $\mathbf{y}$, given $\theta$.
+$$\mathcal{L}(\theta|\mathbf{y}) \propto \mathcal{P}(\mathbf{y}|\theta)$$
+
+--
+
+Notes
+
+1. Likelihood is a surface in the space defined by $\theta$. Examining this space allows us to see which values of $\theta$ are more *likely*.
+
+2. Beware local maxima, non-convergence, and "flat" likelihood surfaces.
+
+---
+
+## Likelihood Is a Surface Defined by $\theta$
+
+```{r llik_surface, warning=FALSE, eval=TRUE, echo=FALSE, fig.showtext=TRUE, fig.height=6, fig.width=12}
+set.seed(2579)
+b_1 <- rnorm(1000, 52, 7)
+b_2 <- rnorm(1000, 77, 17)
+llik <- MASS::kde2d(b_1, b_2, n = 100)
+blues <- colorRampPalette(rev(brewer.pal(7, "Blues")))(10)
+
+plot_ly(x = llik$x, y = llik$y, z = llik$z, showscale=FALSE) %>% 
+  add_surface(colors = blues) %>%
+  layout(
+    #title = "Layout options in a 3d scatter plot",
+    scene = list(
+      xaxis = list(title = "<b>β<sub>1</sub></b>",
+                   ticks="",
+                   showticklabels=FALSE),
+      yaxis = list(title = "<b>β<sub>2</sub></b>",
+                   ticks="",
+                   showticklabels=FALSE),
+      zaxis = list(title = "<b>LogL</b>",
+                   ticks="",
+                   showticklabels=FALSE)
+    ))
+```
+
+
+---
+
+## Developing a Likelihood
+
+**Four Steps**
+
+--
+
+1. Express the *joint probability* of the data using a chosen distribution (could be pdf or cdf)---which comes from our theory and the data generating process.
+  * Remember, $\mathbf{y}$ is a vector; what is the joint probability of observing all those particular values of $\mathbf{y}$?
+  * In other words, how do we describe the real-world social or natural *process* that generated $\mathbf{y}$?
+
+--
+
+2. Convert the joint probability to the likelihood---remember, they are proportional.
+
+--
+
+3. Simplify the likelihood by taking logs and using the distributive property to isolate constants.
+
+--
+
+4. Substitute in the systematic component of the model (e.g., $\mathbf{X}\beta$).
+
+---
+
+## Likelihood for the Normal Model
+
+***Step 1: Express the Joint Probability of the Data***
+
+--
+
+\begin{align}
+\mathcal{P}(y_1|\mu_1, \sigma^2) &= \mathcal{f_N}(y_1|\mu_1, \sigma^2) \\
+\mathcal{P}(y_1, y_2|\mu_1, \mu_2, \sigma^2) &= \mathcal{f_N}(y_1|\mu_1, \sigma^2) \times \mathcal{f_N}(y_2|\mu_2, \sigma^2) \\
+\mathcal{P}(y_1, y_2,..., y_i|\mu_1, \mu_2,...,\mu_i, \sigma^2) &= \mathcal{f_N}(y_1|\mu_1, \sigma^2) \times \mathcal{f_N}(y_2|\mu_2, \sigma^2) \times...\times \mathcal{f_N}(y_i|\mu_i, \sigma^2) \\
+\mathcal{P}(y_i|\mu_i, \sigma^2) &= \prod_{i=1}^n \mathcal{f_N}(y_i|\mu_i, \sigma^2) \\
+\mathcal{P}(y_i|\mu_i, \sigma^2) &= \prod_{i = 1}^n (2\pi\sigma^2)^{-1/2} exp\Big(\frac{-(y-\mu)^2}{2\sigma^2}\Big)
+\end{align}
+
+--
+
+Notes
+
+1. The joint probability embodies some assumptions of OLS. Try to identify them.
+
+2. With the social or natural process generating $\mathbf{y}$ described, we can now express that joint probability as *likelihood*.
+
+---
+
+## Likelihood for the Normal Model
+
+***Step 2: Express the Joint Probability as the Likelihood***
+
+--
+
+\begin{align}
+\mathcal{L}(\mu,\sigma^2|y) &\propto \mathcal{P}(y|\mu,\sigma^2) \\
+\mathcal{L}(\mu,\sigma^2|y) &= \mathcal{k}(y)\mathcal{P}(y|\mu,\sigma^2) \\
+\mathcal{L}(\mu,\sigma^2|y) &= \mathcal{k}(y)\prod_{i = 1}^n (2\pi\sigma^2)^{-1/2} exp\Big(\frac{-(y-\mu)^2}{2\sigma^2}\Big)
+\end{align}
+
+--
+
+Notes
+
+1. The final equation looks nasty. However, we are merely substituting in the equation for the normal distribution.
+
+2. We need to get rid of that product sign. If we could make this additive, things get easier.
+
+---
+
+## Likelihood for the Normal Model
+
+***Step 3: Simplify the Likelihood***
+
+--
+
+\begin{align}
+\mathcal{L}(\mu,\sigma^2|y) &= \mathcal{k}(y)\prod_{i = 1}^n (2\pi\sigma^2)^{-1/2} exp\Big(\frac{-(y-\mu)^2}{2\sigma^2}\Big) \\
+log \mathcal{L}(\mu,\sigma^2|y) & = log \prod_{i = 1}^n \Big(k(y_i)\times(2\pi\sigma^2)^{-1/2} exp\Big(\frac{-(y-\mu)^2}{2\sigma^2}\Big)\Big) \\
+log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n\Big(log k(y_i)-\frac{1}{2} log(2\pi\sigma^2)-\frac{(y-\mu)^2}{2\sigma^2}\Big) \\
+log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i = 1}^n log(2\pi\sigma^2)-\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2} \\
+ log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i = 1}^n log(2\pi)-\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2} \\
+ log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2}
+\end{align}
+
+--
+
+* We have fully described the stochastic component---how $y$ is generated.
+
+--
+
+* We can see our dependent variable, $y$, in the equation, but where is our $\mathbf{X}\beta$?
+
+---
+
+## Likelihood for the Normal Model
+
+***Step 4: Substitute the Systematic Component***
+
+--
+
+\begin{align}
+log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2} \\
+\mu & = \mathbf{X}\beta \\
+ log \mathcal{L}(\beta,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{2\sigma^2}
+\end{align}
+
+--
+
+*Notes*
+
+1. The systematic component comes from our theory and empirical evidence on what causes $y$; i.e., our independent variables and estimated coefficients, $\mathbf{X}\beta$.
+
+2. Maximizing this likelihood minimizes the "sum of squares" - the residuals (i.e., the MLE estimator for the normal is "least squares").
+
+3. We have now derived OLS from first principles.
+
+---
+
+class: left, middle
+
+# Next - Likelihood for Non-Constant Error Variance
+
+# .blue[Up-ahead - Applications for Continuous Outcomes]
+
+---
+
+class: center, middle
+
+# Samuel Workman, Ph.D.
+
+### .red[`r icon::fa("envelope")`] [samuel.workman@ou.edu](mailto:samuel.workman@ou.edu)
+
+### .blue[`r icon::fa("globe-americas")`] [samuelworkman.org](https://www.samuelworkman.org)
+
+### .green[`r icon::fa("medium")`] [@samuel.workman](https://medium.com/@samuel.workman)
+
+### .blue[`r icon::fa("twitter")`] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)

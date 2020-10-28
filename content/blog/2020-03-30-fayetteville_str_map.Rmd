@@ -18,7 +18,7 @@ bibliography: bibs/ggmap.bib
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
-library(citr)
+#library(citr)
 ```
 
 I've titled this post 'The County'. Back home in West Virginia, people often refer to entities of government by their jurisidiction or where they draw authority. We refer to the police as 'The Law' and the various functions, whether for public health or taxes, as 'The County'. Today, I'm drawing a map of the 'The County', Fayetteville, WV. Even when going into town to pay your taxes, you'd say "going over to see 'The County'". This will ring true for folks back home, and probably for other rural areas.

@@ -5,10 +5,6 @@
     <link>https://www.samuelworkman.org/zh-tw/</link>
     <description>Recent content on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-TW</language>
-    
-	<atom:link href="https://www.samuelworkman.org/zh-tw/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>zh-TW</language><atom:link href="https://www.samuelworkman.org/zh-tw/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

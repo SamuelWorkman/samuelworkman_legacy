@@ -5,10 +5,6 @@
     <link>https://www.samuelworkman.org/contact/</link>
     <description>Recent content in Contact on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    
-	<atom:link href="https://www.samuelworkman.org/contact/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en</language><atom:link href="https://www.samuelworkman.org/contact/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

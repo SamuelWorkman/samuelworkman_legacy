@@ -155,3 +155,5 @@ Reading: None.
 [Describing Statistical Models](../../../slides/statistical_models.html)
 
 [Describing Statistical Models `r icon::fa("youtube")`](https://youtu.be/PeaquNSMnhY)
+
+[Deriving Likelihood for the Normal Model](../../../slides/derive_likelihood.html)
