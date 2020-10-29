@@ -28,3 +28,5 @@ The vast majority of data of interest to social scientists do not fit into the G
 {{< youtube PeaquNSMnhY >}}
 
 [***Deriving Likelihood for the Normal Model***](../../../slides/derive_likelihood.html)
+
+{{< youtube lcoNOV85dPE >}}
