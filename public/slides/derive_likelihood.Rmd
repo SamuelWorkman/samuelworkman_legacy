@@ -183,7 +183,7 @@ log \mathcal{L}(\mu,\sigma^2|y) & = log \prod_{i = 1}^n \Big(k(y_i)\times(2\pi\s
 log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n\Big(log k(y_i)-\frac{1}{2} log(2\pi\sigma^2)-\frac{(y-\mu)^2}{2\sigma^2}\Big) \\
 log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i = 1}^n log(2\pi\sigma^2)-\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2} \\
  log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i = 1}^n log(2\pi)-\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2} \\
- log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2}
+ log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{\sigma^2}
 \end{align}
 
 --
@@ -203,9 +203,9 @@ log \mathcal{L}(\mu,\sigma^2|y) & = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i
 --
 
 \begin{align}
-log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{2\sigma^2} \\
+log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu)^2}{\sigma^2} \\
 \mu & = \mathbf{X}\beta \\
- log \mathcal{L}(\beta,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{2\sigma^2}
+ log \mathcal{L}(\beta,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{\sigma^2}
 \end{align}
 
 --
@@ -222,9 +222,9 @@ log \mathcal{L}(\mu,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^
 
 class: left, middle
 
-# Next - Likelihood for Non-Constant Error Variance
+# Next - Applied Likelihood & Simulation for the Normal Model
 
-# .blue[Up-ahead - Applications for Continuous Outcomes]
+# .blue[Up-ahead - Likelihood for the Heteroskedastic Normal]
 
 ---
 
