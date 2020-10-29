@@ -7,6 +7,8 @@ The vast majority of data of interest to social scientists do not fit into the G
 
 ### [Syllabus](../../../slides/syllabus.html)
 
+### [Applied Vignettes in R](applied_walkthrough/)
+
 ### Slides
 
 [***Introduction***](../../../slides/intro_slides.html)

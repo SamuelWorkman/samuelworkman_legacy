@@ -157,3 +157,5 @@ Reading: None.
 [Describing Statistical Models `r icon::fa("youtube")`](https://youtu.be/PeaquNSMnhY)
 
 [Deriving Likelihood for the Normal Model](../../../slides/derive_likelihood.html)
+
+[Applied Normal Model in R](../../../slides/applied_normal_wt.html)

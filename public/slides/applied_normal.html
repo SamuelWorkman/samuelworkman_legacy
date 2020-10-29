@@ -1,0 +1,442 @@
+---
+title: "Applied Likelihood & Simulation for the Normal Model"
+author: "Samuel Workman, Ph.D."
+date: "2020-10-29"
+output:
+  html_document:
+    css: nord_light.css
+    df_print: paged
+    fig_retina: 1
+fig_width: 6
+fig_height: 4.5
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<hr />
+<div id="gather-tools" class="section level2">
+<h2>Gather Tools</h2>
+<ul>
+<li>Source custom functions, set seed, and configure scientific notion. You don’t need the custom function to use the code - it merely styles this document. If you like it, I can provide it.</li>
+<li>Load libraries (install if not installed already); you can ignore the ones that load and use fonts.</li>
+<li>Load <a href="https://fonts.google.com">Google Fonts</a>.</li>
+</ul>
+<pre class="r"><code>options(htmltools.dir.version = FALSE)
+set.seed(7277) # for reproducibility when taking random draws
+options(scipen = 999) # gets rid of scientific notation
+source(&quot;nord_fira.R&quot;) # nord_fira 
+library(tidyverse) # data wrangling &amp; ggplot2
+library(broom) # tidys up regression output for quick tables
+library(MASS) # for simulation from distributions
+library(ggplot2) # pretty plots
+library(RColorBrewer) # pretty colors
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+library(kableExtra) # table construction
+font_add_google(&quot;Fira Sans&quot;, &quot;firasans&quot;)
+font_add_google(&quot;Fira Mono&quot;, &quot;firamono&quot;)
+showtext_auto() # allow ggplot2 to render the fonts automatically for pdfs</code></pre>
+<hr />
+</div>
+<div id="get-some-data" class="section level2">
+<h2>Get Some Data</h2>
+<div class="row">
+<div class="col-md-6">
+<h3 id="make-up-a-world">Make Up a World</h3>
+<pre class="r"><code># Create the &quot;true&quot; parameters, assuming the world has any
+betas &lt;- c(2, 5, 7)
+# Create the constant and covariates (X matrix)
+n &lt;- 1000
+int &lt;- rep(1, n)
+x_1 &lt;- rnorm(n, 22, 2)
+x_2 &lt;- rnorm(n, 7, 3)
+
+# Create the matrix X
+X &lt;- cbind(int, x_1, x_2)
+
+# Systematic component (mu) &amp; stochastic component (e)
+mu &lt;- X%*%betas
+e &lt;- rnorm(n, 0, 12)
+
+# Create y from systematic (mu) and stochastic (e) components
+y &lt;- mu + e</code></pre>
+</div>
+<div class="col-md-6">
+<h3 id="take-a-look">Take a Look</h3>
+<pre class="r"><code>str(mu) # shows the variables and data types
+head(mu) # shows the first 10 entries in the data
+View(mu) # opens the data in table view
+names(mu) # lists the variable names in the data set</code></pre>
+</div>
+</div>
+<hr />
+</div>
+<div id="plot-to-see-the-relationships" class="section level2">
+<h2>Plot to See the Relationships</h2>
+<div class="row">
+<div class="col-md-6">
+<h3 id="plot-y-sim-x_1">Plot <span class="math inline">\(y \sim x_1\)</span></h3>
+<p>We can plot and see a positive relationship between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(y_i\)</span>.</p>
+<pre class="r"><code>plot(x_1, y)</code></pre>
+<p><img src="static/slides/applied_normal_files/figure-html/simple_plot_1-1.png" width="672" /></p>
+</div>
+<div class="col-md-6">
+<h3 id="plot-y-sim-x_2">Plot <span class="math inline">\(y \sim x_2\)</span></h3>
+<p>We can plot and see a positive relationship between <span class="math inline">\(x_2\)</span> and <span class="math inline">\(y_i\)</span>.</p>
+<pre class="r"><code>plot(x_2, y)</code></pre>
+<p><img src="static/slides/applied_normal_files/figure-html/simple_plot_2-1.png" width="672" /></p>
+</div>
+</div>
+<hr />
+</div>
+<div id="good-candidate-for-ols-lets-try" class="section level2">
+<h2>Good Candidate for OLS, Let’s Try</h2>
+<pre class="r"><code>ols &lt;- lm(y ~ x_1 + x_2)
+tidy(ols) %&gt;%
+  kable(digits = 2, format=&quot;html&quot;, booktabs=TRUE) %&gt;%
+    kable_styling(full_width = TRUE, 
+                  bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+std.error
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+10.45
+</td>
+<td style="text-align:right;">
+4.12
+</td>
+<td style="text-align:right;">
+2.53
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+x_1
+</td>
+<td style="text-align:right;">
+4.65
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+25.47
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+x_2
+</td>
+<td style="text-align:right;">
+6.91
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+57.62
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Note the TRUE parameters are as follows: <span class="math inline">\(\alpha = 2\)</span>, <span class="math inline">\(x_1 = 5\)</span>, and <span class="math inline">\(x_2 = 7\)</span>.</em></strong> We defined them above. OLS gets us really close!! Ignore the intercept for now.</p>
+<hr />
+</div>
+<div id="simulation-from-the-model-to-assess-hypothesis-and-counterfactuals" class="section level2">
+<h2>Simulation from the Model to Assess Hypothesis and Counterfactuals</h2>
+<ul>
+<li>Simulating from our model allows us to examine the impact of different values of our IV’s, <span class="math inline">\(\mathbf{X}\)</span>, on the dependent variable <span class="math inline">\(y\)</span>.</li>
+<li>It also allows us to assess how <span class="math inline">\(y\)</span> behaves under different counterfactual scenarios (e.g., what’s the probability that a black, male, with a Ph.D. votes?)</li>
+<li>We construct these counterfactuals such that we can explore any substantive question we like from the data.</li>
+</ul>
+<p>Let’s examine the P(y|x_1) across its range.</p>
+<ul>
+<li>Here we simply create a variable that takes on all values in the range of <span class="math inline">\(x_1\)</span> by .001.</li>
+</ul>
+<pre class="r"><code>x_1_range &lt;- seq(min(x_1), max(x_1), by = .001)</code></pre>
+<ul>
+<li><p>Set up a data frame for hypothesis regarding <span class="math inline">\(x_1\)</span> - holding all else equal—mean_model is the model with all variables held at the mean.</p></li>
+<li><p>Create a matrix of repreated means for each variable that is the length
+of the range of x_1 by .001.</p></li>
+</ul>
+<pre class="r"><code>mean_model &lt;- c(mean(x_1), mean(x_2))
+cf_1 &lt;- matrix(mean_model, nrow = length(x_1_range), ncol = 2, byrow = TRUE)
+cf_1 &lt;- data.frame(cf_1)
+colnames(cf_1) &lt;- c(&quot;x_1&quot;, &quot;x_2&quot;)
+
+# Take a look
+head(cf_1)</code></pre>
+<pre><code>##       x_1      x_2
+## 1 21.9997 7.008283
+## 2 21.9997 7.008283
+## 3 21.9997 7.008283
+## 4 21.9997 7.008283
+## 5 21.9997 7.008283
+## 6 21.9997 7.008283</code></pre>
+<ul>
+<li>Predictions from this counterfactual would give us the expectation for <span class="math inline">\(y\)</span> with all variables held at their means.</li>
+<li>Now, lets replace the <span class="math inline">\(x_1\)</span> column with our counterfactual about <span class="math inline">\(x_1\)</span> and confirm that we were successful.</li>
+</ul>
+<pre class="r"><code>cf_1[,1] &lt;- x_1_range
+head(cf_1)</code></pre>
+<pre><code>##        x_1      x_2
+## 1 15.52166 7.008283
+## 2 15.52266 7.008283
+## 3 15.52366 7.008283
+## 4 15.52466 7.008283
+## 5 15.52566 7.008283
+## 6 15.52666 7.008283</code></pre>
+<ul>
+<li>Note that <span class="math inline">\(x_1\)</span> now increases by .001 in each row of our counterfactual data.</li>
+</ul>
+<div id="making-counterfactual-predictions-for-y" class="section level3">
+<h3>Making Counterfactual Predictions for <span class="math inline">\(y\)</span></h3>
+<ul>
+<li>We can use our estimated model to generate predictions about <span class="math inline">\(y\)</span> across the range of <span class="math inline">\(x_1\)</span>.</li>
+<li>We also generate 95 percent confidence intervals for our predictions. Where “fit” is predictions for <span class="math inline">\(y\)</span>, “lwr” is the lower CI, and “upr” is the upper CI.</li>
+</ul>
+<pre class="r"><code>simols &lt;- predict(ols, newdata = cf_1,
+                  interval = &quot;prediction&quot;, level = 0.95)
+simols &lt;- data.frame(simols)
+head(simols)</code></pre>
+<pre><code>##        fit      lwr      upr
+## 1 130.9555 108.3599 153.5511
+## 2 130.9601 108.3646 153.5557
+## 3 130.9648 108.3693 153.5603
+## 4 130.9694 108.3739 153.5649
+## 5 130.9741 108.3786 153.5695
+## 6 130.9787 108.3833 153.5742</code></pre>
+</div>
+<div id="assess-the-counterfactual-for-x_1-visually" class="section level3">
+<h3>Assess the Counterfactual for <span class="math inline">\(x_1\)</span> Visually</h3>
+<div class="row">
+<div class="col-md-6">
+<ul>
+<li>Grab a nice color from <code>RColorBrewer</code></li>
+<li>Graph our predications with <code>ggplot2</code></li>
+</ul>
+<pre class="r"><code>fill &lt;- brewer.pal(3, &quot;Set1&quot;)[2] # grab a nice color
+
+ggplot(data = simols, aes(x = cf_1$x_1)) +
+  xlab(&quot;x_1 Values&quot;) +
+  ylab(&quot;Predicted y (95% CI)&quot;) +
+  geom_line(aes(y = fit)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), 
+              fill = fill, alpha = 0.2) +
+  theme_minimal()</code></pre>
+</div>
+<div class="col-md-6">
+<p><img src="static/slides/applied_normal_files/figure-html/plot_ols-1.png" width="672" /></p>
+</div>
+</div>
+<ul>
+<li>Note that we could easily perform the same analysis for <span class="math inline">\(x_2\)</span>. We just need to define another counterfactual data set.
+<ul>
+<li>This time we would allow <span class="math inline">\(x_2\)</span> to vary while prescribing the values of the other variables.</li>
+<li>We used means for the other variables, but we could use any value that had substantive meaning given our variables (e.g., <span class="math inline">\(x_3 = \text{&quot;female&quot;}\)</span> or <span class="math inline">\(x_4 =\)</span> 40–60 year olds).</li>
+</ul></li>
+<li>Does this look right? Why would the confidence intervals display as uniform across the range of <span class="math inline">\(y\)</span>?</li>
+<li>The predictions from our model do not take account of the <em>uncertainty</em> in our estimated <span class="math inline">\(\beta\)</span>s from OLS. Remember, they are averages…they come from a distribution with variance.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="simulation-for-substantive-inference-a-bayesian-esque-approach" class="section level2">
+<h2>Simulation for Substantive Inference (a ‘Bayesian-esque’ Approach)</h2>
+<ul>
+<li>In looking at the graphs, are we taking the distribution of the betas
+and uncertainty around them seriously?</li>
+<li>Should the confidence intervals really be constant across the range of our variables?</li>
+<li>Remember, our estimates for the betas represent averages or point estimates…in other words, there is a distribution associated with these.
+Unless our predictions about <span class="math inline">\(y\)</span> incorporate this uncertainty, our statements about <span class="math inline">\(y\)</span> aren’t entirely accurate.</li>
+</ul>
+<div id="simulating-from-the-distribution-of-the-betas" class="section level3">
+<h3>Simulating from the distribution of the betas</h3>
+<ul>
+<li>To simulate, we need some information from our fitted model. Yes! OLS is particularly powerful and useful for starting a simulation for many types of models.</li>
+<li>What do we need from the model?</li>
+<li>The systematic and stochastic components of course—<span class="math inline">\(\beta\)</span>s, uncertainty around the <span class="math inline">\(\beta\)</span>s, and <span class="math inline">\(\sigma^2\)</span> - the variance.</li>
+</ul>
+<pre class="r"><code>pe &lt;- ols$coefficients # the betas
+vc &lt;- vcov(ols) # var-cov matrix, remember from Joe&#39;s class
+se &lt;- sqrt(diag(vc)) # standard errors
+s2 &lt;- summary(ols)$sigma**2 # the variance or sigma^2</code></pre>
+<ul>
+<li>Simulate from the distribution of our betas.</li>
+<li>We can use the multivariate normal distribution, thanks to the Central Limit Theorem.</li>
+</ul>
+<pre class="r"><code>sim_n &lt;- 10000 # 10k simulations
+simbs &lt;- mvrnorm(sim_n, pe, vc)
+simbs &lt;- data.frame(simbs)
+colnames(simbs)[1] &lt;- &quot;intercept&quot; # a nicer name
+head(simbs) # take a look</code></pre>
+<pre><code>##   intercept      x_1      x_2
+## 1  14.06019 4.494938 6.897720
+## 2  11.22464 4.625690 6.833098
+## 3  12.95272 4.598620 6.720639
+## 4   7.07816 4.806637 6.848045
+## 5  12.88514 4.512921 7.074548
+## 6  11.21085 4.658453 6.801821</code></pre>
+<ul>
+<li>We now have a data set of 10k simulations of the values of our <span class="math inline">\(\beta\)</span>s based on a distribution defined by our estimates and their variances.</li>
+<li>We can look at these and see the distribution.</li>
+</ul>
+<div class="row">
+<div class="col-md-6">
+<pre class="r"><code>ggplot(simbs, aes(x=x_1)) +
+  geom_density(
+    fill=&quot;#69b3a2&quot;, 
+    color=&quot;#e9ecef&quot;, 
+    alpha=0.6) +
+  xlab(expression(beta[1])) +
+  ylab(&quot;Density&quot;) +
+  theme_tufte()</code></pre>
+</div>
+<div class="col-md-6">
+<pre class="r"><code>ggplot(simbs, aes(x=x_2)) +
+  geom_density(
+    fill=&quot;#69b3a2&quot;, 
+    color=&quot;#e9ecef&quot;, 
+    alpha=0.6) +
+  xlab(expression(beta[2])) +
+  ylab(&quot;Density&quot;) +
+  theme_tufte()</code></pre>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<p><img src="static/slides/applied_normal_files/figure-html/x1_dist-1.png" width="672" /></p>
+</div>
+<div class="col-md-6">
+<p><img src="static/slides/applied_normal_files/figure-html/x2_dist-1.png" width="672" /></p>
+</div>
+</div>
+<ul>
+<li>So, we can now see that OLS’s <span class="math inline">\(\beta\)</span> is really one among many <span class="math inline">\(\beta\)</span>s…if assumptions hold, its the most <em>likely</em> <span class="math inline">\(\beta\)</span>, but if not…</li>
+<li>So, this is all well and good. But, how to we propagate this uncertainty into our predictions about <span class="math inline">\(y\)</span>?</li>
+<li>To do this we will construct a matrix of means and make use of the distributional information contained in our simulated <span class="math inline">\(\beta\)</span>s.</li>
+</ul>
+</div>
+<div id="setting-up-the-counterfactual" class="section level3">
+<h3>Setting Up the Counterfactual</h3>
+<ol style="list-style-type: decimal">
+<li>Create our “hypothesis” - the range of <span class="math inline">\(x_1\)</span></li>
+<li>Create a matrix containing meanings for everything.</li>
+<li>Extend the length of this matrix to the length of our hypothsis - the range of <span class="math inline">\(x_1\)</span> by .001.</li>
+<li>Replace the column of means for <span class="math inline">\(x_1\)</span> with our hypothesis data - the range of <span class="math inline">\(x_1\)</span>. This allows us to assess the impact of <span class="math inline">\(x_1\)</span> on <span class="math inline">\(y\)</span> across its range.</li>
+</ol>
+</div>
+<div id="use-information-from-the-ols-model-to-simulate-betas" class="section level3">
+<h3>Use Information from the OLS Model to Simulate <span class="math inline">\(\beta\)</span>s</h3>
+<ul>
+<li>Use these to simulate the systematic and stochastic components of <span class="math inline">\(y\)</span>.</li>
+</ul>
+<pre class="r"><code>sim_betas &lt;- mvrnorm(sim_n, pe, vc) # simulate betas
+mu &lt;- sim_betas%*%t(cf_data) # systematic component mu; transpose for comformability
+s2 &lt;- summary(ols)$sigma**2 # stochastic component sigma^2
+
+cf_y &lt;- mu + sqrt(s2) # create the simulated $y$ values</code></pre>
+<ul>
+<li>Now, we have a 10k simulations of <span class="math inline">\(y\)</span> <strong><em>at each value of <span class="math inline">\(x_1\)</span></em></strong> that incorporate the uncertainty, or the distribution, of our OLS <span class="math inline">\(\beta\)</span>s.</li>
+<li>Next, we will calculate point estimates of predictions for <span class="math inline">\(y\)</span> along with confidence intervals, which logistically means grabbing the average for each set of 10k simulated values of <span class="math inline">\(y\)</span>.</li>
+<li>First, we need to create a set of objects or “containers” to put this stuff in…</li>
+</ul>
+<pre class="r"><code>ev &lt;- NULL
+lci &lt;- NULL
+uci &lt;- NULL</code></pre>
+<ul>
+<li>Calculate the quantities of interest.
+<ul>
+<li>ev: expected value of the simulated y’s is simply their mean in each column of cf_y.</li>
+<li>lci &amp; uci: use apply to calculate by column the 2.5 and 97.5 quantile—plus/minus two standard deviations.</li>
+<li>Note we could calucate multiple ci’s with multiple calls on the columns.</li>
+<li><code>apply</code> allows us to conduct operations on columns in the data when specifying “2” (“1” for rows).</li>
+</ul></li>
+</ul>
+<pre class="r"><code>ev &lt;- apply(cf_y, 2, mean)
+lci &lt;- apply(cf_y, 2, quantile, probs = .025)
+uci &lt;- apply(cf_y, 2, quantile, probs = .975)
+sim.result &lt;- data.frame(cbind(x_1_range,ev,lci,uci))</code></pre>
+</div>
+</div>
+<div id="assess-the-counterfactual-visually" class="section level2">
+<h2>Assess the Counterfactual Visually</h2>
+<div class="row">
+<div class="col-md-6">
+<pre class="r"><code>ggplot(data = sim.result, aes(x = x_1_range)) + 
+  xlab(&quot;x_1 Values&quot;) +
+  ylab(&quot;Predicted y (95% CI)&quot;) +
+  geom_line(aes(y = ev)) +
+  geom_ribbon(aes(ymin = lci, ymax = uci), 
+    fill = &quot;blue&quot;, alpha = 0.2) + 
+  theme_tufte()</code></pre>
+</div>
+<div class="col-md-6">
+<p><img src="static/slides/applied_normal_files/figure-html/sim_plot-1.png" width="672" /></p>
+</div>
+</div>
+<p><em>Notes</em></p>
+<ol style="list-style-type: decimal">
+<li>We now have slimmer confidence intervals in the center of the conditional distributions, because this is where the most information is - so we are more certain!!</li>
+<li>We have now incorporated the distribution of our <span class="math inline">\(\beta\)</span>s into predictions about <span class="math inline">\(y\)</span>; we can not only say something about <span class="math inline">\(y\)</span>, but about how certain we are under different <strong><em>SUBSTANTIVE</em></strong> assumptions in our data.</li>
+</ol>
+<hr />
+</div>
+<div id="include-session-system-package-information" class="section level2">
+<h2>Include Session, System, Package Information</h2>
+<pre class="r"><code>library(sessioninfo)
+library(pander)
+edregs_ms1.Rmd_session_2020_04_28 &lt;- sessionInfo()
+pander::pander(edregs_ms1.Rmd_session_2020_04_28)</code></pre>
+<p><strong>R version 4.0.3 (2020-10-10)</strong></p>
+<p><strong>Platform:</strong> x86_64-w64-mingw32/x64 (64-bit)</p>
+<p><strong>locale:</strong>
+<em>LC_COLLATE=English_United States.1252</em>, <em>LC_CTYPE=English_United States.1252</em>, <em>LC_MONETARY=English_United States.1252</em>, <em>LC_NUMERIC=C</em> and <em>LC_TIME=English_United States.1252</em></p>
+<p><strong>attached base packages:</strong>
+<em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
+<p><strong>other attached packages:</strong>
+<em>pander(v.0.6.3)</em>, <em>sessioninfo(v.1.1.1)</em>, <em>kableExtra(v.1.3.1)</em>, <em>showtext(v.0.9)</em>, <em>showtextdb(v.3.0)</em>, <em>sysfonts(v.0.8.1)</em>, <em>ggExtra(v.0.9)</em>, <em>RColorBrewer(v.1.1-2)</em>, <em>MASS(v.7.3-53)</em>, <em>broom(v.0.7.2)</em>, <em>forcats(v.0.5.0)</em>, <em>stringr(v.1.4.0)</em>, <em>dplyr(v.1.0.2)</em>, <em>purrr(v.0.3.4)</em>, <em>readr(v.1.4.0)</em>, <em>tidyr(v.1.1.2)</em>, <em>tibble(v.3.0.4)</em>, <em>tidyverse(v.1.3.0)</em>, <em>ggthemes(v.4.2.0)</em> and <em>ggplot2(v.3.3.2)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong>
+<em>httr(v.1.4.2)</em>, <em>jsonlite(v.1.7.1)</em>, <em>viridisLite(v.0.3.0)</em>, <em>modelr(v.0.1.8)</em>, <em>shiny(v.1.5.0)</em>, <em>assertthat(v.0.2.1)</em>, <em>highr(v.0.8)</em>, <em>blob(v.1.2.1)</em>, <em>cellranger(v.1.1.0)</em>, <em>yaml(v.2.2.1)</em>, <em>pillar(v.1.4.6)</em>, <em>backports(v.1.1.10)</em>, <em>glue(v.1.4.2)</em>, <em>digest(v.0.6.27)</em>, <em>promises(v.1.1.1)</em>, <em>rvest(v.0.3.6)</em>, <em>colorspace(v.1.4-1)</em>, <em>htmltools(v.0.5.0)</em>, <em>httpuv(v.1.5.4)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>haven(v.2.3.1)</em>, <em>bookdown(v.0.21)</em>, <em>xtable(v.1.8-4)</em>, <em>scales(v.1.1.1)</em>, <em>webshot(v.0.5.2)</em>, <em>later(v.1.1.0.1)</em>, <em>farver(v.2.0.3)</em>, <em>generics(v.0.0.2)</em>, <em>ellipsis(v.0.3.1)</em>, <em>withr(v.2.3.0)</em>, <em>cli(v.2.1.0)</em>, <em>magrittr(v.1.5)</em>, <em>crayon(v.1.3.4)</em>, <em>readxl(v.1.3.1)</em>, <em>mime(v.0.9)</em>, <em>evaluate(v.0.14)</em>, <em>ps(v.1.4.0)</em>, <em>fs(v.1.5.0)</em>, <em>fansi(v.0.4.1)</em>, <em>xml2(v.1.3.2)</em>, <em>blogdown(v.0.21)</em>, <em>tools(v.4.0.3)</em>, <em>hms(v.0.5.3)</em>, <em>lifecycle(v.0.2.0)</em>, <em>munsell(v.0.5.0)</em>, <em>reprex(v.0.3.0)</em>, <em>compiler(v.4.0.3)</em>, <em>rlang(v.0.4.8)</em>, <em>grid(v.4.0.3)</em>, <em>rstudioapi(v.0.11)</em>, <em>miniUI(v.0.1.1.1)</em>, <em>labeling(v.0.4.2)</em>, <em>rmarkdown(v.2.5.2)</em>, <em>gtable(v.0.3.0)</em>, <em>DBI(v.1.1.0)</em>, <em>curl(v.4.3)</em>, <em>R6(v.2.5.0)</em>, <em>lubridate(v.1.7.9)</em>, <em>knitr(v.1.30)</em>, <em>fastmap(v.1.0.1)</em>, <em>stringi(v.1.5.3)</em>, <em>Rcpp(v.1.0.5)</em>, <em>vctrs(v.0.3.4)</em>, <em>dbplyr(v.1.4.4)</em>, <em>tidyselect(v.1.1.0)</em> and <em>xfun(v.0.18)</em></p>
+</div>
+<div id="export-session-information-to-text-file" class="section level2">
+<h2>Export Session Information to Text File</h2>
+<pre class="r"><code>sink(&quot;../results/replication_data/session_info.txt&quot;, append = FALSE)
+print(sessioninfo::session_info(include_base = TRUE))
+sink()</code></pre>
+</div>

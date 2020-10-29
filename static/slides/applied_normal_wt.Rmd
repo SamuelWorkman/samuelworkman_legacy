@@ -1,0 +1,393 @@
+---
+title: "Applied Likelihood & Simulation for the Normal Model"
+author: "Samuel Workman, Ph.D."
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    css: nord_light.css
+    df_print: paged
+    fig_retina: 1
+fig_width: 6
+fig_height: 4.5
+---
+
+---
+
+## Gather Tools
+
+* Source custom functions, set seed, and configure scientific notion. You don't need the custom function to use the code - it merely styles this document. If you like it, I can provide it.
+* Load libraries (install if not installed already); you can ignore the ones that load and use fonts.
+* Load [Google Fonts](https://fonts.google.com).
+
+```{r setup, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+options(htmltools.dir.version = FALSE)
+set.seed(7277) # for reproducibility when taking random draws
+options(scipen = 999) # gets rid of scientific notation
+source("nord_fira.R") # nord_fira 
+library(tidyverse) # data wrangling & ggplot2
+library(broom) # tidys up regression output for quick tables
+library(MASS) # for simulation from distributions
+library(ggplot2) # pretty plots
+library(RColorBrewer) # pretty colors
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+library(kableExtra) # table construction
+font_add_google("Fira Sans", "firasans")
+font_add_google("Fira Mono", "firamono")
+showtext_auto() # allow ggplot2 to render the fonts automatically for pdfs
+```
+
+---
+
+## Get Some Data
+
+<div class = "row">
+<div class = "col-md-6">
+
+### Make Up a World
+
+```{r data, include = TRUE, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE}
+# Create the "true" parameters, assuming the world has any
+betas <- c(2, 5, 7)
+# Create the constant and covariates (X matrix)
+n <- 1000
+int <- rep(1, n)
+x_1 <- rnorm(n, 22, 2)
+x_2 <- rnorm(n, 7, 3)
+
+# Create the matrix X
+X <- cbind(int, x_1, x_2)
+
+# Systematic component (mu) & stochastic component (e)
+mu <- X%*%betas
+e <- rnorm(n, 0, 12)
+
+# Create y from systematic (mu) and stochastic (e) components
+y <- mu + e
+```
+</div>
+
+<div class = "col-md-6">
+### Take a Look
+
+```{r view, include = TRUE, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
+str(mu) # shows the variables and data types
+head(mu) # shows the first 10 entries in the data
+View(mu) # opens the data in table view
+names(mu) # lists the variable names in the data set
+```
+</div>
+</div>
+
+---
+
+## Plot to See the Relationships
+
+<div class = "row">
+<div class = "col-md-6">
+
+### Plot $y \sim x_1$
+
+We can plot and see a positive relationship between $x_1$ and $y_i$.
+
+```{r simple_plot_1, include = TRUE, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE}
+plot(x_1, y)
+```
+</div>
+
+<div class = "col-md-6">
+### Plot $y \sim x_2$
+
+We can plot and see a positive relationship between $x_2$ and $y_i$.
+
+```{r simple_plot_2, include = TRUE, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE}
+plot(x_2, y)
+```
+</div>
+</div>
+
+---
+
+## Good Candidate for OLS, Let's Try
+
+```{r ols, include = TRUE, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE}
+ols <- lm(y ~ x_1 + x_2)
+tidy(ols) %>%
+  kable(digits = 2, format="html", booktabs=TRUE) %>%
+    kable_styling(full_width = TRUE, 
+                  bootstrap_options = c("striped", "hover"))
+```
+
+***Note the TRUE parameters are as follows: $\alpha = 2$, $x_1 = 5$, and $x_2 = 7$.*** We defined them above. OLS gets us really close!! Ignore the intercept for now.
+
+---
+
+## Simulation from the Model to Assess Hypothesis and Counterfactuals
+
+* Simulating from our model allows us to examine the impact of different values of our IV's, $\mathbf{X}$, on the dependent variable $y$.
+* It also allows us to assess how $y$ behaves under different counterfactual scenarios (e.g., what's the probability that a black, male, with a Ph.D. votes?)
+* We construct these counterfactuals such that we can explore any substantive question we like from the data.
+
+Let's examine the P(y|x_1) across its range.
+
+* Here we simply create a variable that takes on all values in the range of $x_1$ by .001.
+
+```{r h_1, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+x_1_range <- seq(min(x_1), max(x_1), by = .001)
+```
+
+* Set up a data frame for hypothesis regarding $x_1$ - holding all else equal---mean_model is the model with all variables held at the mean.
+
+* Create a matrix of repreated means for each variable that is the length
+of the range of x_1 by .001.
+
+```{r cf_1, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+mean_model <- c(mean(x_1), mean(x_2))
+cf_1 <- matrix(mean_model, nrow = length(x_1_range), ncol = 2, byrow = TRUE)
+cf_1 <- data.frame(cf_1)
+colnames(cf_1) <- c("x_1", "x_2")
+
+# Take a look
+head(cf_1)
+```
+
+* Predictions from this counterfactual would give us the expectation for $y$ with all variables held at their means.
+* Now, lets replace the $x_1$ column with our counterfactual about $x_1$ and confirm that we were successful.
+
+```{r cf_x1, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+cf_1[,1] <- x_1_range
+head(cf_1)
+```
+
+* Note that $x_1$ now increases by .001 in each row of our counterfactual data.
+
+### Making Counterfactual Predictions for $y$
+
+* We can use our estimated model to generate predictions about $y$ across the range of $x_1$.
+* We also generate 95 percent confidence intervals for our predictions. Where "fit" is predictions for $y$, "lwr" is the lower CI, and "upr" is the upper CI.
+
+```{r pred_ols, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+simols <- predict(ols, newdata = cf_1,
+                  interval = "prediction", level = 0.95)
+simols <- data.frame(simols)
+head(simols)
+```
+
+### Assess the Counterfactual for $x_1$ Visually
+
+<div class = "row">
+<div class = "col-md-6">
+
+* Grab a nice color from `RColorBrewer`
+* Graph our predications with `ggplot2`
+
+```{r plot_ols, eval=FALSE, echo=TRUE, include = TRUE, message=FALSE, warning=FALSE}
+fill <- brewer.pal(3, "Set1")[2] # grab a nice color
+
+ggplot(data = simols, aes(x = cf_1$x_1)) +
+  xlab("x_1 Values") +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = fit)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), 
+              fill = fill, alpha = 0.2) +
+  theme_minimal()
+```
+</div>
+
+<div class = "col-md-6">
+```{r plot_ols, eval=TRUE, echo=FALSE, include = TRUE, message=FALSE, warning=FALSE}
+```
+</div>
+</div>
+
+* Note that we could easily perform the same analysis for $x_2$. We just need to define another counterfactual data set.
+  * This time we would allow $x_2$ to vary while prescribing the values of the other variables.
+  * We used means for the other variables, but we could use any value that had substantive meaning given our variables (e.g., $x_3 = \text{"female"}$ or $x_4 =$ 40--60 year olds).
+* Does this look right? Why would the confidence intervals display as uniform across the range of $y$?
+* The predictions from our model do not take account of the *uncertainty* in our estimated $\beta$s from OLS. Remember, they are averages...they come from a distribution with variance.
+
+---
+
+## Simulation for Substantive Inference (a 'Bayesian-esque' Approach)
+
+* In looking at the graphs, are we taking the distribution of the betas
+and uncertainty around them seriously?
+* Should the confidence intervals really be constant across the range of our variables?
+* Remember, our estimates for the betas represent averages or point estimates...in other words, there is a distribution associated with these.
+Unless our predictions about $y$ incorporate this uncertainty, our statements about $y$ aren't entirely accurate.
+
+### Simulating from the distribution of the betas
+
+* To simulate, we need some information from our fitted model. Yes! OLS is particularly powerful and useful for starting a simulation for many types of models.
+* What do we need from the model?
+* The systematic and stochastic components of course---$\beta$s, uncertainty around the $\beta$s, and $\sigma^2$ - the variance.
+
+```{r ols_info, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+pe <- ols$coefficients # the betas
+vc <- vcov(ols) # var-cov matrix, remember from Joe's class
+se <- sqrt(diag(vc)) # standard errors
+s2 <- summary(ols)$sigma**2 # the variance or sigma^2
+```
+
+* Simulate from the distribution of our betas.
+* We can use the multivariate normal distribution, thanks to the Central Limit Theorem.
+
+```{r beta_dist, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+sim_n <- 10000 # 10k simulations
+simbs <- mvrnorm(sim_n, pe, vc)
+simbs <- data.frame(simbs)
+colnames(simbs)[1] <- "intercept" # a nicer name
+head(simbs) # take a look
+```
+
+* We now have a data set of 10k simulations of the values of our $\beta$s based on a distribution defined by our estimates and their variances.
+* We can look at these and see the distribution.
+
+<div class = "row">
+<div class = "col-md-6">
+
+```{r x1_dist, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ggplot(simbs, aes(x=x_1)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  xlab(expression(beta[1])) +
+  ylab("Density") +
+  theme_tufte()
+```
+</div>
+
+<div class = "col-md-6">
+
+```{r x2_dist, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ggplot(simbs, aes(x=x_2)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  xlab(expression(beta[2])) +
+  ylab("Density") +
+  theme_tufte()
+```
+</div>
+</div>
+
+<div class = "row">
+<div class = "col-md-6">
+
+```{r x1_dist, eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+</div>
+
+<div class = "col-md-6">
+
+```{r x2_dist, eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+</div>
+</div>
+
+* So, we can now see that OLS's $\beta$ is really one among many $\beta$s...if assumptions hold, its the most *likely* $\beta$, but if not...
+* So, this is all well and good. But, how to we propagate this uncertainty into our predictions about $y$?
+* To do this we will construct a matrix of means and make use of the distributional information contained in our simulated $\beta$s.
+
+### Setting Up the Counterfactual
+
+1. Create our "hypothesis" - the range of $x_1$
+2. Create a matrix containing meanings for everything.
+3. Extend the length of this matrix to the length of our hypothsis - the range of $x_1$ by .001.
+4. Replace the column of means for $x_1$ with our hypothesis data - the range of $x_1$. This allows us to assess the impact of $x_1$ on $y$ across its range.
+
+```{r sim_cf, eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+x_1_range <- seq(min(x_1), max(x_1), by = .001)
+
+x_mean <- c(
+  1, # this is the identity placeholder for the intercept
+  mean(x_1), # the mean of x_1
+  mean(x_2) # the mean of x_2
+)
+
+cf_data <- matrix(x_mean, nrow = length(x_1_range), ncol = 3, byrow = TRUE)
+cf_data[,2] <- x_1_range
+```
+
+### Use Information from the OLS Model to Simulate $\beta$s
+
+* Use these to simulate the systematic and stochastic components of $y$.
+
+```{r sim_b, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+sim_betas <- mvrnorm(sim_n, pe, vc) # simulate betas
+mu <- sim_betas%*%t(cf_data) # systematic component mu; transpose for comformability
+s2 <- summary(ols)$sigma**2 # stochastic component sigma^2
+
+cf_y <- mu + sqrt(s2) # create the simulated $y$ values
+```
+
+* Now, we have a 10k simulations of $y$ ***at each value of $x_1$*** that incorporate the uncertainty, or the distribution, of our OLS $\beta$s.
+* Next, we will calculate point estimates of predictions for $y$ along with confidence intervals, which logistically means grabbing the average for each set of 10k simulated values of $y$.
+* First, we need to create a set of objects or "containers" to put this stuff in...
+
+```{r containers, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ev <- NULL
+lci <- NULL
+uci <- NULL
+```
+
+* Calculate the quantities of interest.
+  * ev: expected value of the simulated y's is simply their mean in each column of cf_y.
+  * lci & uci: use apply to calculate by column the 2.5 and 97.5 quantile---plus/minus two standard deviations.
+  * Note we could calucate multiple ci's with multiple calls on the columns.
+  * `apply` allows us to conduct operations on columns in the data when specifying "2" ("1" for rows).
+
+```{r q_int, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ev <- apply(cf_y, 2, mean)
+lci <- apply(cf_y, 2, quantile, probs = .025)
+uci <- apply(cf_y, 2, quantile, probs = .975)
+sim.result <- data.frame(cbind(x_1_range,ev,lci,uci))
+```
+
+## Assess the Counterfactual Visually
+
+<div class = "row">
+<div class = "col-md-6">
+
+```{r sim_plot, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ggplot(data = sim.result, aes(x = x_1_range)) + 
+  xlab("x_1 Values") +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = ev)) +
+  geom_ribbon(aes(ymin = lci, ymax = uci), 
+    fill = "blue", alpha = 0.2) + 
+  theme_tufte()
+```
+</div>
+
+<div class = "col-md-6">
+```{r sim_plot, eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+</div>
+</div>
+
+*Notes*
+
+  1. We now have slimmer confidence intervals in the center of the conditional distributions, because this is where the most information is - so we are more certain!!
+  2. We have now incorporated the distribution of our $\beta$s into predictions about $y$; we can not only say something about $y$, but about how certain we are under different ***SUBSTANTIVE*** assumptions in our data.
+
+---
+
+## Include Session, System, Package Information
+
+```{r session_html, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+library(sessioninfo)
+library(pander)
+edregs_ms1.Rmd_session_2020_04_28 <- sessionInfo()
+pander::pander(edregs_ms1.Rmd_session_2020_04_28)
+```
+
+## Export Session Information to Text File
+
+```{r session_txt, eval=FALSE, echo=TRUE, include=TRUE}
+sink("../results/replication_data/session_info.txt", append = FALSE)
+print(sessioninfo::session_info(include_base = TRUE))
+sink()
+```
