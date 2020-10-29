@@ -1,0 +1,249 @@
+## Applied Likelihood for the Normal Model
+## October 28, 2020
+
+## Install these in order to run this script, if not already installed
+# Libraries
+library(MASS)
+library(ggplot2)
+library(RColorBrewer)
+library(ggExtra)
+library(showtext)
+
+# Create the "true" parameters, assuming the world has any
+betas <- c(2, 5, 7)
+
+# Create the constant and covariates (X matrix)
+n <- 1000
+int <- rep(1, n)
+x_1 <- rnorm(n, 22, 2)
+x_2 <- rnorm(n, 7, 3)
+
+# Create the matrix X
+X <- cbind(int, x_1, x_2)
+
+# Systematic component (mu) & stochastic component (e)
+mu <- X%*%betas
+e <- rnorm(n, 0, 12)
+
+# Create y from systematic (mu) and stochastic (e) components
+y <- mu + e
+
+# Plot these and we can see the strong relationship between the X's and y
+# Why is the relationship between x_2 cleaner than x_1?
+plot(x_1, y)
+plot(x_2, y)
+
+# run a linear model - note the model is dead on, why?
+ols <- lm(y ~ x_1 + x_2)
+summary(ols)
+
+# Let's grab the AIC and BIC for the models for kicks
+BIC(ols)
+AIC(ols)
+
+## Simulating from our model to show the influence of our IVs on y across their range
+
+# Let's examine the P(y|x_1) across its range
+
+x_1_range <- seq(min(x_1), max(x_1), by = .001)
+
+# Set up a data frame for hypothesis regarding x_1 - holding all else equal
+# mean_model is the model with everything held at the mean
+
+# Create a matrix of repreated means for each variable that is the length
+# of the range of x_1 by .01
+mean_model <- c(mean(x_1), mean(x_2))
+cf_1 <- matrix(mean_model, nrow = length(x_1_range), ncol = 2, byrow = TRUE)
+cf_1 <- data.frame(cf_1)
+colnames(cf_1) <- c("x_1", "x_2")
+
+# Confirm that this is just a matrix of repeated means for each x
+head(cf_1)
+
+# Now, lets replace the x_1 column with our counterfactual about x_1
+# confirm that we were successful
+cf_1[,1] <- x_1_range
+head(cf_1)
+
+# Now, we can generate predications about y across the range of x_1
+simols <- predict(ols, newdata = cf_1,
+                  interval = "prediction", level = 0.95)
+simols <- data.frame(simols)
+head(simols)
+
+
+# Grab a nice color and see how well our model does
+fill <- brewer.pal(3, "Set1")[2] # grab a nice color
+
+ggplot(data = simols, aes(x = cf_1$x_1)) +
+  xlab("x_1 Values") +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = fit)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), fill = fill, alpha = 0.2) +
+  theme_minimal()
+
+## Lets examine x_2, to see if we are as good
+
+# Let's examine the P(y|x_1) across its range
+
+x_2_range <- seq(min(x_2), max(x_2), by = .001)
+
+# Set up a data frame for hypothesis regarding x_1 - holding all else equal
+# mean_model is the model with everything held at the mean
+
+# Create a matrix of repreated means for each variable that is the length
+# of the range of x_1 by .01
+# mean_model <- c(mean(x_1), mean(x_2)) created this above, no need to repeat
+cf_2 <- matrix(mean_model, nrow = length(x_2_range), ncol = 2, byrow = TRUE)
+cf_2 <- data.frame(cf_2)
+colnames(cf_2) <- c("x_1", "x_2")
+
+# Now, we sub in the x_2 range as our counterfactual
+cf_2[,2] <- x_2_range
+head(cf_2)
+
+# Now, we can generate predications about y across the range of x_2
+simols_2 <- predict(ols, newdata = cf_2,
+                  interval = "prediction", level = 0.95)
+simols_2 <- data.frame(simols_2)
+head(simols_2)
+
+# Grab a nice color and see how well our model does
+fill <- brewer.pal(3, "Set1")[2] # grab a nice color
+
+ggplot(data = simols_2, aes(x = cf_2$x_2)) +
+  xlab("x_2 Values") +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = fit)) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), fill = fill, alpha = 0.2) +
+  theme_minimal()
+
+## In looking at the graphs, are we taking the distribution of the betas
+## and uncertainty around them seriously?
+## Should the confidence intervals really be constant across the range
+## of our variables?
+
+## Remember, our estimates for the betas represent averages or point
+## estimates...in other words, there is a distribution
+## associated with these.
+## Unless our predictions about y incorporate this uncertainty,
+## our statements about y aren't entirely accurate.
+
+# Simulating from the distribution of the betas
+# To simulate, we need some information from our fitted model
+
+pe <- ols$coefficients # the betas
+vc <- vcov(ols) # var-cov matrix, remember from Joe's class
+se <- sqrt(diag(vc)) # standard errors
+
+# Simulate from the distribution of our betas
+# We can use the multivariate normal distribution, thanks to the
+# Central Limit Theorem
+
+sim_n <- 10000
+simbs <- mvrnorm(sim_n, pe, vc)
+simbs <- data.frame(simbs)
+colnames(simbs)[,1] <- "intercept"
+head(simbs)
+
+# Now we can see the distribution of the betas, let's like at x_1
+ggplot(simbs, aes(x=x_1)) +
+  geom_density(
+    fill="#69b3a2",
+    color="#e9ecef",
+    alpha=0.6) +
+  xlab("x_1 Values") +
+  ylab("Density") +
+  theme_minimal()
+
+# Now x_2
+
+ggplot(simbs, aes(x=x_2)) +
+  geom_density(
+    fill="#69b3a2",
+    color="#e9ecef",
+    alpha=0.6) +
+  xlab("x_2 Values") +
+  ylab("Density") +
+  theme_minimal()
+
+## So, we can now see that OLS's beta is really one among many betas...
+## if assumptions hold, its the most likely beta, but if not...
+
+## So, this is all well and good. But, how to we propogate this uncertainty
+## into our predictions about y
+
+## To do this we will construct a matrix of means and this time automate
+## our predictions across all the variables simultaneously
+## We can make use of our likelihood function and its information
+
+x_1_range <- seq(min(x_1), max(x_1), by = .001)
+
+# Note I chose means, but we could choose any combinations of legitimate
+# values of any of the covariates (e.g., x_3 = "Female", x_4 = 2);
+# This always detailed hypothesis testing and counterfactual exploration
+x_mean <- c(
+  1, # this is the identity placeholder for the intercept
+  mean(x_1), # the mean of x_1
+  mean(x_2) # the mean of x_2
+)
+
+# Here we make our matrix for the counterfactual, then replace the
+# variable we are interested in.
+cf_data <- matrix(x_mean, nrow = length(x_1_range), ncol = 3, byrow = TRUE)
+cf_data[,2] <- x_1_range
+
+# creates objects (containers) for the expected value (ev),
+# lower & upper CIs (lci & uci), and the simulated values of the DV (y)
+ev <- NULL
+lci <- NULL
+uci <- NULL
+simy <- NULL
+
+# We are just simulating from our original OLS model again
+sim_betas <- mvrnorm(sim_n, pe, vc)
+
+# Here, we simply use our information from the original OLS model
+# along with the counterfactual that we defined, focusing on x_1's
+# influence on y across its range
+
+# First, we calculate the systematic component (mu) of x (its xb)
+mu <- sim_betas%*%t(cf_data)
+
+# Our counterfactual y is a product of mu
+ycf <- mu
+
+# The stochastic component of y is the variance, sigma^2
+s2 <- summary(ols)$sigma**2
+
+# The values of our simulated y contain both the systematic and
+# stochastic components; mu provides the regression line while s2 provides
+# the variation around that line conditional on values of x_1
+y_star <- mu + sqrt(s2)
+
+simy <- cbind(simy,ycf) # Each value of cf.oira will contain 10k simulated values of y; this code adds the simulations for each value in a column; removing the cbind, it stores only the last column of values**
+ev <- apply(simy, 2, mean) # expected value of the simulated y's is simply their mean in each column of simy (denoting the values of cf.oira to which the simulations belong)
+lci <- apply(simy, 2, quantile, probs = .025) # apply calculates by column the 33rd and 67th quantile---plus/minus one standard deviation
+uci <- apply(simy, 2, quantile, probs = .975)
+
+# note that we could calculate multiple values of for the CI's shading different portions.
+
+# We combine the results of our simulation in a data frame
+sim.result <- data.frame(cbind(x_1_range,ev,lci,uci))
+
+
+# let's plot the data and see how it differs
+ggplot(data = sim.result, aes(x = x_1_range)) + # x axis is the values of the counterfactual
+  xlab("x_1 Values") +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = ev)) + # prediction from the distribution of simy; the point estimates
+  geom_ribbon(aes(ymin = lci, ymax = uci), fill = "blue", alpha = 0.2) + # again, the min and max are the CIs for the simulated predictions for y
+  theme_minimal()
+
+## NOTE that we now have slimmer confidence intervals in the center
+## of the conditional distributions; this is because this is where the most
+## information is - so we are more certain!!
+
+## We have now incorporated the distribution of our betas into predictions
+## about y; this means we can not only say something about y, but about how
+## certain we are under different SUBSTANTIVE assumptions in our data.
