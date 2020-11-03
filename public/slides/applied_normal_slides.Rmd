@@ -1,0 +1,547 @@
+---
+title: "Maximum Likelihood Estimation"
+subtitle: "Social & Natural Science Applications"  
+author: 
+  - "Samuel Workman, Ph.D."
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    includes:
+      in_header: "in_header.html"
+      after_body: "after_body.html"
+    lib_dir: libs
+    css: [xaringan-themer.css, title_theme.css]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+library(plotly)
+library(RColorBrewer)
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+library(xaringanthemer)
+style_solarized_light(
+  header_font_google = google_font("Josefin Slab", "600"),
+  text_font_google   = google_font("Alegreya Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code")
+)
+```
+
+class: center, middle
+
+# Applied Likelihood & Simulation for the Normal Model in `r fontawesome::fa("r-project", fill = "steelblue", height = 50)`
+
+---
+
+## Likelihood for the Normal Model
+
+Recall
+
+\begin{align}
+log \mathcal{L}(\mu_i,\sigma^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu_i)^2}{\sigma^2} \\
+\mu & = \mathbf{X}\beta \\
+\end{align}
+
+--
+
+In our simple notation
+
+\begin{align}
+y_i & \sim \mathcal{N}(\mu_i, \sigma^2) \\
+\mu_i & = \mathbf{X}\beta
+\end{align}
+
+--
+
+*Notes*
+
+  1. Maximizing the above log likelihood minimizes our sum of squares, $(y-\mathbf{X}\beta)^2$ (i.e., least squares).
+  2. We get estimaties, $\beta$'s, for each of our covariates or independent variables $x_i$'s.
+
+---
+
+## Applied Likelihood for the Normal Model in `r fontawesome::fa("r-project", fill = "steelblue", height = 50)`
+
+***Approach***
+
+1. Simulate fake data in order to get you used to the notion of simulation.
+
+--
+
+2. Use our fake data to implement OLS in `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`.
+
+--
+
+3. Learn how to use information from OLS to engage in Bayesian-esque simulation. Our simulations will incorporate distributional information from our estimates of the OLS $\beta_k$.
+  * OLS estimates are very often useful starting points even when OLS isn't the best approach.
+
+--
+
+4. Throughout, we will *know*, a priori, the coefficients (we created them) so that we can observe how the model performs.
+
+--
+
+5. Get acquainted with graphical code in `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`.
+
+--
+
+6. Learn how to simulate predictions and *prediction* intervals in `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`.
+
+---
+
+## Gather Tools
+
+.pull-left[
+***Source Custom Functions & Set Preferences***
+
+```{r custom_func_prefs, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+options(htmltools.dir.version = FALSE)
+set.seed(7277) # for reproducibility when taking random draws
+options(scipen = 999) # gets rid of scientific notation
+source("nord_fira.R") # nord_fira 
+```
+
+--
+
+***Libraries for Data Wrangling & Table Construction***
+
+```{r data_libs, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+library(tidyverse) # data wrangling & ggplot2
+library(broom) # tidys up regression output for quick tables
+library(MASS) # for simulation from distributions
+library(kableExtra) # table construction
+```
+]
+
+--
+
+.pull-right[
+***Libraries for Plotting and Visualization***
+
+```{r vis_libs, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+library(ggplot2) # pretty plots
+library(RColorBrewer) # pretty colors
+library(ggExtra) # axes and labeling
+```
+
+***Loading & Implementing Custom Fonts***
+
+```{r font_setup, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+library(showtext) # use Google Fonts
+font_add_google("Fira Sans", "firasans")
+font_add_google("Fira Mono", "firamono")
+showtext_auto() # allow ggplot2 to render the fonts automatically for pdfs
+```
+]
+
+---
+
+## Let's Make Up a World
+
+.pull-left[
+***Create Synthetic Data***
+
+```{r data, include = TRUE, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE}
+# Create the "true" parameters, assuming the world has any
+betas <- c(5, 7)
+
+# Create the constant and covariates (X matrix)
+n <- 1000
+x_1 <- rnorm(n, 22, 2)
+x_2 <- rnorm(n, 7, 3)
+
+# Create the matrix X
+X <- cbind(x_1, x_2)
+
+# Systematic component (mu) & stochastic component (e)
+alpha <- 2
+mu <- X%*%betas
+e <- rnorm(n, 0, 12)
+
+# Create y from systematic (mu) and stochastic (e) components
+y <- alpha + mu + e
+```
+]
+
+--
+
+.pull-right[
+***4 Ways to View the World***
+
+```{r view, include = TRUE, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
+str(mu) # shows the variables and data types
+head(mu) # shows the first 10 entries in the data
+View(mu) # opens the data in table view
+names(mu) # lists the variable names in the data set
+```
+]
+
+---
+
+## Scatterplots to Assess Relationships
+
+.pull-left[
+```{r simple_plot_1, include = TRUE, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, fig.height=6}
+plot(x_1, y)
+```
+]
+
+.pull-right[
+```{r simple_plot_2, include = TRUE, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE, fig.height=6}
+plot(x_2, y)
+```
+]
+
+---
+
+## Good Candidate for OLS, Let's Try
+
+
+```{r ols, include = TRUE, echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE}
+ols <- lm(y ~ x_1 + x_2)
+tidy(ols) %>%
+  kable(digits = 2, format="html", booktabs=TRUE) %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(2, color = "	#d33682")
+```
+
+***Note the TRUE parameters are as follows: $\alpha = 2$, $x_1 = 5$, and $x_2 = 7$.***
+
+---
+
+## Constructing Counterfactuals
+
+
+.pull-left[
+```{r h_1, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+x_1_range <- seq(min(x_1), max(x_1), by = .001)
+
+mean_model <- c(2, mean(x_1), mean(x_2))
+cf_1 <- matrix(mean_model, nrow = length(x_1_range), ncol = 3, byrow = TRUE)
+cf_1 <- data.frame(cf_1)
+colnames(cf_1) <- c("int", "x_1", "x_2")
+head(cf_1)
+```
+]
+
+--
+
+.pull-right[
+```{r h_1_final, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+cf_1[,2] <- x_1_range
+head(cf_1)
+```
+]
+
+---
+
+## Let's Make Some Counterfactual Predictions for $y$
+
+```{r pred_ols, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+simols <- predict(ols, newdata = cf_1,
+                  interval = "prediction", level = 0.95)
+simols <- data.frame(simols)
+head(simols)
+```
+
+---
+
+## Visualize the Predictions from OLS
+
+.left-code[
+```{r plot_ols, eval=FALSE, echo=TRUE, include = TRUE, message=FALSE, warning=FALSE}
+ggplot(data = simols, aes(x = cf_1$x_1)) +
+  xlab(expression(x[1])) +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = fit),
+            color = "#dc322f",
+            size = 1) +
+  geom_ribbon(
+    aes(ymin = lwr, ymax = upr), 
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha = 0.6) +
+  theme_xaringan() # could use minimal or tufte
+```
+]
+
+.right-out[
+```{r plot_ols, eval=TRUE, echo=FALSE, include = TRUE, message=FALSE, warning=FALSE, fig.height=6, fig.width=8}
+```
+]
+
+--
+
+* What's not right? Should those prediction intervals all be the same?
+
+---
+
+## Simulation for Substantive Inference - a Bayesian-esque Approach
+
+* Should the confidence intervals really be constant across the range of our variables?
+
+--
+
+* Remember, our estimates for the betas represent averages or point estimates...in other words, there is a distribution associated with these.
+
+--
+* Unless our predictions about $y_i$ incorporate this uncertainty, our statements about $y_i$ aren't entirely accurate.
+
+--
+
+* Need to take the distribution of $\beta_k$ into account.
+
+--
+
+* To simulate, we need some information from our fitted model. Yes! OLS is particularly powerful and useful for starting a simulation for many types of models.
+
+--
+
+* What do we need from the model?
+
+--
+
+* The systematic and stochastic components of course--- $\beta_k$, uncertainty around the $\beta_k$, and $\sigma^2$ - the variance.
+
+---
+
+## What do we need from OLS?
+
+* To simulate, we need some information from our fitted model. Yes! OLS is particularly powerful and useful for starting a simulation for many types of models.
+
+--
+
+* What do we need from the model?
+
+--
+
+* The systematic and stochastic components of course--- $\beta_k$, uncertainty around the $\beta$s, and $\sigma^2$ - the variance.
+
+--
+
+```{r ols_info, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+pe <- ols$coefficients # the betas
+vc <- vcov(ols) # var-cov matrix, remember from Joe's class
+se <- sqrt(diag(vc)) # standard errors
+s2 <- summary(ols)$sigma**2 # the variance or sigma^2
+```
+
+---
+
+## Simulate from the *Distribution* of the OLS $\beta_k$
+
+* Simulate from the distribution of our betas.
+* We can use the multivariate normal distribution, thanks to the Central Limit Theorem.
+
+```{r beta_dist, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+sim_n <- 10000 # 10k simulations
+simbs <- mvrnorm(sim_n, pe, vc)
+simbs <- data.frame(simbs)
+colnames(simbs)[1] <- "intercept" # a nicer name
+```
+
+--
+
+* We now have a data set of 10k simulations of the values of our $\beta_k$ based on a distribution defined by our estimates and their variances.
+* We can look at these and see the distribution.
+
+```{r beta_look, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+head(simbs)[1:4,] # take a look
+```
+
+---
+
+## Simulated Distribution of $\beta_1$
+
+.left-code[
+```{r x1_dist, eval=FALSE, echo=TRUE, include = TRUE, message=FALSE, warning=FALSE}
+ggplot(simbs, aes(x=x_1)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  xlab(expression(b[1])) +
+  ylab("Density") +
+  theme_xaringan() 
+```
+]
+
+.right-out[
+```{r x1_dist_out, ref.label="x1_dist", eval=TRUE, echo=FALSE, include = TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
+```
+]
+
+---
+
+## Simulated Distribution of $\beta_2$
+
+.left-code[
+```{r x2_dist, eval=FALSE, echo=TRUE, include = TRUE, message=FALSE, warning=FALSE}
+ggplot(simbs, aes(x=x_2)) +
+  geom_density(
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha=0.6) +
+  xlab(expression(b[2])) +
+  ylab("Density") +
+  theme_xaringan() 
+```
+]
+
+.right-out[
+```{r x2_dist_out, ref.label="x2_dist", eval=TRUE, echo=FALSE, include = TRUE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5}
+```
+]
+
+---
+
+## Simulating $y_i$ and Prediction Intervals
+
+* So, we can now see that the $\beta_k$ are really one among many $\beta_k$...if assumptions hold, they the most *likely* $\beta_k$, but if not...
+
+--
+
+* So, this is all well and good. But, how to we propagate this uncertainty into our predictions about $y_i$?
+
+--
+
+* To do this we will construct a matrix of means and make use of the distributional information contained in our simulated $\beta_k$.
+
+--
+
+### Setting Up a Counterfactual
+
+1. Create our "hypothesis" - the range of $x_1$
+
+--
+
+2. Create a matrix containing means for everything.
+
+--
+
+3. Extend the length of this matrix to the length of our hypothsis - the range of $x_1$ by .001.
+
+--
+
+4. Replace the column of means for $x_1$ with our hypothesis data - the range of $x_1$. This allows us to assess the impact of $x_1$ on $y_i$ across its range.
+
+---
+
+## Construct the Counterfactual to Explore the effect of $x_1$
+
+* Key to remember that we need a column of "1" values for the intercept.
+  * These identities will be multiplied by our simulated betas, which are simulated from the OLS results.
+
+```{r sim_cf, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+x_1_range <- seq(min(x_1), max(x_1), by = .001)
+
+x_mean <- c(
+  1, # this is the identity placeholder for the intercept
+  mean(x_1), # the mean of x_1
+  mean(x_2) # the mean of x_2
+)
+
+cf_data <- matrix(x_mean, nrow = length(x_1_range), ncol = 3, byrow = TRUE)
+cf_data[,2] <- x_1_range
+
+head(cf_data)[1:3,]
+```
+
+---
+
+## Use Information from OLS to Simulate $\beta_k$
+
+* Use these to simulate the *systematic* and *stochastic* components of $y_i$.
+
+```{r sim_b, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+sim_betas <- mvrnorm(sim_n, pe, vc) # simulate betas
+mu <- sim_betas%*%t(cf_data) # systematic component mu; transpose for comformability
+s2 <- summary(ols)$sigma**2 # stochastic component sigma^2
+
+cf_y <- mu + sqrt(s2) # create the simulated $y$ values
+```
+
+* Now, we have a 10k simulations of $y_i$ ***at each value of $x_1$*** that incorporate the uncertainty, or the distribution, of our OLS $\beta_k$.
+* Next, we will calculate point estimates of predictions for $y_i$ along with confidence intervals, which logistically means grabbing the average for each set of 10k simulated values of $y_i$.
+
+---
+
+## Calculating Quantities of Interest (QoI)
+
+* First, we need to create a set of objects or "containers" to put this stuff in...
+
+```{r containers, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ev <- NULL
+lpi <- NULL
+upi <- NULL
+```
+
+* Calculate the quantities of interest.
+  * ev: expected value of the simulated $y_i$ is simply their mean in each column of cf_y.
+  * lci & uci: use apply to calculate by column the 2.5 and 97.5 quantile---plus/minus two standard deviations.
+  * Note we could calculate multiple prediction intervals with multiple calls on the columns.
+  * `apply` allows us to conduct operations on columns in the data when specifying "2" ("1" for rows).
+
+```{r q_int, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ev <- apply(cf_y, 2, mean)
+lpi <- apply(cf_y, 2, quantile, probs = .025)
+upi <- apply(cf_y, 2, quantile, probs = .975)
+sim.result <- data.frame(cbind(x_1_range,ev,lpi,upi))
+```
+
+---
+
+## Assess the Substantive Counterfactual Visually
+
+.left-code[
+```{r sim_plot, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ggplot(data = sim.result, aes(x = x_1_range)) + 
+  xlab(expression(x[1], "Values")) +
+  ylab("Predicted y (95% PI)") +
+  geom_line(aes(y = ev),
+            color = "#dc322f",
+            size = 1) +
+  geom_ribbon(aes(ymin = lpi, ymax = upi), 
+    fill="#69b3a2", 
+    color="#e9ecef", 
+    alpha = 0.6) + 
+  theme_xaringan()
+```
+]
+
+.right-out[
+```{r sim_plot_out, ref.label="sim_plot", eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE, fig.height=9, fig.width=12}
+```
+]
+
+---
+
+class: left, middle
+
+# Next - Likelihood for the Heteroskedastic Normal
+
+# .blue[Up-ahead - Applied Likelihood & Simulation for the Heteroskedastic Normal Model]
+
+---
+
+class: center, middle
+
+# Samuel Workman, Ph.D.
+
+### .red[`r icon::fa("envelope")`] [samuel.workman@ou.edu](mailto:samuel.workman@ou.edu)
+
+### .blue[`r icon::fa("globe-americas")`] [samuelworkman.org](https://www.samuelworkman.org)
+
+### .green[`r icon::fa("medium")`] [@samuel.workman](https://medium.com/@samuel.workman)
+
+### .blue[`r icon::fa("twitter")`] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)

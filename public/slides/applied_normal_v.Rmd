@@ -48,22 +48,23 @@ showtext_auto() # allow ggplot2 to render the fonts automatically for pdfs
 
 ```{r data, include = TRUE, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE}
 # Create the "true" parameters, assuming the world has any
-betas <- c(2, 5, 7)
+betas <- c(5, 7)
+
 # Create the constant and covariates (X matrix)
 n <- 1000
-int <- rep(1, n)
 x_1 <- rnorm(n, 22, 2)
 x_2 <- rnorm(n, 7, 3)
 
 # Create the matrix X
-X <- cbind(int, x_1, x_2)
+X <- cbind(x_1, x_2)
 
 # Systematic component (mu) & stochastic component (e)
+alpha <- 2
 mu <- X%*%betas
 e <- rnorm(n, 0, 12)
 
 # Create y from systematic (mu) and stochastic (e) components
-y <- mu + e
+y <- alpha + mu + e
 ```
 </div>
 
@@ -142,12 +143,10 @@ x_1_range <- seq(min(x_1), max(x_1), by = .001)
 of the range of x_1 by .001.
 
 ```{r cf_1, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-mean_model <- c(mean(x_1), mean(x_2))
-cf_1 <- matrix(mean_model, nrow = length(x_1_range), ncol = 2, byrow = TRUE)
+mean_model <- c(2, mean(x_1), mean(x_2))
+cf_1 <- matrix(mean_model, nrow = length(x_1_range), ncol = 3, byrow = TRUE)
 cf_1 <- data.frame(cf_1)
-colnames(cf_1) <- c("x_1", "x_2")
-
-# Take a look
+colnames(cf_1) <- c("int", "x_1", "x_2")
 head(cf_1)
 ```
 
@@ -155,7 +154,7 @@ head(cf_1)
 * Now, lets replace the $x_1$ column with our counterfactual about $x_1$ and confirm that we were successful.
 
 ```{r cf_x1, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-cf_1[,1] <- x_1_range
+cf_1[,2] <- x_1_range
 head(cf_1)
 ```
 
@@ -295,10 +294,10 @@ ggplot(simbs, aes(x=x_2)) +
 
 1. Create our "hypothesis" - the range of $x_1$
 2. Create a matrix containing meanings for everything.
-3. Extend the length of this matrix to the length of our hypothsis - the range of $x_1$ by .001.
+3. Extend the length of this matrix to the length of our hypothesis - the range of $x_1$ by .001.
 4. Replace the column of means for $x_1$ with our hypothesis data - the range of $x_1$. This allows us to assess the impact of $x_1$ on $y$ across its range.
 
-```{r sim_cf, eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```{r sim_cf, eval=TRUE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 x_1_range <- seq(min(x_1), max(x_1), by = .001)
 
 x_mean <- c(
