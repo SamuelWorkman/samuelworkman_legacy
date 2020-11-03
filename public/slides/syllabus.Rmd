@@ -160,4 +160,6 @@ Reading: None.
 
 [Deriving Likelihood for the Normal Distribution `r icon::fa("youtube")`](https://youtu.be/lcoNOV85dPE)
 
-[Applied Normal Model in R](../../../slides/applied_normal_wt.html)
+[Applied Normal Model in R - Vignette](../../../../slides/applied_normal_v.html)
+
+[Applied Normal Model in R - Slide Deck](../../../../slides/applied_normal_slides.html)
