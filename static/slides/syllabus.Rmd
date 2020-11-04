@@ -164,4 +164,4 @@ Reading: None.
 
 [Applied Normal Model in R - Slide Deck](../../../../slides/applied_normal_slides.html)
 
-[Applied Normal Model in R - YouTube `r icon::fa("youtube")`](https://youtu.be/lcoNOV85dPE)
+[Applied Normal Model in R - YouTube `r icon::fa("youtube")`](https://youtu.be/GsHDogjIqJg)
