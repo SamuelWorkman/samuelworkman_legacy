@@ -30,3 +30,5 @@ The vast majority of data of interest to social scientists do not fit into the G
 [***Deriving Likelihood for the Normal Model***](../../../slides/derive_likelihood.html)
 
 {{< youtube lcoNOV85dPE >}}
+
+[Deriving Likelihood for the Heteroskedastic Normal Model](../../../slides/het_normal.html)

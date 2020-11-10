@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Maximum Likelihood Estimation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Samuel Workman, Ph.D." />
+    <meta name="date" content="2020-11-10" />
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+      crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/fnaufel/smartify/smartify.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="title_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Maximum Likelihood Estimation
+## Social &amp; Natural Science Applications
+### Samuel Workman, Ph.D.
+### 2020-11-10
+
+---
+
+
+
+
+
+
+class: center, middle
+
+# Likelihood for Non-Constant Variance
+
+#### How to parameterize other features of distributions
+
+---
+
+## Non-Constant Variance - Heteroskedasticity
+
+--
+
+The problem...
+`$$y-\mathbb{E}(y|\mathbf{X}) = \sigma_i^2$$`
+--
+
+*Notes*
+
+1. OLS remains unbiased and consistent.
+2. OLS also remains assymptotically normal.
+3. However, OLS estimates are no longer efficient---hypothesis testing becomes difficult---standard errors are incorrect.
+4. We would need to know the individual variances.
+
+---
+
+## Heteroskedasticity and the Normal Model
+
+***OLS is inefficient in the presence of heteroskedasticity.***
+
+* Observations with higher variance contain less information.
+
+--
+
+* Observations with low variance fall tightly around the regression line.
+
+--
+
+We get better estimates if we can give more weight to the observations closer to the regression line.
+  1. Weighted Least Squares *if* we know the weights---rare.
+  2. "Fix" the standard errors.
+  3. Robust standard errors may fix bias associated with standard errors, but DO NOT fix inefficiency.
+  
+--
+
+* Both of the approaches above treat heteroskedasticity as a statistical nuisance.
+* We could instead treat heteroskedasticity as something substantively or theoretically interesting and worthy of explanation.
+
+--
+
+Some examples:  competition among actors may increase the variability of policy outcomes
+  1. Polarization increases the variability of legislative productivity.
+  2. Subsystem competition increases the variability in regulatory change.
+  3. Cross-sectional data - small geographic areas will have smaller values of things than larger areas.
+  4. Time-series - Larger changes in the levels of a variable can induce heteroskedasticity (e.g., changing the definition of the poverty level).
+
+---
+
+## What's normal or homoskedastic?
+
+.left-code[
+
+```r
+n &lt;- 1000
+x &lt;- runif(n)
+mu &lt;- 7 + 17*x
+e &lt;- rnorm(n, 0, 5)
+y &lt;- mu + e
+
+constant &lt;- data.frame(cbind(y,x,mu,e))
+
+ggplot(constant, aes(x = x, y=y)) +
+  geom_point(color = "#69b3a2") +
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "#dc322f") +
+  theme_xaringan()
+```
+]
+
+.right-out[
+![](het_normal_files/figure-html/constant_out-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## What's not normal?
+
+.left-code[
+
+```r
+n &lt;- 1000
+x &lt;- runif(n)
+mu &lt;- 7 + 17*x
+sigma2 &lt;- exp(1 + 4*x)
+y &lt;- rnorm(n)*sqrt(sigma2) + mu
+
+constant &lt;- data.frame(cbind(y,x,mu,e))
+
+ggplot(constant, aes(x = x, y=y)) +
+  geom_point(color = "#69b3a2") +
+  geom_smooth(method = "lm", 
+              se = FALSE, 
+              color = "#dc322f") +
+  theme_xaringan()
+```
+]
+
+.right-out[
+![](het_normal_files/figure-html/nonconstant_out-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Likelihood for the Heteroskedastic Normal
+
+Likelihood allows for deriving a model of the heteroskedasticity and
+parameterizing it as function of covariates. This is straightforward using our notation.
+
+--
+
+***Stochastic Component***
+`$$y_i \sim \mathcal{N}(\mu_i,\sigma^2_{\textbf{i}})$$`
+We subscript `\(\sigma_i^2\)` because the variance in the error terms is non-constant and dependent on values of our `\(x_i\)`'s.
+
+--
+
+***Systematic Component - Center Mass or Mean***
+`$$\mu_i = \mathbf{X}\beta$$`
+So far, this is just the classic normal regression model that focuses on `\(\mu_i\)`, the center of the distribution of `\(\mathbf{y}\)`.
+  * We want to model the variance also, in order to deal with our heteroskedasticity. So,...
+
+--
+
+***Systematic Component - Dispersion or Variance***
+`$$\sigma^2_i = exp(\mathbf{Z}\Omega)$$`
+---
+
+## Parameterizing Variance in the Normal Model
+
+***Systematic Component - Dispersion or Variance***
+`$$\sigma^2_i = exp(\mathbf{Z}\Omega)$$`
+--
+
+*Notes*
+
+  1. `\(\mathbf{Z}\)` is a matrix of covariates (independent variables) that influence or predict the variance, just as `\(\mathbf{X}\)` does for the mean of `\(y\)`.
+  
+--
+  
+  2. `\(\mathbf{Z}\)` may contain the same variables as `\(\mathbf{X}\)` or different ones. This is useful since non-constant error variance arises from error terms that are systematically related to one or more of our `\(x_i\)`'s.
+  
+--
+  
+  3. `\(\Omega\)` is a set (vector) of coefficients estimated for predicting the variance, just as `\(\beta\)` does for the mean in the normal regression model.
+  
+--
+  
+  4. In this case, we exponentiate `\(\mathbf{Z}\Omega\)`. Why?
+  
+--
+
+* Variance must always be *positive* (can't have negative variance). Exponentiating ensures this.
+
+---
+
+## Likelihood for the Heteroskedastic Normal
+
+The MLE for the heteroskedastic normal adds a systematic component, `\(\mathbf{Z}\Omega\)`. Deriving the log likelihood means subscripting the variance components throughout the equations. So,...
+
+***Step 1: Express the Joint Probability of the Data***
+
+--
+
+`\begin{align}
+\mathcal{P}(y_1|\mu_1, \sigma_1^2) &amp;= \mathcal{N}(y_1|\mu_1, \sigma_1^2) \\
+\mathcal{P}(y_1, y_2|\mu_1, \mu_2, \sigma_1^2, \sigma_2^2) &amp;= \mathcal{N}(y_1|\mu_1, \sigma_1^2) \times \mathcal{N}(y_2|\mu_2, \sigma_2^2) \\
+\mathcal{P}(y_1, y_2,..., y_i|\mu_1, \mu_2,...,\mu_i, \sigma_1^2, \sigma_2^2,...,\sigma_i^2) &amp;= \mathcal{N}(y_1|\mu_1, \sigma_1^2) \times \mathcal{N}(y_2|\mu_2, \sigma_2^2) \times...\times \mathcal{N}(y_i|\mu_i, \sigma_1^2) \\
+\mathcal{P}(y_i|\mu_i, \sigma_i^2) &amp;= \prod_{i=1}^n \mathcal{N}(y_i|\mu_i, \sigma_i^2) \\
+\mathcal{P}(y_i|\mu_i, \sigma_i^2) &amp;= \prod_{i = 1}^n (2\pi\sigma_i^2)^{-1/2} exp\Big(\frac{-(y_i - \mu_i)^2}{2\sigma_i^2}\Big)
+\end{align}`
+
+--
+
+Notes
+
+1. We model the variation in our `\(\mu_i\)` as before.
+
+2. Now, we also parameterize a second feature of the normal distribution (its variance) to account for its variation across cases, `\(\sigma_i^2\)`.
+
+---
+
+## Likelihood for the Heteroskedastic Normal Model
+
+***Step 2: Express the Joint Probability as the Likelihood***
+
+--
+
+`\begin{align}
+\mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp;\propto \mathcal{P}(y_i|\mu_i,\sigma_i^2) \\
+\mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp;= \mathcal{k}(y_i)\mathcal{P}(y|\mu_i,\sigma_i^2) \\
+\mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp;= \mathcal{k}(y_i)\prod_{i = 1}^n (2\pi\sigma_i^2)^{-1/2} exp\Big(\frac{-(y - \mu_i)^2}{2\sigma_i^2}\Big)
+\end{align}`
+
+--
+
+Notes
+
+1. Remember, likelihood is *proportional* to the joint probability of the data.
+
+2. The "cosmic" constant `\(k(y_i)\)`, if known, would help us calculate the objective likelihood of the data. We don't know it, so we will be in the realm of *relative* likelihood.
+
+---
+
+## Likelihood for the Heroskedastic Normal Model
+
+***Step 3: Simplify the Likelihood***
+
+--
+
+`\begin{align}
+\mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp;= \mathcal{k}(y_i)\prod_{i = 1}^n (2\pi\sigma_i^2)^{-1/2} exp\Big(\frac{-(y_i-\mu_i)^2}{2\sigma_i^2}\Big) \\
+log \mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp; = log \prod_{i = 1}^n \Big(k(y_i)\times(2\pi\sigma_i^2)^{-1/2} exp\Big(\frac{-(y_i-\mu_i)^2}{2\sigma_i^2}\Big)\Big) \\
+log \mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp; = \sum_{i = 1}^n\Big(log k(y_i)-\frac{1}{2} log(2\pi\sigma_i^2)-\frac{(y_i-\mu_i)^2}{2\sigma_i^2}\Big) \\
+log \mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp; = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i = 1}^n log(2\pi\sigma_i^2)-\sum_{i = 1}^n\frac{(y_i-\mu_i)^2}{2\sigma_i^2} \\
+ log \mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp; = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\sum_{i = 1}^n log(2\pi)-\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y_i-\mu_i)^2}{\sigma_i^2} \\
+ log \mathcal{L}(\mu_i,\sigma_i^2|y_i) &amp; \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y_i-\mu_i)^2}{\sigma_i^2}
+\end{align}`
+
+--
+
+* We use the laws of logs and exponents to simplify the expressions in the likelihood.
+
+--
+
+* We use the distributive property to propogate the the summation and log; then, isolate constants and drop them as they aren't need to calculate the *relative* likelihood.
+
+---
+
+***Step 4: Substitute the Systematic Component***
+
+--
+
+`\begin{align}
+log \mathcal{L}(\mu_i,\sigma_i^2|y) &amp; \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu_i)^2}{2\sigma_i^2} \\
+\mu_i &amp; = \mathbf{X}\beta \\
+log \mathcal{L}(\beta,\sigma_i^2|y) &amp; \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{2\sigma_i^2} \\
+\sigma^2 &amp; = \mathbf{Z}\Omega \\
+log \mathcal{L}(\beta,\sigma_i^2|y) &amp; \propto -\frac{1}{2}\sum_{i = 1}^n exp(\mathbf{Z}\Omega)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{exp(\mathbf{Z}\Omega)}
+\end{align}`
+
+---
+
+## Likelihood for the Heteroskedastic Normal Model
+
+`$$log \mathcal{L}(\beta_k,\sigma_i^2|y_i) \propto -\frac{1}{2}\sum_{i = 1}^n exp(\mathbf{Z}\Omega_j)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta_k)^2}{exp(\mathbf{Z}\Omega_j)}$$`
+--
+
+*Notes*
+
+  1. We substitue our systematic variance component, `\(\mathbf{Z}\Omega_j\)`, in for `\(\sigma_i^2\)`.
+    * Just as we substitute our systematic mean component, `\(\mathbf{X}\beta_k\)`, for `\(\mu_i\)`.
+  2. Maximizing this likelihood will generate estimates, `\(\beta_k\)` that predict the mean response of `\(y_i\)`, AND estimates `\(\Omega_j\)`'s that will predict the variance in `\(y_i\)`.
+
+---
+
+class: left, middle
+
+# Next - Applied Likelihood &amp; Simulation for the Heteroskedastic Normal Model
+
+# .blue[Up-ahead - Likelihood for Binary Outcomes]
+
+---
+
+class: center, middle
+
+# Samuel Workman, Ph.D.
+
+### .red[<i class="fas  fa-envelope "></i>] [samuel.workman@ou.edu](mailto:samuel.workman@ou.edu)
+
+### .blue[<i class="fas  fa-globe-americas "></i>] [samuelworkman.org](https://www.samuelworkman.org)
+
+### .green[<i class="fab  fa-medium "></i>] [@samuel.workman](https://medium.com/@samuel.workman)
+
+### .blue[<i class="fab  fa-twitter "></i>] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<script type="text/javascript">smartify();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
