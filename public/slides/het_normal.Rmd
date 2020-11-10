@@ -161,42 +161,42 @@ parameterizing it as function of covariates. This is straightforward using our n
 
 ***Stochastic Component***
 $$y_i \sim \mathcal{N}(\mu_i,\sigma^2_{\textbf{i}})$$
-We subscript $\sigma_i^2$ because the variance in the error terms is non-constant and dependent on values of our $x_i$'s.
+We subscript $\sigma_i^2$ because the variance in the error terms is non-constant and dependent on values of our $x_i$.
 
 --
 
 ***Systematic Component - Center Mass or Mean***
-$$\mu_i = \mathbf{X}\beta$$
-So far, this is just the classic normal regression model that focuses on $\mu_i$, the center of the distribution of $\mathbf{y}$.
+$$\mu_i = \mathbf{X}\beta_k$$
+So far, this is just the classic normal regression model that focuses on $\mu_i$, the center of the distribution of $\mathbf{y_i}$.
   * We want to model the variance also, in order to deal with our heteroskedasticity. So,...
 
 --
 
 ***Systematic Component - Dispersion or Variance***
-$$\sigma^2_i = exp(\mathbf{Z}\Omega)$$
+$$\sigma^2_i = exp(\mathbf{Z}\Omega_j)$$
 ---
 
 ## Parameterizing Variance in the Normal Model
 
 ***Systematic Component - Dispersion or Variance***
-$$\sigma^2_i = exp(\mathbf{Z}\Omega)$$
+$$\sigma^2_i = exp(\mathbf{Z}\Omega_j)$$
 --
 
 *Notes*
 
-  1. $\mathbf{Z}$ is a matrix of covariates (independent variables) that influence or predict the variance, just as $\mathbf{X}$ does for the mean of $y$.
+  1. $\mathbf{Z}$ is a matrix of covariates (independent variables) that influence or predict the variance, just as $\mathbf{X}$ does for the mean of $y_i$.
   
 --
   
-  2. $\mathbf{Z}$ may contain the same variables as $\mathbf{X}$ or different ones. This is useful since non-constant error variance arises from error terms that are systematically related to one or more of our $x_i$'s.
+  2. $\mathbf{Z}$ may contain the same variables as $\mathbf{X}$ or different ones. This is useful since non-constant error variance arises from error terms that are systematically related to one or more of our $x_i$.
   
 --
   
-  3. $\Omega$ is a set (vector) of coefficients estimated for predicting the variance, just as $\beta$ does for the mean in the normal regression model.
+  3. $\Omega_j$ is a set (vector) of coefficients estimated for predicting the variance, just as $\beta_k$ does for the mean in the normal regression model.
   
 --
   
-  4. In this case, we exponentiate $\mathbf{Z}\Omega$. Why?
+  4. In this case, we exponentiate $\mathbf{Z}\Omega_j$. Why?
   
 --
 
@@ -277,15 +277,17 @@ log \mathcal{L}(\mu_i,\sigma_i^2|y_i) & = \sum_{i = 1}^n log k(y_i)-\frac{1}{2}\
 
 ---
 
+## Likelihood for the Heteroskedastic Normal Model
+
 ***Step 4: Substitute the Systematic Component***
 
 --
 
 \begin{align}
-log \mathcal{L}(\mu_i,\sigma_i^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu_i)^2}{2\sigma_i^2} \\
+log \mathcal{L}(\mu_i,\sigma_i^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu_i)^2}{\sigma_i^2} \\
 \mu_i & = \mathbf{X}\beta \\
-log \mathcal{L}(\beta,\sigma_i^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{2\sigma_i^2} \\
-\sigma^2 & = \mathbf{Z}\Omega \\
+log \mathcal{L}(\beta,\sigma_i^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{\sigma_i^2} \\
+\sigma_i^2 & = \mathbf{Z}\Omega \\
 log \mathcal{L}(\beta,\sigma_i^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n exp(\mathbf{Z}\Omega)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mathbf{X}\beta)^2}{exp(\mathbf{Z}\Omega)}
 \end{align}
 

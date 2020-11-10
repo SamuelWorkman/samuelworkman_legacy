@@ -167,3 +167,5 @@ Reading: None.
 [Applied Normal Model in R - YouTube `r icon::fa("youtube")`](https://youtu.be/GsHDogjIqJg)
 
 [Deriving Likelihood for the Heteroskedastic Normal Model](../../../slides/het_normal.html)
+
+[Deriving Likelihood for the Heteroskedastic Normal Model - YouTube `r icon::fa("youtube")`](https://youtu.be/r84hRlBTINU)
