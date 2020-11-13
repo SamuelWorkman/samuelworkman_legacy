@@ -8,6 +8,7 @@ categories:
   - Appalachia
   - Cultural Appropriation
   - Labor
+  - West Virginia
 tags:
   - opioid epidemic
   - appalachia
