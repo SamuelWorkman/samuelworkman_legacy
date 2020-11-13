@@ -17,6 +17,8 @@ images:
 type: post
 ---
 
+This post originally appeared on [Medium at 3Streams Blog](https://medium.com/3streams/want-an-elegy-ask-an-appalachian-69a9d86ce2c6).
+
 With *Hillbilly Elegy* set to hit the silver screen this week. I couldn’t help but sit down to pen a perspective on my Appalachia, as his is unrecognizable to me. To a generation of people, and sadly even academics who should know better, JD Vance’s depiction of Appalachia has come to dominate popular discussion of the region. This is great for JD and his political prospects. Still, it saddens me that so many intelligent, educated people who disdain outsiders' attempts to define other vulnerable populations buy JD’s definition of Appalachian culture lock, stock, and barrel.
 
 Before I get on with it, let me say that I am a white, middle-aged male from West Virginia. I’m a native of the state and live significant portions of the year in the state. My Appalachian experience is one among many — women, BIPOC, LGBTQ, and immigrant Appalachians will have different experiences and perspectives. They should be consulted long before you read JD’s book. On to the show...
