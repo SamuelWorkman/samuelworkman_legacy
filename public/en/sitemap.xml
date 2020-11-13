@@ -3,83 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.samuelworkman.org/courses/mle/applied_walkthrough/</loc>
-    <lastmod>2020-11-03T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/categories/appalachia/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/</loc>
-    <lastmod>2020-11-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://www.samuelworkman.org/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://www.samuelworkman.org/pl/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="https://www.samuelworkman.org/pt/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://www.samuelworkman.org/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://www.samuelworkman.org/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.samuelworkman.org/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://www.samuelworkman.org/zh-tw/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://www.samuelworkman.org/ja/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.samuelworkman.org/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://www.samuelworkman.org/courses/bureaucracy_ug/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.samuelworkman.org/courses/</loc>
-    <lastmod>2020-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.samuelworkman.org/courses/mle/</loc>
-    <lastmod>2020-10-01T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/tags/appalachia/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.samuelworkman.org/blog/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.samuelworkman.org/categories/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -128,28 +68,78 @@
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/blog/how-food-bends-the-arc-of-time/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/categories/cultural-appropriation/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/categories/food/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/categories/labor/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/categories/life/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/tags/opioidepidemic/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.samuelworkman.org/tags/life/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/categories/politics/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://www.samuelworkman.org/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://www.samuelworkman.org/pl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://www.samuelworkman.org/pt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://www.samuelworkman.org/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://www.samuelworkman.org/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.samuelworkman.org/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://www.samuelworkman.org/zh-tw/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://www.samuelworkman.org/ja/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.samuelworkman.org/"
+                />
   </url>
   
   <url>
     <loc>https://www.samuelworkman.org/tags/</loc>
-    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -195,6 +185,51 @@
                 hreflang="en"
                 href="https://www.samuelworkman.org/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/blog/2020-11-13-want-an-elegy-ask-an-appalachian/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/courses/mle/applied_walkthrough/</loc>
+    <lastmod>2020-11-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/courses/bureaucracy_ug/</loc>
+    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/courses/</loc>
+    <lastmod>2020-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/courses/mle/</loc>
+    <lastmod>2020-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/blog/how-food-bends-the-arc-of-time/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/categories/food/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/categories/life/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/tags/life/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -270,11 +305,6 @@
   <url>
     <loc>https://www.samuelworkman.org/cv/</loc>
     <lastmod>2020-03-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.samuelworkman.org/categories/politics/</loc>
-    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
