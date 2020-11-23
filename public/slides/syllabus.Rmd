@@ -173,3 +173,5 @@ Reading: None.
 [Applied Heteroskedastic Normal Model in R - Vignette](../../../../slides/applied_hetnormal_v.html)
 
 [Applied Heteroskedastic Normal Model in R - Slide Deck](../../../../slides/applied_hetnormal_slides.html)
+
+[Applied Heteroskedastic Normal Model in R - YouTube `r icon::fa("youtube")`](https://youtu.be/VmyIceqoMD4)

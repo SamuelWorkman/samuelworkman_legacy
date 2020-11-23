@@ -16,3 +16,5 @@ This page contains applied walkthroughs for the models covered in Maximum Likeli
 [Applied Heteroskedastic Normal Model in R - Vignette](../../../../slides/applied_hetnormal_v.html)
 
 [Applied Heteroskedastic Normal Model in R - Slide Deck](../../../../slides/applied_hetnormal_slides.html)
+
+{{< youtube VmyIceqoMD4 >}}
