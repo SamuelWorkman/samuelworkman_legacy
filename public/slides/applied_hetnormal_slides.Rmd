@@ -1,0 +1,644 @@
+---
+title: "Maximum Likelihood Estimation"
+subtitle: "Social & Natural Science Applications"  
+author: 
+  - "Samuel Workman, Ph.D."
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    includes:
+      in_header: "in_header.html"
+      after_body: "after_body.html"
+    lib_dir: libs
+    css: [xaringan-themer.css, title_theme.css]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 16:9
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(ggExtra) # axes and labeling
+library(showtext) # use Google Fonts
+library(plotly)
+library(RColorBrewer)
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+library(xaringanthemer)
+style_solarized_light(
+  header_font_google = google_font("Josefin Slab", "600"),
+  text_font_google   = google_font("Alegreya Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code")
+)
+```
+
+class: center, middle
+
+# Applied Likelihood & Simulation for the Heteroskedastic Normal Model in `r fontawesome::fa("r-project", fill = "steelblue", height = 50)`
+
+---
+
+## Likelihood for the Normal Model
+
+Recall
+
+\begin{align}
+log \mathcal{L}(\mu_i,\sigma_i^2|y) & \propto -\frac{1}{2}\sum_{i = 1}^n log(\sigma_i^2)-\frac{1}{2}\sum_{i = 1}^n\frac{(y-\mu_i)^2}{\sigma_i^2} \\
+\mu & = \mathbf{X}\beta \\
+\sigma_i^2 & = exp(\mathbf{Z}\Omega)
+\end{align}
+
+--
+
+In our simple notation
+
+\begin{align}
+y_i & \sim \mathcal{N}(\mu_i, \sigma_i^2) \\
+\mu_i & = \mathbf{X}\beta \\
+\sigma_i^2 & = exp(\mathbf{Z}\Omega)
+\end{align}
+
+--
+
+*Notes*
+
+  1. Maximizing the above log likelihood minimizes our sum of squares, $(y-\mathbf{X}\beta)^2$ (i.e., least squares).
+  2. We get estimaties, $\beta_k$, for each of our covariates or independent variables $x_i$ that influence the center mass, or conditional mean of $y_i$.
+  3. We get estimates, $\Omega_j$, for each of our covariates or independent variables $z_i$ that influence the dispersion, or conditional variance of $y_i$.
+
+---
+
+## Applied Likelihood for the Normal Model in `r fontawesome::fa("r-project", fill = "steelblue", height = 50)`
+
+***Approach***
+
+1. Simulate fake data in order to visualize heteroskedasticity and approaches to modeling it.
+
+--
+
+2. Use our fake data to implement OLS and examine the consquences of ignoring heteroskedasticity `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`.
+  * Throughtout, think about the implications for advising managers, policymakers, or the public.
+
+--
+
+3. Learn to write a likelihood function of our own in R. The `lm` function will no longer work for us.ngage in Bayesian-esque simulation.
+  * OLS estimates are very often useful starting points even when OLS isn't the best approach.
+
+--
+
+4. Engage in Bayesian-esque simulation in order to explore counterfactuals and to gauge the effectiveness of our modeling strategy.
+
+--
+
+5. Get acquainted with graphical code in `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`. Note we will also touch upon code for crafting tables of results.
+
+--
+
+6. Learn how to simulate predictions and *prediction* intervals in `r fontawesome::fa("r-project", fill = "steelblue", height = 20)`. This time, we'll not only incorporate information about our $\beta_k$, but also the $\Omega_j$ that parameterize the variance.
+
+---
+
+## Gather Tools
+
+.pull-left[
+***Source Custom Functions & Set Preferences***
+
+```{r custom_func_prefs, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+options(htmltools.dir.version = FALSE)
+set.seed(7277) # for reproducibility when taking random draws
+options(scipen = 999) # gets rid of scientific notation
+source("nord_fira.R") # nord_fira 
+```
+
+--
+
+***Libraries for Data Wrangling & Table Construction***
+
+```{r data_libs, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+library(tidyverse) # data wrangling & ggplot2
+library(broom) # tidys up regression output for quick tables
+library(MASS) # for simulation from distributions
+library(kableExtra) # table construction
+```
+]
+
+--
+
+.pull-right[
+***Libraries for Plotting and Visualization***
+
+```{r vis_libs, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+library(ggplot2) # pretty plots
+library(RColorBrewer) # pretty colors
+library(ggExtra) # axes and labeling
+```
+
+***Loading & Implementing Custom Fonts***
+
+```{r font_setup, eval = TRUE, echo = TRUE, include = TRUE, warning=FALSE, message=FALSE}
+library(showtext) # use Google Fonts
+font_add_google("Fira Sans", "firasans")
+font_add_google("Fira Mono", "firamono")
+showtext_auto() # allow ggplot2 to render the fonts automatically for pdfs
+```
+]
+
+---
+
+## Let's Make Up a World
+
+.pull-left[
+***Create Synthetic Data***
+
+```{r data, include = TRUE, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE}
+n <- 1000
+beta <- c(7, 2, 17)
+omega <- c(1, 0, 5)
+
+x_1 <- rep(1, n)
+x_2 <- runif(n)
+x_3 <- runif(n)
+
+X <- cbind(x_1, x_2, x_3)
+Z <- X
+
+mu <- X%*%beta
+sigma2 <- exp(Z%*%omega)
+
+y <- rnorm(n)*sqrt(sigma2) + mu
+
+data <- data.frame(cbind(y, x_2, x_3))
+colnames(data)[1] <- "y"
+```
+]
+
+--
+
+.pull-right[
+***Take a look at our problem...***
+
+```{r dirty_plot, include = TRUE, echo = FALSE, eval = TRUE, fig.height = 6, message = FALSE, warning = FALSE}
+ggplot(data = data, aes(x = x_3, y = y)) +
+  geom_point(color = "#69b3a2", alpha = .4) +
+  xlab(expression(x[3])) +
+  ylab("y") +
+  stat_smooth(method = "lm", se = FALSE, color = "#dc322f") +
+  theme_xaringan()
+```
+]
+
+---
+
+## Let's Try OLS
+
+.pull-left[
+```{r ols, include = TRUE, echo = TRUE, eval = FALSE}
+ols <- lm(y ~ x_2 + x_3)
+tidy(ols) %>%
+  kable(digits = 2, format="html", booktabs=TRUE) %>%
+    kable_styling(full_width = TRUE, 
+                  bootstrap_options = c("striped", "hover"))
+```
+]
+
+.pull-right[
+```{r , ref.label="ols", include = TRUE, echo = FALSE, eval = TRUE}
+```
+]
+
+--
+
+***Note the TRUE parameters are as follows: $\alpha = 7$, $x_2 = 2$, and $x_3 = 17$.*** We defined them above. OLS gets us really close!! Its estimates are still unbiased and consistent.
+
+---
+
+## Construct a Counterfactual Baseline for $x_3$ for the OLS Model
+
+.pull-left[
+```{r h_1, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+x_3_range <- seq(.001, 1, by = .001)
+length(x_3_range)
+mean_model <- c(7, mean(x_2), mean(x_3))
+cf_1 <- matrix(mean_model, nrow = length(x_3_range), ncol = 3, byrow = TRUE)
+cf_1 <- data.frame(cf_1)
+colnames(cf_1) <- c("int", "x_2", "x_3")
+head(cf_1)
+```
+]
+
+.pull-right[
+```{r, ref.label="h_1", eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+]
+
+***Notes***
+
+* We now have a matrix that is simply the intercept and means for each of our variables.
+
+* This serves as a baseline and would give us the conditiional prediction for $y_i$ given our covariates (independent variables) being held at their mean.
+  * Remember, the intercept is just the conditional mean of $y_i$
+
+---
+
+## Substitute the Counterfactual of Interest in the Baseline 
+
+.pull-left[
+```{r cf_1, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+cf_1[,3] <- x_3_range
+head(cf_1)
+```
+]
+
+.pull-right[
+```{r, ref.label="cf_1", eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+]
+
+***Notes***
+
+* Now, we just replace the column of means for $x_3$ with the counterfactual values we want to explore.
+
+---
+
+## Simulate from the OLS Model
+
+.pull-left[
+```{r ols_pred, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+simols <- predict(ols, newdata = cf_1,
+                  interval = "prediction", level = 0.95)
+simols <- data.frame(simols)
+head(simols)
+```
+]
+
+.pull-right[
+```{r, ref.label= "ols_pred", eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+]
+
+***Notes***
+
+* `fit` gives us the point prediction for $y_i$.
+
+* `lwr` gives us the lower prediction interval.
+
+* `upr` gives us the upper prediction interval.
+
+* In this case, we chose the 95 percent interval.
+
+---
+
+## Visualize the OLS Predictions and Prediction Intervals
+
+.pull-left[
+```{r ols_vis, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+fill <- brewer.pal(3, "Set1")[2] # grab a nice color
+
+ggplot(data = simols, aes(x = cf_1$x_3)) +
+  geom_point(aes(x = data$x_3, y = data$y),
+             color = "#69b3a2", alpha = .4) +
+  xlab(expression(paste('Counterfactual  ', x[3]))) +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = fit), color = "#dc322f") +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), 
+              fill = fill, alpha = 0.2) +
+  theme_xaringan()
+```
+
+* `expression` and `paste` allow us to use mathtype in axis labels.
+]
+
+.pull-right[
+```{r, ref.label="ols_vis", eval=TRUE, echo=FALSE, include=TRUE, fig.height=6, message=FALSE, warning=FALSE}
+```
+]
+
+---
+
+## Our problems are not just ***Statistical***, but ***Substantive***
+
+* Note that our point predictions are still spot-on. The regression line represents the relationship between $x_3$ and $y$ well.
+
+--
+
+* However, we *understate* the confidence in our predictions at low levels of $x_3$ and *overstate* our confidence in predictions at high levels of $x_3$.
+
+--
+
+* This would be a **big** problem if advising a boss, policymaker, or the public, leading to tentativeness in the lower range of $x_3$ and over-confidence in the higher range of $x_3$.
+  * When we are right, we will be spot on in our advice, but when we are wrong, we will be wrong by a **LOT**.
+
+---
+
+## Making Use of the Normal Distribution's 2nd Paramter
+
+* The problem here is that the variance is not constant across the range of $x_3$.
+
+--
+
+* This induces systematic variation in the residuals, violates our assumption of constant error variance because $y-\mathbf{X}\beta$ is not constant.
+
+--
+
+* We can try weights or fixes or robust standard errors, but these have lots of pitfalls.
+
+--
+
+* Instead, we'll make use of the knowledge we have above, and model the variance directly with the normal distributions second parameter, $\sigma_i^2$.
+
+--
+
+***The Approach to Parameterizing Variance***
+
+* To start, we need to define a set of covariates for the mean, and separately for the variance.
+
+--
+
+* We'll use $x_2$ and $x_3$ for both, since the source of the problem is covariation between an independent variable and our residuals. 
+
+--
+
+* We don't need the intercepts, as we'll add identities later and let the model estimate the intercepts.
+
+---
+
+## Define a Set of Covariates for the Mean and Variance
+
+.pull-left[
+```{r data_x, include=TRUE, echo=TRUE, eval=FALSE}
+xcov <- cbind(x_2, x_3)
+head(xcov)
+```
+]
+
+.pull-right[
+```{r, ref.label="data_x", include=TRUE, echo=FALSE, eval=TRUE}
+```
+]
+
+.pull-left[
+```{r data_z, include=TRUE, echo=TRUE, eval=FALSE}
+zcov <- cbind(x_2, x_3)
+head(zcov)
+```
+]
+
+.pull-right[
+```{r, ref.label="data_z", include=TRUE, echo=FALSE, eval=TRUE}
+```
+]
+
+---
+
+## Write a Likelihood Function for the Heteroskedastic Normal in `r fontawesome::fa("r-project", fill = "steelblue", height = 30)`
+
+
+```{r het_llk}
+llk_hetnorm <- function(param,y,x,z) {
+    x <- as.matrix(xcov) # makes sure x is a matrix for multiplication
+    z <- as.matrix(zcov) # Makes sure z is a matrix for multiplication
+    a <- rep(1,nrow(x)) # a for alpha - a vector of identities used to estimate intercepts
+    x <- cbind(a,x) # add the intercept identities to the x matrix
+    z <- cbind(a,z) # add the intercept identities to the z matrix
+    b <- param[ 1 : ncol(x) ] # we want 1 beta for each x matrix covariate
+    o <- param[ (ncol(x)+1) : (ncol(x) + ncol(z)) ] # we want one variance parameter for for each variable; telling r to start with the 4th parameter and run to the number z columns
+    xb <- x%*%b # systematic component for the mean
+    s2 <- exp(z%*%o) # systematic component for the variance
+    sum(0.5*(log(s2)+(y-xb)^2/s2))
+    }
+```
+
+* This should look familier, its the equation we derived in the conceptual lecture.
+
+* Just plug in our components. 
+
+* `optim` is a minimizer, so min -ln L(param|y) - negative signs become positive.
+
+---
+
+### Maximize the Likelihood Function above Using `optim` in `r fontawesome::fa("r-project", fill = "steelblue", height = 30)`
+
+.pull-left[
+
+***Optimize the Function***
+
+```{r het_norm_mod}
+initval <- c(0,0,0,0,0,0) # initial values for maximization; note that OLS values are pretty good starters in many cases
+
+hetnorm_result <- optim( # call the optim function
+  initval, # initial values
+  llk_hetnorm, # what likelihood function to we want to maximize
+  method = "BFGS", # method of maximization - don't worry about this
+  hessian = TRUE, # need the hessian matrix in order to retrieve the variance covariance matrix
+  y = y,
+  x = x,
+  z = z)
+```
+]
+
+.pull-right[
+
+***Recover a Model Summary***
+
+```{r par_recov}
+pe <- hetnorm_result$par # parameters for mu AND sigma2
+vc <- solve(hetnorm_result$hessian)  # variance-covariance matrix
+se <- sqrt(diag(vc))    # standard errors
+llik <- -hetnorm_result$value  # likelihood at maximum
+aic <- 2*length(initval) - 2*llik  # Lower is better
+```
+]
+
+---
+
+## Make a Table of the Results
+
+.pull-left[
+```{r het_tab, include = TRUE, echo = TRUE, eval = FALSE}
+reality <- c(7,2,17,1,0,5)
+data.frame(cbind(reality, pe, se)) %>%
+  kable(digits = 2, format = "html", booktabs = TRUE,
+        col.names = c("True", "Estimates", "Std Errors"), escape = FALSE) %>%
+    kable_styling(full_width = TRUE, bootstrap_options = c("striped", "hover")) %>%
+  pack_rows("mu", 1, 3) %>%
+  pack_rows("sigma^2", 4, 6) %>%
+  footnote(general = "log-Likelihood: -2285.75, AIC: 4583.51")
+```
+]
+
+.pull-right[
+```{r, ref.label="het_tab", include = TRUE, echo = FALSE, eval = TRUE}
+```
+]
+
+--
+  
+* We now have a model that addresses the variance explicitly, no fixes.
+* Note the value of the $log\mathcal{L}$ at its maximum and the Akaike Information Criterion (AIC).
+* Compare the AIC to our OLS model of `r round(AIC(ols), 2)`, note that lower is better.
+
+---
+
+## Simulate Paramters from Our New Model
+
+```{r het_sim}
+sims <- 1000
+
+simps <- mvrnorm(sims,pe,vc) # draw parameters
+
+simb <- simps[,1:(ncol(xcov)+1)]
+simo <- simps[,(ncol(simb)+1):ncol(simps)]
+```
+
+* The last two lines separate the simulated $\beta_k$ (for the mean) and the simulated $\Omega_j$ (for the variance).
+* Could use the code `simb_alt <- simps[,1:3]`, but this code automates for changes in `xcov`
+
+---
+
+## Construct a Counterfactual for the $\mathbf{X}$ and $\mathbf{Z}$ Matrices
+
+```{r cf_setup}
+x_mean <- c(1, mean(x_2), mean(x_3))
+z_mean <- c(1, mean(x_2), mean(x_3))
+
+cfx <- matrix(x_mean, nrow = length(x_3_range), ncol = 3, byrow = TRUE)
+cfz <- matrix(z_mean, nrow = length(x_3_range), ncol = 3, byrow = TRUE)
+
+cfx[,3] <- x_3_range
+cfz[,3] <- x_3_range
+```
+
+* The first two lines construct a 'base' counterfactual for both the $x$ covariates and the $z$ covariates.
+
+--
+
+* The second two lines repeat the vectors above to form matrices of counterfactuals with identities for the constant and both variables held at their means. 
+  * Note, the number of sims from the previous section should match the length of the intended counterfactual - "x_3_range," defined previously.
+  
+--
+
+* Our counterfactual will make use of "x_3_range" defined above to explore how $y$ responds to $x_3$ as it takes values across its range.
+
+--
+
+* The final two lines substitute our counterfactual "x_3_range" for the third columns of means for $x_3$.
+
+---
+
+## Calculate Our Counterfactual $y_i$
+
+```{r cf_y}
+het_mu <- simb%*%t(cfx)
+het_sigma2 <- exp(simo%*%t(cfz)) # exponentiated so that sigma2 > 0
+
+cfy <- rnorm(sims)*sqrt(het_sigma2) + het_mu
+```
+
+* Based on our simulations of the $\beta$ and $\Omega$ and Counterfactual $\mathbf{X}$ and $\mathbf{Z}$
+
+--
+
+* `het_mu` is the systematic component of our heteroskedastic normal model that addresses the mean.
+
+--
+
+* `het_sigma2` is the systematic component of our heteroskedastic normal model that addresses the variance.
+
+--
+
+* $y$ is a random normal variable with heteroskedasticity.
+
+--
+
+* Use `sqrt` because `het_sigma2` is the variance---we want the standard deviation instead.
+
+---
+
+## Calculate Quantities of Interest from the Simulations
+
+```{r qoi_calc}
+ev <- apply(cfy, 2, mean)
+lwr1 <- apply(cfy, 2, quantile, probs = .330)
+lwr2 <- apply(cfy, 2, quantile, probs = .025)
+upr1 <- apply(cfy, 2, quantile, probs = .667)
+upr2 <- apply(cfy, 2, quantile, probs = .975)
+sim.result <- data.frame(cbind(x_3_range,ev,lwr1,upr1, lwr2, upr2))
+```
+
+* Note that in addition to the expected value of $y$, we calculate the prediction interval at both the 1st and 2nd standard deviation this time.
+
+---
+
+## Visualize the Counterfactual for $x_3$
+
+
+.pull-left[
+```{r het_vis, eval=FALSE, echo=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+ggplot(data = sim.result, aes(x = x_3_range)) + 
+  geom_point(aes(x = x_3, y = y),
+             color = "#69b3a2", alpha = .4) +
+  xlab(expression(paste('Counterfactual   ', x[3]))) +
+  ylab("Predicted y (95% CI)") +
+  geom_line(aes(y = ev), color = "#dc322f") +
+  geom_ribbon(aes(ymin = lwr2, ymax = upr2), 
+    fill = fill, alpha = 0.2) +
+  geom_ribbon(aes(ymin = lwr1, ymax = upr1), 
+    fill = fill, alpha = 0.4) +
+  theme_xaringan()
+```
+
+* Note, that we can now say something about our predictions that is substantively accurate and takes account of our true uncertainty.
+* Easy to see which model is best by looking past tables and exploring substantive counterfactuals.
+]
+
+.pull-right[
+```{r, ref.label="het_vis", eval=TRUE, echo=FALSE, include=TRUE, message=FALSE, warning=FALSE}
+```
+]
+
+---
+
+## What Did We Learn?
+
+* Probability distributions often contain other parameters besides the center mass. 
+  * These are useful for dealing with problems or oddities in data.
+  * But, also useful for modeling interesting substantively interesting facets in data.
+
+--
+
+* Its extremely important in contexts where you are consulting, advising, doing research, or conveying information, to accurately reflect the uncertainty in recommendations.
+
+--
+
+* With this lecture, you now have all the tools to characterize *ANY* probability distribution and model its various components---parameterizing those necessary to accurately characterize the data.
+
+--
+
+* You also have the tools to engage ***quantitative*** counterfactuals and assess the substantive importance of your model---no longer need to "stargaze" and hope.
+
+---
+
+class: left, middle
+
+# Next - Likelihood for the Binary Outcomes
+
+# .blue[Up-ahead - Applied Likelihood & Simulation for the Logit Model]
+
+---
+
+class: center, middle
+
+# Samuel Workman, Ph.D.
+
+### .red[`r icon::fa("envelope")`] [samuel.workman@ou.edu](mailto:samuel.workman@ou.edu)
+
+### .blue[`r icon::fa("globe-americas")`] [samuelworkman.org](https://www.samuelworkman.org)
+
+### .green[`r icon::fa("medium")`] [@samuel.workman](https://medium.com/@samuel.workman)
+
+### .blue[`r icon::fa("twitter")`] [@SamuelGWorkman](https://twitter.com/SamuelGWorkman)
