@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Samuel Workman</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.samuelworkman.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.samuelworkman.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>politics</title>
+      <link>https://www.samuelworkman.org/tags/politics/</link>
+      <pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.samuelworkman.org/tags/politics/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>appalachia</title>
       <link>https://www.samuelworkman.org/tags/appalachia/</link>
@@ -76,15 +85,6 @@
       <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.samuelworkman.org/tags/ggplot2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>politics</title>
-      <link>https://www.samuelworkman.org/tags/politics/</link>
-      <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.samuelworkman.org/tags/politics/</guid>
       <description></description>
     </item>
     
