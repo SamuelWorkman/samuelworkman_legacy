@@ -1,14 +1,14 @@
 ---
-date: "2020-03-16"
+date: "2021-02-08"
 title: Curriculum Vitae or Resume
 ---
 
-Please see links below to view my full CV or a brief 2-page CV. Both versions are available in HTML to view in a browser or in printer friendly PDF form. References are available upon request.
+Please see links below to view my full CV or a brief CV. Both versions are available in HTML to view in a browser or in printer friendly PDF form. References are available upon request.
 
 |               |               |  |
 | ---:         |     :---:      | :---: |
-| Open in Browser (HTML)  | [Full CV](sw_full_cv)    | [2-Page CV](sw_two-page)    |
-| View in PDF (for Printing) | [Full CV](sw_full_cv.pdf) | [2-Page CV](sw_two-page_cv.pdf) |
+| View in Browser (HTML)  | [Full CV](sw_full_cv.html)    | [Brief CV](sw_brief_cv.html)    |
+| View in PDF (for Printing) | [Full CV](sw_full_cv.pdf) | [Brief CV](sw_brief_cv.pdf) |
 
 {{< css.inline >}}
 <style>
