@@ -164,6 +164,8 @@ code {
 #site-intro ul {color: #BC4639;}
 #Sidebar a {font-family: 'Alegreya', serif;}
 
+#site-main .post h2 a:hover {color: #E85A4F;}
+
 .cta {
 text-align: left;
 font-family: 'Fira Sans', sans-serif;
