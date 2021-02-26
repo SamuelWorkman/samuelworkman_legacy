@@ -113,8 +113,8 @@ body {
 /*Top Navigation Styles Solarized*/
 
  #site-header {background-color: #EAE7DC;}
-  #site-header a {color: #8E8D83;}
-  #site-header a:hover {color: #304890;}
+  #site-header a {color: #2E3440;}
+  #site-header a:hover {color: #E85A4F;}
   #site-header a {font-family: 'Alegreya', serif;}
 
 /*#site-nav .nav-title a {color: #ff0053;}
