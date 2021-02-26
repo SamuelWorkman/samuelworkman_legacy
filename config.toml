@@ -364,7 +364,7 @@ math = true
   #instagram             = "example"
   #tumblr                = ""
   twitter               = "SamuelGWorkman"
-  skype                 = "prof.samuel.workman"
+  #skype                 = "prof.samuel.workman"
   #snapchat              = ""
   #pinterest             = "example"
   #telegram              = "example"
@@ -373,6 +373,6 @@ math = true
   orcid                 = "0000-0002-3924-2694"
   #researchgate          = "example"
   #keybase               = "example"
-  mastodon              = "mastodon.social/@samuelworkman"
+  #mastodon              = "mastodon.social/@samuelworkman"
   # Email
   email                 = "samuel.workman@ou.edu"
