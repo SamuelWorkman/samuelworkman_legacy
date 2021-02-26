@@ -112,9 +112,9 @@ body {
 
 /*Top Navigation Styles Solarized*/
 
- #site-header {background-color: #ECEFF4;}
+ #site-header {background-color: #EAE7DC;}
   #site-header a {color: #2E3440;}
-  #site-header a:hover {color: #304890;}
+  #site-header a:hover {color: #E85A4F;}
   #site-header a {font-family: 'Alegreya', serif;}
 
 /*#site-nav .nav-title a {color: #ff0053;}
@@ -122,20 +122,20 @@ body {
 
 /* Main Content Area Styling */
 
-#wrapper {background-color: #D8C385;}
+#wrapper {background-color: #EAE7DC;}
 
 .pagination .button {
-  color: #5F4B32;
-  border-color: #fdf6e3;
+  color: #EAE7DC;
+  border-color: #E98074;
   }
   .pagination .button:hover,
   article.post .button:hover {
-    color: #304890 !important;
-    border-color: #2E3440;
+    color: #E85A4F !important;
+    border-color: #E98074;
   }
 
 article.post{
-  background-color: #EAE7DC;
+  background-color: #D8C385;
   border-radius: 5px 15px 5px 5px;
   }
   article.post .button {
@@ -155,11 +155,13 @@ code {
 /* MCA Links and Hover Styles */
 
 .content p a {color: #D08770;} /* color change for links in post paragraphs */
-  .content p a:hover {color: #304890;}
+  .content p a:hover {color: #E85A4F;}
 
 /* Sidebar Area Styles */
 
 #site-intro header h1 {color: #006D2C;}
+#site-intro p {color: #31708E;}
+#site-intro ul {color: #687864;}
 #Sidebar a {font-family: 'Alegreya', serif;}
 
 .cta {
@@ -169,7 +171,7 @@ text-shadow:0 1px 1px rgba(0,0,0,0.2);
 }
 
 .cta button:hover {
-background-color:#D8DEE9;
+background-color:#E85A4F;
 margin-top:6px;
 margin-bottom:16px;
 border-radius:4px;
