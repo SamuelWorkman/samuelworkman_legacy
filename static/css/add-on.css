@@ -164,7 +164,7 @@ code {
 #site-intro ul {color: #000000;}
 #site-intro ul a:hover {color: #bd081c;}
 #Sidebar a {font-family: 'Alegreya', serif;}
-#Sidebar .mini-post h1 a:hover{color: #E85A4F;}
+#site-sidebar .mini-post h1 a:hover{color: #E85A4F;}
 
 #site-main .post h2 a:hover {color: #E85A4F;}
 
