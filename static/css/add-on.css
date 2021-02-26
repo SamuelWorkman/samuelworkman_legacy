@@ -125,12 +125,12 @@ body {
 #wrapper {background-color: #D8C385;}
 
 .pagination .button {
-  color: #5F4B32;
+  color: #EAE7DC;
   border-color: #fdf6e3;
   }
   .pagination .button:hover,
   article.post .button:hover {
-    color: #304890 !important;
+    color: #EAE7DC !important;
     border-color: #2E3440;
   }
 
