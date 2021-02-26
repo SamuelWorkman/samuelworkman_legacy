@@ -62,7 +62,7 @@ math = true
   # required for proper functionality. HTML is supported within the params.
   [params.intro]
     header                = "Samuel Workman"
-    paragraph             = "Professor, Data & Statistical Consultant, West Virginian"
+    paragraph             = "Public Policy Professor, Data & Statistical Consultant, West Virginian"
     rssIntro              = true
     socialIntro           = true
 
