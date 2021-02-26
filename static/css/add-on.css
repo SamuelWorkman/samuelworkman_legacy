@@ -163,6 +163,7 @@ code {
 #site-intro p {color: #3C3B3B;}
 #site-intro ul {color: #BC4639;}
 #Sidebar a {font-family: 'Alegreya', serif;}
+#Sidebar .mini-post h1 a:hover{color: #E85A4F;}
 
 #site-main .post h2 a:hover {color: #E85A4F;}
 
