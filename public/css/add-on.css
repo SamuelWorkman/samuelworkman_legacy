@@ -154,15 +154,19 @@ code {
 
 /* MCA Links and Hover Styles */
 
-.content p a {color: #D08770;} /* color change for links in post paragraphs */
+.content p a {color: #116466;} /* color change for links in post paragraphs */
   .content p a:hover {color: #E85A4F;}
 
 /* Sidebar Area Styles */
 
 #site-intro header h1 {color: #006D2C;}
-#site-intro p {color: #31708E;}
-#site-intro ul {color: #687864;}
+#site-intro p {color: #000000;}
+#site-intro ul {color: #2E3440;}
+#site-intro ul a:hover {color: #bd081c;}
 #Sidebar a {font-family: 'Alegreya', serif;}
+#Sidebar .mini-post h1 a:hover{color: #E85A4F;}
+
+#site-main .post h2 a:hover {color: #E85A4F;}
 
 .cta {
 text-align: left;

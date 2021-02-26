@@ -160,8 +160,9 @@ code {
 /* Sidebar Area Styles */
 
 #site-intro header h1 {color: #006D2C;}
-#site-intro p {color: #3C3B3B;}
-#site-intro ul {color: #BC4639;}
+#site-intro p {color: #000000;}
+#site-intro ul {color: #000000;}
+#site-intro ul a:hover {color: #bd081c;}
 #Sidebar a {font-family: 'Alegreya', serif;}
 #Sidebar .mini-post h1 a:hover{color: #E85A4F;}
 
