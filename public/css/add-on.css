@@ -125,7 +125,7 @@ body {
 #wrapper {background-color: #EAE7DC;}
 
 .pagination .button {
-  color: #EAE7DC;
+  color: #000000;
   border-color: #E98074;
   }
   .pagination .button:hover,
@@ -133,6 +133,9 @@ body {
     color: #E85A4F !important;
     border-color: #E98074;
   }
+.pagination .previous {color: #000000;}
+.pagination .next {color: #000000;}
+.pagination .button div {color: #000000}
 
 article.post{
   background-color: #D8C385;
@@ -145,7 +148,7 @@ article.post{
 
 .hljs,
 code {
-  background: #ECEFF4;
+  background: #EAE7DC;
   border-radius: 5px;
   border: 1px solid #A3BE8C;
   color: #2E3440;
@@ -157,14 +160,17 @@ code {
 .content p a {color: #116466;} /* color change for links in post paragraphs */
   .content p a:hover {color: #E85A4F;}
 
+a {color: #116466;}
+a:hover {color: #E85A4F;}
+
 /* Sidebar Area Styles */
 
 #site-intro header h1 {color: #006D2C;}
 #site-intro p {color: #000000;}
-#site-intro ul {color: #2E3440;}
+#site-intro ul {color: #000000;}
 #site-intro ul a:hover {color: #bd081c;}
 #Sidebar a {font-family: 'Alegreya', serif;}
-#Sidebar .mini-post h1 a:hover{color: #E85A4F;}
+#site-sidebar .mini-post h1 a:hover{color: #E85A4F;}
 
 #site-main .post h2 a:hover {color: #E85A4F;}
 
