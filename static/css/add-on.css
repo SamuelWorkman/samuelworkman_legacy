@@ -160,6 +160,9 @@ code {
 .content p a {color: #116466;} /* color change for links in post paragraphs */
   .content p a:hover {color: #E85A4F;}
 
+#site-main .post .content p a {color: #116466;}
+#site-main .post .content p a:hover {color: #E85A4F;}
+
 /* Sidebar Area Styles */
 
 #site-intro header h1 {color: #006D2C;}
