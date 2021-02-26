@@ -5,6 +5,20 @@
   and follow the formatting and style given.
 */
 
+/* josefin-slab-regular - latin */
+@font-face {
+  font-family: 'Josefin Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/josefin-slab-v13-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../fonts/josefin-slab-v13-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/josefin-slab-v13-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/josefin-slab-v13-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/josefin-slab-v13-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/josefin-slab-v13-latin-regular.svg#JosefinSlab') format('svg'); /* Legacy iOS */
+}
+
 /* alegreya-regular - latin */
 @font-face {
   font-family: 'Alegreya';
@@ -75,7 +89,7 @@
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Alegreya', serif;
+  font-family: 'Josefin Slab', serif;
 }
 
 body {
