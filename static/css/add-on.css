@@ -155,7 +155,7 @@ code {
 /* MCA Links and Hover Styles */
 
 .content p a {color: #D08770;} /* color change for links in post paragraphs */
-  .content p a:hover {color: #304890;}
+  .content p a:hover {color: #E85A4F;}
 
 /* Sidebar Area Styles */
 
@@ -169,7 +169,7 @@ text-shadow:0 1px 1px rgba(0,0,0,0.2);
 }
 
 .cta button:hover {
-background-color:#D8DEE9;
+background-color:#E85A4F;
 margin-top:6px;
 margin-bottom:16px;
 border-radius:4px;
