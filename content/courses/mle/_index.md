@@ -8,29 +8,3 @@ The vast majority of data of interest to social scientists do not fit into the G
 ### [Syllabus](../../../slides/syllabus.html)
 
 ### [Applied Vignettes in R](applied_walkthrough/)
-
-### Slides
-
-[***Introduction***](../../../slides/intro_slides.html)
-
-{{< youtube 5Y1t3fb-Rm0 >}}
-
-[***Basic Probability & Mathematics***](../../../slides/likelihood_math.html)
-
-{{< youtube wwe_U7z3sKY >}}
-
-[***Classical Approach to Analysis***](../../../slides/classical_approach.html)
-
-{{< youtube NXafc2vNU6I >}}
-
-[***Describing Statistical Models***](../../../slides/statistical_models.html)
-
-{{< youtube PeaquNSMnhY >}}
-
-[***Deriving Likelihood for the Normal Model***](../../../slides/derive_likelihood.html)
-
-{{< youtube lcoNOV85dPE >}}
-
-[Deriving Likelihood for the Heteroskedastic Normal Model](../../../slides/het_normal.html)
-
-{{< youtube r84hRlBTINU >}}
