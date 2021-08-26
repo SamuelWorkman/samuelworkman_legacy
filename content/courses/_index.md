@@ -11,6 +11,8 @@ My courses on data analysis and statistical methods emphasize data-driven decisi
 
 #### *Graduate Courses*
 
+{{< button "Introduction to Analysis of Political Data" "intro_methods/" >}}
+
 {{< button "Maximum Likelihood Estimation (MLE)" "mle/" >}}
 
 #### *Undergraduate Courses*

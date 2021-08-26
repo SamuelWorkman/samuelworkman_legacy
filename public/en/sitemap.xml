@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.samuelworkman.org/cv/</loc>
-    <lastmod>2021-02-08T00:00:00+00:00</lastmod>
+    <loc>https://www.samuelworkman.org/courses/intro_methods/</loc>
+    <lastmod>2021-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.samuelworkman.org/</loc>
-    <lastmod>2021-02-08T00:00:00+00:00</lastmod>
+    <lastmod>2021-08-26T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -55,6 +55,11 @@
                 hreflang="en"
                 href="https://www.samuelworkman.org/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://www.samuelworkman.org/cv/</loc>
+    <lastmod>2021-02-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -210,11 +215,6 @@
   <url>
     <loc>https://www.samuelworkman.org/blog/2020-11-13-want-an-elegy-ask-an-appalachian/</loc>
     <lastmod>2020-11-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.samuelworkman.org/courses/mle/applied_walkthrough/</loc>
-    <lastmod>2020-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
